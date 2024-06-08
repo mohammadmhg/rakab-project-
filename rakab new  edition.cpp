@@ -95,6 +95,11 @@ public:
     ///setters
     void SetPlayer(int number){
         this->players = number;
+        
+    ///getters
+    int GetPlayer(){
+        return players;
+    }
     }
 protected:
     int players = 0;
