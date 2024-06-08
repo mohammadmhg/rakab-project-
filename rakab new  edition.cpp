@@ -77,5 +77,9 @@ public:
         system("cls");
         cout << "\tYou Exited the Game!!";
     }
+    void Enter_players(){
+        system("cls");
+        cout << "Enter the number of players you want to play with:(must be between 3 to 6): "<<endl;
+    }
 private:
 };
