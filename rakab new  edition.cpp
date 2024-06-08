@@ -81,5 +81,9 @@ public:
         system("cls");
         cout << "Enter the number of players you want to play with:(must be between 3 to 6): "<<endl;
     }
+    void Enter_details(){
+        system("cls");
+        cout << "Enter the name and age and color of each person in the Game please(first enter name second age and third your color): "<<endl;
+    }
 private:
 };
