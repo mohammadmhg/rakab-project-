@@ -42,5 +42,28 @@ public:
         cout << "Press x or X to Exit: "<<endl;
         Exit();
     }
+    bool Action(){
+        bool flag = true;
+        while(flag){
+            Start_menu();
+            int number;
+            cin >> number;
+            while(number > 3 || number < 1){
+                cin >> number;
+            }
+            if(number == 1){
+                return true;
+            }
+            if(number == 2){
+                Menu_of_opsions();
+            }
+            if(number == 3){
+                return false;
+            }
+
+        }
+        return true;
+
+    }
 private:
 };
