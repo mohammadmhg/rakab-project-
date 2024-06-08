@@ -87,3 +87,12 @@ public:
     }
 private:
 };
+
+
+
+class Game {
+public:
+    
+protected:
+    int players = 0;
+};
