@@ -92,7 +92,10 @@ private:
 
 class Game {
 public:
-    
+    ///setters
+    void SetPlayer(int number){
+        this->players = number;
+    }
 protected:
     int players = 0;
 };
