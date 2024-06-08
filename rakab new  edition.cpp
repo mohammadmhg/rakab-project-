@@ -73,5 +73,9 @@ public:
         }
         system("cls");
     }
+    void End(){
+        system("cls");
+        cout << "\tYou Exited the Game!!";
+    }
 private:
 };
