@@ -95,12 +95,24 @@ public:
     ///setters
     void SetPlayer(int number){
         this->players = number;
-        
+    }    
     ///getters
     int GetPlayer(){
         return players;
     }
+
+    ///methods
+
+    void SetUsers_player(){
+        int temp_players;
+        cin >> temp_players;
+        while(temp_players > 6 || temp_players < 3){
+            cout << "Error!!"<<endl;
+            cin >> temp_players;
+        }
+        SetPlayer(temp_players);
     }
+    
 protected:
     int players = 0;
 };
