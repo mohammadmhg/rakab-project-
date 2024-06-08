@@ -65,5 +65,13 @@ public:
         return true;
 
     }
+    void Exit(){
+        char user = getch();
+        while(user != 'x' && user != 'X'){
+            cout <<"Unknown input!!!try again"<<endl;
+            char user = getch();
+        }
+        system("cls");
+    }
 private:
 };
