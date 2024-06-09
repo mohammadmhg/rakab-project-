@@ -135,6 +135,12 @@ public:
     string GetWar(){
         return War;
     }
+    ///method
+    void SetWar_sing(){
+        string temp;
+        cin>> temp;
+        SetWar(temp);
+    }
 protected:
     string War;
 };
