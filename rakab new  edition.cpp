@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <string>
 using namespace std;
 class Menu{///for setting the menu of game
 public:
