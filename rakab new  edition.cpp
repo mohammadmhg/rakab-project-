@@ -144,3 +144,13 @@ public:
 protected:
     string War;
 };
+
+
+
+class Play_game
+{
+public:
+
+private:
+
+};
