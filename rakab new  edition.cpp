@@ -175,6 +175,20 @@ private:
 
 class Army_Power:public Play_game{
 public:
+///setter
+    void SetPower(int& number){
+        this->Power += number;
+    }
+    void SetShah_dokht(int number){
+        this->shah_dokht += number;
+    }
+    ///getter
+    int GetPower(){
+        return Power;
+    }
+    int Getshah_dokht(){
+        return shah_dokht;
+    }
 protected:
     int Power = 0;
 private:
