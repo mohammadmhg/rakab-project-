@@ -152,5 +152,5 @@ class Play_game
 public:
 
 private:
-
+    int Chosen_card = 0;
 };
