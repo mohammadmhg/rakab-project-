@@ -124,3 +124,17 @@ istream& operator>>(istream &stream,Game& data){
     data.SetPlayer(temp);
     return stream;
 }
+
+class War_sign{
+public:
+    ///setter
+    void SetWar(string city){
+        this->War = city;
+    }
+    ///getter
+    string GetWar(){
+        return War;
+    }
+protected:
+    string War;
+};
