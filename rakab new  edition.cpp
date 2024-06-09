@@ -150,7 +150,14 @@ protected:
 class Play_game
 {
 public:
-
+    ///setter
+    void SetChosen_card(int number){
+        this->Chosen_card = number;
+    }
+    ///getter
+    int Getchosen_card(){
+        return Chosen_card;
+    }
 private:
     int Chosen_card = 0;
 };
