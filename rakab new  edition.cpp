@@ -170,3 +170,13 @@ public:
 private:
     int Chosen_card = 0;
 };
+
+
+
+class Army_Power:public Play_game{
+public:
+protected:
+    int Power = 0;
+private:
+    int shah_dokht =0;
+};
