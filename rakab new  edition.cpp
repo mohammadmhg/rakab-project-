@@ -158,6 +158,14 @@ public:
     int Getchosen_card(){
         return Chosen_card;
     }
+    ///method
+    void CinChosen_Card(int &temp){
+        while(temp < 0||temp > 10){
+            cout <<"Error!!The index of Cards is Wrong!"<<endl;
+            cin>> temp;
+        }
+        SetChosen_card(temp);
+    }
 private:
     int Chosen_card = 0;
 };
