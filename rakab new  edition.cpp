@@ -116,3 +116,11 @@ public:
 protected:
     int players = 0;
 };
+
+
+istream& operator>>(istream &stream,Game& data){
+    int temp;
+    stream >> temp;
+    data.SetPlayer(temp);
+    return stream;
+}
