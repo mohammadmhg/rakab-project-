@@ -160,11 +160,7 @@ public:
         return Chosen_card;
     }
     ///method
-    void CinChosen_Card(int &temp){
-        while(temp < 0||temp > 10){
-            cout <<"Error!!The index of Cards is Wrong!"<<endl;
-            cin>> temp;
-        }
+    void CinChosen_Card(int temp){
         SetChosen_card(temp);
     }
 private:
