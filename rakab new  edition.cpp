@@ -163,6 +163,7 @@ public:
     void CinChosen_Card(int temp){
         SetChosen_card(temp);
     }
+    
 private:
     int Chosen_card = 0;
 };
