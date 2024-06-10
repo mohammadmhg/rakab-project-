@@ -198,3 +198,11 @@ private:
     int shah_dokht =0;
     bool Winner = false;
 };
+
+
+
+void Sort_Array(vector <ID>&Player_ID){
+        sort(Player_ID.begin(),Player_ID.end(),[](ID& temp1,ID& temp2){
+            return temp1.Getage() < temp2.Getage();
+        });
+}
