@@ -163,7 +163,7 @@ public:
     void CinChosen_Card(int temp){
         SetChosen_card(temp);
     }
-    
+
 private:
     int Chosen_card = 0;
 };
@@ -179,6 +179,9 @@ public:
     void SetShah_dokht(int number){
         this->shah_dokht += number;
     }
+    void SetWinner(bool flag){
+        this->Winner = flag;
+    }
     ///getter
     int GetPower(){
         return Power;
@@ -186,8 +189,12 @@ public:
     int Getshah_dokht(){
         return shah_dokht;
     }
+    bool GetWinner(){
+        return Winner;
+    }
 protected:
     int Power = 0;
 private:
     int shah_dokht =0;
+    bool Winner = false;
 };
