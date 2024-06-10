@@ -230,6 +230,20 @@ public:
     int GetNon_Neighbor_city(){
         return Non_Neighbor_city;
     }
+    ///method
+    void Defind_players(){
+        int temp1;
+        string temp2;
+        string temp3;
+        system("cls");
+        cout << "Enter the name and age and color of each person in the Game please(first enter name second age and third your color): "<<endl;
+        cin >> temp2;
+        cin>> temp1;
+        cin >> temp3;
+        SetnameP(temp2);
+        SetageP(temp1);
+        Setcolor(temp3);
+    }
 
 private:
     int age;
