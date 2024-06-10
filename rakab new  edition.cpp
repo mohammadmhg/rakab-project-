@@ -201,6 +201,20 @@ private:
 
 
 
+class ID{
+    
+public:
+
+private:
+    int age;
+    string name;
+    string color;
+    int Non_Neighbor_city =0;
+
+};
+
+
+
 void Sort_Array(vector <ID>&Player_ID){
         sort(Player_ID.begin(),Player_ID.end(),[](ID& temp1,ID& temp2){
             return temp1.Getage() < temp2.Getage();
