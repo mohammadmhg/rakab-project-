@@ -926,5 +926,27 @@ int main ()
             }
             Check_City = false;
         }
-        
+
+        while(!winner){
+            for(Players_index ; Players_index < play.GetPlayer(); Players_index++){
+                game_map.Map(play.GetPlayer(),Warzone.GetWar(),Pplay,City);
+                Pplay[Players_index].Print_Saturation(Player_ID[Players_index]);
+                Pplay[Players_index].SetBiggest_Card();
+                if(Pplay[Players_index].GetPass() == true && Pplay[Players_index].GetPass_counted() == false){
+                    Pplay[Players_index].SetPass_counted(true);//to sure that we already count this pass
+                    First_player.SetPassed_Players();
+                }
+                if(Pplay[Players_index].Gethelp()){
+                    Pplay[Players_index].Sethelp(false);
+                    Players_index--;
+                }
+            }
+            Players_index = 0;//to restart
+            if(First_player.GetPassed_Players() >= play.GetPlayer()){//to end the round on fight in a city
+                First_player.ReSetPassed_Players();
+                winner = true;
+                break;
+            }
+        }//winner while
+
     }//end_of_game while
