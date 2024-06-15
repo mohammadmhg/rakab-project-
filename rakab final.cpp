@@ -754,4 +754,56 @@ private:
 class Print_Map_of_game{//print the map of game in each round and show the informations that are needed
 public:
 
+    void Map(const int number,const string City,vector<Control_Cards> &Play, vector<Citys> citys){
+        system("cls");
+        bool Pflag = true;
+        for(int i = 0 ; i < number ;i++){
+            if(Pflag){
+                cout << "Player"<<i+1<<" Played Cards:\t";
+                Pflag = false;
+            }
+            for(int j = 0; j < Play[i].GetPlay_cards();j++){
+                if(Play[i].GetPlay_cards_data(j) == "Empty"){
+                    continue;
+                }
+                cout << Play[i].GetPlay_cards_data(j)<<'\t';
+            }
+            cout <<endl<<endl;
+            Pflag = true;
+        }
+        cout << "--------------------------------------------------"<<endl<<endl;
+        for(int x = 0; x < citys.size();x++){
+            if(Pflag){
+                cout << "Player" << x+1<<": ";
+                Pflag = false;
+            }
+            citys[x].Getcitys();
+            cout << endl<<endl;
+            Pflag = true;
+        }
+        cout << "--------------------------------------------------"<<endl<<endl;
+        for(int i = 0; i< number ;i++){
+            if(number % 2 == 0){
+                if(i % 2 == 0){
+                    cout <<endl<<endl<<endl;
+                }
+                cout << "        Player"<<i + 1<<"      ";
+            }
+            if(number % 2 != 0){
+                if(i == 3){
+                    cout <<endl<<endl<<endl;
+                }
+                if( i == 0){
+                    cout << "                        Player"<<i + 1<<endl<<endl<<endl;
+                }
+                if(i != 0){
+                    cout << "  Player"<<i+1 << "                                    ";
+                }
+            }
+        }
+        cout <<endl<<endl<<"             The City in War is "<< City<<endl;
+        cout << "--------------------------------------------------";
+    }
+
+    
 };
