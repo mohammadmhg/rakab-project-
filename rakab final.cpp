@@ -966,4 +966,14 @@ int main ()
             }
         }
 
+        system("cls");
+        for(int i =0 ; i< play.GetPlayer() ; i++){
+            if(Pplay[i].GetPower() > Pplay[i].GetMost_Powerful()){
+                int temp = Pplay[i].GetPower();
+                Pplay[i].SetMost_Powerful(temp);
+                First_player.SetFirst_Attacker(i);
+                Pplay[i].SetWinner(true);
+            }
+        }
+
     }//end_of_game while
