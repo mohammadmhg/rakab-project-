@@ -812,5 +812,12 @@ public:
 
     }
 
- 
+        void Round_ends(int number){
+        system("cls");
+        cout <<"THIS WAR END HERE!! Player" << number<< " Is winner of this battle!!"<<endl<<endl;
+        cout << "\tNEW ROUND BEGINS!!FIGHT"<<endl;
+        getch();
+
+    }
+     
 };
