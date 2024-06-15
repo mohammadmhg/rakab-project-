@@ -280,7 +280,24 @@ public:
     string GetnamePurple(){
         return nameP;
     }
+    ///methods
+    void SetPurple_card(int &i,int Shuffle){
+        srand(time(0));
+        vector <string> Cards = {"matarsak","shah_dokht","tabl_zan","matarsak","matarsak","bahar","zemestan","matarsak","tabl_zan","matarsak","matarsak","shah_dokht","tabl_zan","bahar",
+        "matarsak","matarsak","matarsak","shah_dokht","matarsak","tabl_zan","bahar","zemestan","matarsak","matarsak","tabl_zan","matarsak","tabl_zan","zemestan","matarsak","matarsak"
+        ,"matarsak"};
+        Shuffle_Cards(Cards,Shuffle);
+        nameP = Cards[i];
+    }
+    void Shuffle_Cards(vector <string> &Cards,int &Shuffle){//shuffle the cards with random number
+        if(Shuffle > 30){
+            Shuffle = rand() % 5 + 1;
+        }
+        for(int i = 0; i< Cards.size() ;i++){
+            swap(Cards[i],Cards[Shuffle]);
+        }
 
+    }
 private:
     string nameP;
 };
