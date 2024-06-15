@@ -244,3 +244,25 @@ public:
 private:
     string Peace;
 };
+
+
+
+
+class Yellow_card{//this class is for setting the soldier(yellow)cards in game
+public:
+///constructor
+    Yellow_card(){}
+    Yellow_card(int number): Number(number){}
+///getter
+    int GetNumber(){
+        return Number;
+    }
+///method
+    void Setcard(){
+        this->Number = rand() % 10 + 1;
+    }
+
+private:
+    int Number = 0;
+
+};
