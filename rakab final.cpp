@@ -106,5 +106,25 @@ public:
         return true;
 
     }
-    
+    void Exit(){// Exit the game before start
+        char user = getch();
+        while(user != 'x' && user != 'X'){
+            cout <<"Unknown input!!!try again"<<endl;
+            char user = getch();
+        }
+        system("cls");
+    }
+    void End(){
+        system("cls");
+        cout << "\tYou Exited the Game!!";
+    }
+    void Enter_players(){
+        system("cls");
+        cout << "Enter the number of players you want to play with:(must be between 3 to 6): "<<endl;
+    }
+    void Enter_details(){
+        system("cls");
+        cout << "Enter the name and age and color of each person in the Game please: "<<endl;
+    }
+
 };
