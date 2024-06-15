@@ -128,3 +128,11 @@ public:
     }
 
 };
+
+
+
+class ID_Player{// this class is for taking the ID of a player during the game
+public:
+
+private:
+};
