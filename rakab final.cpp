@@ -653,6 +653,14 @@ public:
         }
     }
 
+    void Setzemestan(){//set power when is zemestan
+        for(int i = 0 ; i < Play_cards.size();i++){
+            if(Play_cards[i] != "matarsak"&&Play_cards[i] != "shah_dokht"&&Play_cards[i] != "tabl_zan"&&Play_cards[i] != "bahar"&&Play_cards[i] !="zemestan"&&Play_cards[i] != "Empty"){
+                Power = (Power + 1) - ( stoi(Play_cards[i]) );
+            }
+        }
+    }
+
 private:
 
     bool Winner = false;
