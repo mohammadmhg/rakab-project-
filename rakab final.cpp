@@ -420,7 +420,7 @@ public:
         getch();
         cout << endl<<endl;
     }
-    
+
     void Print_Saturation(ID_Player& Player_ID){//print the available cards for player and taking his input
         cout <<endl<< "Player Turn : " << Player_ID.Getname()<<endl;
         if(Pass){
@@ -500,6 +500,52 @@ protected:
     vector <string> Play_cards;
 
 private:
+
+    void Cards_helping_Menus(string &temp){//check the input to show help menu
+        if(temp == "help bahar"){
+            Bahar_Menu();
+            return;
+        }
+        if(temp=="help matarsak"){
+            Matarsak_Menu();
+            return;
+        }
+        if(temp == "help zemestan"){
+            Zemestan_Menu();
+            return;
+        }
+        if(temp == "help tabl_zan"){
+            Tabl_Zan_Menu();
+            return;
+        }
+        if(temp == "help shah_dokht"){
+            Shah_dokht_Menu();
+            return;
+        }
+
+    }
+    void CinChosen_Card(string temp){//setting the index of chosen card by player
+        for(int i =0 ; i < Cards.size();i++){
+            if(Cards[i] == temp){
+                Chosen_card = i+1;
+                break;
+            }
+        }
+    }
+    //getter
+    int Getchosen_card(){
+        return Chosen_card;
+    }
+    bool Check_Exist_Card(string Chosen){//check that input from player is correct
+        for(int i = 0 ; i < Cards.size() ; i++){
+            if(Chosen == Cards[i]|| Chosen == "Empty"){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
     int Chosen_card = 0;
     bool Getting_help = false;
