@@ -567,3 +567,16 @@ int Gameplay::Passed_Players;
 int Gameplay::players;
 
 
+
+
+
+
+
+class Control_Cards:public Gameplay{///this class this for controlling the power of each player army(include normal and some spacial cards related to Army power)
+public:
+private:
+    bool Winner = false;
+    int Power = 0;
+    static int Biggest_Played_Card;
+    static int Most_Powerful;
+};
