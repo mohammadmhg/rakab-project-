@@ -234,6 +234,13 @@ public:
     string Getpeace(){
         return Peace;
     }
+    ///method
+    void Setsign(){
+        cout << "Please Enter the city that you want to no one Attack to it: "<< endl;
+        string temp;
+        cin >> temp;
+        Setpeace(temp);
+    }
 private:
     string Peace;
 };
