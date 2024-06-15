@@ -223,5 +223,17 @@ private:
 
 class Peace_sign{//this class is for the peace_sing in map
 public:
+    ///constructor
+    Peace_sign(){}
+    Peace_sign(string Player_name): Peace(Player_name){}
+    ///setter
+    void Setpeace(string city){
+        this->Peace = city;
+    }
+    ///getter
+    string Getpeace(){
+        return Peace;
+    }
 private:
+    string Peace;
 };
