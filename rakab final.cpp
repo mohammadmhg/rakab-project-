@@ -345,19 +345,24 @@ public:
         }
         this->players = number;
     }
+
     void SetPass_counted(bool temp){
         this->Pass_counted = temp;
     }
+
     void Set_Seasons(){
         Is_bahar = false;
         Is_zemestan = false;
     }
+
     void SetPassed_Players(){
         this->Passed_Players = Passed_Players + 1;
     }
+
     void ReSetPassed_Players(){
         this->Passed_Players = 0;
     }
+
     ///getter
     int GetPlayer(){
         return players;
@@ -395,7 +400,100 @@ public:
         return Pass;
     }
 
+    ///method
+    void SetUsers_player(){//checking that players are in right numbers
+        int temp_players;
+        cin >> temp_players;
+        while(temp_players > 6 || temp_players < 3){
+            cout << "Error!!"<<endl;
+            cin >> temp_players;
+        }
+        SetPlayer(temp_players);
+    }
+
+    void Print(int numbers,int &i,ID_Player &Player_ID){//print the cards for each player
+        system("cls");
+        cout <<"We want to show the Player"<<i+1<<" Card(press any key): "<<endl;
+        getch();
+        cout << "Name: " << Player_ID.Getname() << "\tage: " << Player_ID.Getage() <<"\tColor : " << Player_ID.Getcolor() <<"\tCards: " <<endl;
+        Show_Array();
+        getch();
+        cout << endl<<endl;
+    }
     
+    void Print_Saturation(ID_Player& Player_ID){//print the available cards for player and taking his input
+        cout <<endl<< "Player Turn : " << Player_ID.Getname()<<endl;
+        if(Pass){
+            cout << "\t Player has Passed the round!!"<<endl;
+            getch();
+            return;
+        }
+        cout << "The player available Cards are : " << endl<<endl;
+        Show_Array();
+        cout << endl<<endl<<"Please Enter the value of The Card That you want to play(Enter 0 or say pass if You want to Pass): " <<endl;
+        string temp;
+        getline(cin,temp);
+        while(Check_Exist_Card(temp)==true&&temp!="help"&&temp!="pass"&&temp!="matarsak"&&temp!="shah_dokht"&&temp!="bahar"&&temp!="zemestan"&&temp!="tabl_zan"
+              &&temp!="help bahar"&&temp!="help matarsak"&&temp!="help shah_dokht"&&temp!="help zemestan"&&temp!="help tabl_zan"&&temp!="0"){
+            Non_Existed_Card();
+            getline(cin,temp);
+        }
+        if(temp == "pass"|| temp == "0"){
+            Pass = true;
+            return;
+        }
+        if(temp == "help"){
+            Sethelp(true);
+            Menu_of_opsions();
+            return;
+        }
+        if(temp=="help bahar"||temp=="help matarsak"||temp=="help shah_dokht"||temp=="help zemestan"||temp=="help tabl_zan"){
+            Sethelp(true);
+            Cards_helping_Menus(temp);
+            return;
+        }
+
+        CinChosen_Card(temp);
+        cout << "The Played Card is : " << Cards[Getchosen_card() - 1]<<endl;
+        getch();
+        Played_Card(Cards[Getchosen_card() - 1]);
+        Cards[Getchosen_card() - 1] = "Empty";
+    }
+
+    void Matarsak(){//handle the matarsak card(matarsak card only impact during the game and after the round ends is useless so we handle it here)
+        cout << "You select matarsak! Your Played cards are: "<<endl;
+        for(int i =0 ;i < Play_cards.size() ; i++){
+            cout << Play_cards[i] << '\t';
+        }
+        cout<<endl << "Please Enter the Value of The soldier Card you Want to Put Back:(only inter Value of card if there is no soldier card Enter 0)"<<endl;
+        string temp;
+        cin>> temp;
+        while(temp != "0"&&temp != "1"&&temp !="2"&&temp != "3"&&temp != "4"&&temp != "5"&&temp != "6"&&temp != "7"&&temp != "8"&&temp != "9"&&temp != "10"){
+            cout <<"ONLY SOLDIERS PLEASE!!"<<endl;
+            cin>> temp;
+        }
+        if(temp == "0"){
+            return;
+        }
+        if(temp != "0" && Play_cards.size() == 1){
+            cout << "PLAY 0 IF THERE IS NO CARD PLEASE!!"<<endl;
+            getch();
+            return;
+        }
+        while(stoi(temp) < 1 || stoi(temp) > 10){
+            cout <<"Error!!you Entered The wrong Value!!"<< endl;
+            cin>> temp;
+        }
+        for(int i =0 ;i < Play_cards.size() ; i++){
+            if(Play_cards[i] == temp){
+                Play_cards[i] = "Empty";
+                SetCards(temp);
+                break;
+            }
+        }
+    }
+
+
 protected:
 
     vector <string> Cards;
