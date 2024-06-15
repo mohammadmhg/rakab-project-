@@ -863,4 +863,5 @@ int main ()
         City.push_back(x);
     }
 
-    
+    play.Sort_Array(Player_ID);//sort players by age
+
