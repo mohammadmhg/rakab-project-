@@ -309,6 +309,93 @@ private:
 class Gameplay: public Menus_of_game{///this class is for Gameplay during each round and setting Cards and Played Cards for User and Controlling every thing related to Cards in a round
 public:
 
+    ///constructor
+    Gameplay(){}
+    Gameplay(string card,string played_card){
+        SetCards(card);
+        Played_Card(played_card);
+    }
+    ///setter
+    void Sethelp(bool temp){
+        this->Getting_help = temp;
+    }
+    void SetFirst_Attacker(int number){
+        this->First_Attacker = number + 1;
+    }
+    void SetCards(string a){
+        Cards.push_back(a);
+    }
+    void Played_Card(string name){//setting the paled card and check the season
+        Play_cards.push_back(name);
+        if(name == "bahar"){
+            Is_bahar = true;
+            Is_zemestan = false;
+        }
+        if(name == "zemestan"){
+            Is_bahar = false;
+            Is_zemestan = true;
+        }
+        if(name == "matarsak"){
+            Matarsak();
+        }
+    }
+    void SetPlayer(int number){//this method is for taking the number of players
+        if(number > 6 || number < 3){
+            players = 0;
+        }
+        this->players = number;
+    }
+    void SetPass_counted(bool temp){
+        this->Pass_counted = temp;
+    }
+    void Set_Seasons(){
+        Is_bahar = false;
+        Is_zemestan = false;
+    }
+    void SetPassed_Players(){
+        this->Passed_Players = Passed_Players + 1;
+    }
+    void ReSetPassed_Players(){
+        this->Passed_Players = 0;
+    }
+    ///getter
+    int GetPlayer(){
+        return players;
+    }
+    int GetPassed_Players(){
+        return Passed_Players;
+    }
+    bool Gethelp(){
+        return Getting_help;
+    }
+    int GetFirst_Attacker(){
+        return First_Attacker;
+    }
+    bool GetPass_counted(){
+        return Pass_counted;
+    }
+    void Show_Array(){//showing the unplaed cards
+        for(int i = 0 ; i < Cards.size(); i++){
+            cout << Cards[i] << '\t';
+        }
+    }
+    bool Getbahar(){
+        return Is_bahar;
+    }
+    bool Getzemestan(){
+        return Is_zemestan;
+    }
+    int GetPlay_cards(){
+        return Play_cards.size();
+    }
+    string GetPlay_cards_data(int &i){
+        return Play_cards[i];
+    }
+    bool GetPass(){
+        return Pass;
+    }
+
+    
 protected:
 
     vector <string> Cards;
