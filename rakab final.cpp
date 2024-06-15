@@ -805,5 +805,12 @@ public:
         cout << "--------------------------------------------------";
     }
 
-    
+    void Win(int &number){
+        system("cls");
+        cout << "\tTHE WAR ENDS!!!WINNER IS PLAYER"<<number + 1<<endl<<endl;
+        cout <<"<THANK YOU FOR PLAYING>";
+
+    }
+
+ 
 };
