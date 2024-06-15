@@ -134,11 +134,11 @@ public:
 
 
 
-class ID_Player{// this class is for taking the ID of a player during the game
+class Players{// this class is for taking the ID of a player during the game
 public:
      ///constructor
-    ID_Player(){}
-    ID_Player(int data1,string data2,string data3): age(data1), name(data2), color(data3){}
+    Players(){}
+    Players(int data1,string data2,string data3): age(data1), name(data2), color(data3){}
     ///setter
     void SetageP(int number){
         this->age = number;
@@ -152,6 +152,7 @@ public:
     void SetNon_Neighbor_city(){
         this->Non_Neighbor_city = Non_Neighbor_city + 1;
     }
+
 
     ///getter
     string Getname(){
@@ -167,6 +168,12 @@ public:
         return Non_Neighbor_city;
     }
     ///method
+    void Sort_Array(vector <Players>&Player_ID){//sort players by age
+        sort(Player_ID.begin(),Player_ID.end(),[](Players& temp1,Players& temp2){
+            return temp1.Getage() < temp2.Getage();
+        });
+    }
+
     void Defind_players(){// this method is for taking the name and age and color of each player
         int temp1;
         string temp2;
@@ -413,7 +420,7 @@ public:
         SetPlayer(temp_players);
     }
 
-    void Print(int numbers,int &i,ID_Player &Player_ID){//print the cards for each player
+    void Print(int numbers,int &i,Players &Player_ID){//print the cards for each player
         system("cls");
         cout <<"We want to show the Player"<<i+1<<" Card(press any key): "<<endl;
         getch();
@@ -423,7 +430,7 @@ public:
         cout << endl<<endl;
     }
 
-    void Print_Saturation(ID_Player& Player_ID){//print the available cards for player and taking his input
+    void Print_Saturation(Players& Player_ID){//print the available cards for player and taking his input
         cout <<endl<< "Player Turn : " << Player_ID.Getname()<<endl;
         if(Pass){
             cout << "\t Player has Passed the round!!"<<endl;
@@ -821,3 +828,12 @@ public:
     }
      
 };
+
+
+
+
+int main ()
+{
+    
+    return 0;
+}
