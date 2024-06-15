@@ -841,3 +841,9 @@ int main ()
     user.End();
     return 0;
     }
+
+    War_sign Warzone;
+    Control_Cards First_player;
+    int Shuffle = rand() % 5 + 1;
+
+    
