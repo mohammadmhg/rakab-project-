@@ -707,7 +707,43 @@ public:
         cout << "The city that you choose Has been taken Before!!"<<endl<<"PLEASE ENTER A NAME OF (EMPTY) CITY :("<<endl;
     }
 
-    
+    bool SetMapcitys(){//check adjacent for the taken citys by a player
+        unordered_map<string, vector<string>> Mapcitys;
+        Mapcitys = {
+        {"BELLA", {"CALINE","PLADACI","BORGE"}},
+        {"CALINE", {"BELLA","PLADACI","BORGE","ENNA","ATELA"}},
+        {"ENNA", {"CALINE","ATELA","BORGE","DIMASE"}},
+        {"ATELA", {"CALINE","ENNA","DIMASE"}},
+        {"PLADACI", {"BORGE","MORINA","ROLLO"}},
+        {"BORGE", {"BELLA","CALINE","ENNA","DIMASE","PLADACI","DIMASE","MORINA","OLIVADI"}},
+        {"DIMASE", {"ENNA","ATELA","BORGE","OLIVADI"}},
+        {"MORINA", {"PLADACI","BORGE","OLIVADI","ROLLO","TALMONE","ARMENTO"}},
+        {"OLIVADI", {"BORGE","DIMASE","MORINA","ARMENTO","LIA"}},
+        {"ROLLO", {"PLADACI","MORINA","TALMONE","ELINIA"}},
+        {"TALMONE", {"MORINA","ROLLO","ARMENTO","ELINIA"}},
+        {"ARMENTO", {"MORINA","OLIVADI","LIA","TALMONE"}},
+        {"LIA", {"OLIVADI","ARMENTO"}},
+        {"ELINIA", {"ROLLO","TALMONE"}}
+        };
+        int Adjacent = 0;
+        for(int i = 0; i< Taken_city.size();i++){
+            auto name = Mapcitys.find(Taken_city[i]);
+            if(name != Mapcitys.end()){
+                for(vector<string>::const_iterator Neighbor = name->second.begin(); Neighbor != name->second.end();Neighbor++){
+                    for(int k = i + 1 ; k < Taken_city.size();k++){
+                        if(*Neighbor == Taken_city[k]){
+                            Adjacent++;
+                            if(Adjacent >= 2){
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 private:
     vector <string>Taken_city;
 };
