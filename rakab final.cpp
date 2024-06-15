@@ -301,3 +301,22 @@ public:
 private:
     string nameP;
 };
+
+
+
+
+
+class Gameplay: public Menus_of_game{///this class is for Gameplay during each round and setting Cards and Played Cards for User and Controlling every thing related to Cards in a round
+public:
+protected:
+private:
+    int Chosen_card = 0;
+    bool Getting_help = false;
+    static bool Is_zemestan;
+    static bool Is_bahar;
+    static int First_Attacker;
+    static int Passed_Players;
+    bool Pass = false;
+    bool Pass_counted = false;
+    static int players;
+};
