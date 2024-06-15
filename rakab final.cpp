@@ -976,4 +976,16 @@ int main ()
             }
         }
 
+        system("cls");
+        cout << "Army_power in order from Player1 to Player" <<play.GetPlayer()<<endl;
+        for(int i =0 ; i <play.GetPlayer();i++){
+            cout << Pplay[i].GetPower()<<"  ";
+        }
+        getch();
+        if(Pplay[First_player.GetFirst_Attacker() - 1].GetWinner()){
+            game_map.Round_ends(First_player.GetFirst_Attacker());
+            Player_ID[First_player.GetFirst_Attacker() - 1].SetNon_Neighbor_city();
+            City[First_player.GetFirst_Attacker() - 1].Setcitys(Warzone.GetWar());
+        }
+
     }//end_of_game while
