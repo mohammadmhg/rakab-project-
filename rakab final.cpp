@@ -988,4 +988,19 @@ int main ()
             City[First_player.GetFirst_Attacker() - 1].Setcitys(Warzone.GetWar());
         }
 
+        for(int k = 0; k < play.GetPlayer();k++){
+            if(Player_ID[k].GetNon_Neighbor_city() >= 3){
+                if(City[k].SetMapcitys()){//end of game by adjacent
+                    end_of_game = true;
+                    game_map.Win(k);
+                    return 0;
+                }
+                if(Player_ID[k].GetNon_Neighbor_city() >= 5){//end of game by taking the citys
+                    end_of_game = true;
+                    game_map.Win(k);
+                    return 0;
+                }
+            }
+        }
+
     }//end_of_game while
