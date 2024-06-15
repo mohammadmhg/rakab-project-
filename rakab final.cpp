@@ -669,3 +669,9 @@ private:
     static int Most_Powerful;
 
 };
+
+
+int Control_Cards::Biggest_Played_Card;
+int Control_Cards::Most_Powerful;
+
+
