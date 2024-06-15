@@ -135,4 +135,8 @@ class ID_Player{// this class is for taking the ID of a player during the game
 public:
 
 private:
+    int age = 0;
+    string name;
+    string color;
+    int Non_Neighbor_city =0;
 };
