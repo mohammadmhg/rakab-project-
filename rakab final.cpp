@@ -677,8 +677,20 @@ int Control_Cards::Biggest_Played_Card;
 int Control_Cards::Most_Powerful;
 
 
+
 class Citys{//to control the Map of game and the citys(include every methods and datas needed for controlling the citys)
 public:
+
+    ///setter
+    void Setcitys(string name){
+        Taken_city.push_back(name);
+    }
+    ///getter
+    void Getcitys(){//print the taken citys by a player
+        for(int i = 0; i < Taken_city.size();i++){
+            cout << Taken_city[i]<<" ";
+        }
+    }
 
 private:
     vector <string>Taken_city;
