@@ -702,6 +702,11 @@ public:
         }
     return false;
     }
+
+    void Wrong_city(){//check that player do not enter a name of a taken city
+        cout << "The city that you choose Has been taken Before!!"<<endl<<"PLEASE ENTER A NAME OF (EMPTY) CITY :("<<endl;
+    }
+
     
 private:
     vector <string>Taken_city;
