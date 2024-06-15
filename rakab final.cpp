@@ -193,5 +193,5 @@ class War_sign{//this class is for the war_sing in map
 public:
 
 private:
-    tring War;
+    string War;
 };
