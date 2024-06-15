@@ -677,3 +677,9 @@ int Control_Cards::Biggest_Played_Card;
 int Control_Cards::Most_Powerful;
 
 
+class Citys{//to control the Map of game and the citys(include every methods and datas needed for controlling the citys)
+public:
+
+private:
+    vector <string>Taken_city;
+};
