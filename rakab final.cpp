@@ -846,4 +846,12 @@ int main ()
     Control_Cards First_player;
     int Shuffle = rand() % 5 + 1;
 
+    Players play;///to set the number of Players
+    user.Enter_players();
+    play.SetUsers_player();
+    vector <Players> Player_ID(play.GetPlayer());
+    for(int i = 0; i < play.GetPlayer(); i++){
+        Player_ID[i].Defind_players();
+    }
+
     
