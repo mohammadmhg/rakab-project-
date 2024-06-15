@@ -202,6 +202,17 @@ public:
     string GetWar(){
         return War;
     }
+    ///method
+    void SetWar_sing(){
+        string temp;
+        cin>> temp;
+        while(temp!="BELLA" && temp!="CALINE" && temp!="ENNA" && temp!="ATELA" && temp!="PLADACI" && temp!="BORGE" && temp!="DIMASE" && temp!="MORINA" && temp!="OLIVADI" && temp!="ROLLO" && temp!="TALMONE"
+        && temp!="ARMENTO" && temp!="LIA" && temp!="ELINIA") {
+            cout <<"WRONG NAME!!"<<endl;
+            cin>>temp;
+        }
+        SetWar(temp);
+    }
 private:
     string War;
 };
