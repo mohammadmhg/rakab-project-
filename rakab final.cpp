@@ -308,8 +308,14 @@ private:
 
 class Gameplay: public Menus_of_game{///this class is for Gameplay during each round and setting Cards and Played Cards for User and Controlling every thing related to Cards in a round
 public:
+
 protected:
+
+    vector <string> Cards;
+    vector <string> Play_cards;
+
 private:
+
     int Chosen_card = 0;
     bool Getting_help = false;
     static bool Is_zemestan;
@@ -319,4 +325,5 @@ private:
     bool Pass = false;
     bool Pass_counted = false;
     static int players;
+
 };
