@@ -887,4 +887,6 @@ int main ()
     bool end_of_game = false;
     Print_Map_of_game game_map;
 
+    First_player.SetFirst_Attacker(0);//setting the first Person who star the game by age
+    
     
