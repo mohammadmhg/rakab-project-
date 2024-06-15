@@ -216,3 +216,12 @@ public:
 private:
     string War;
 };
+
+
+
+
+
+class Peace_sign{//this class is for the peace_sing in map
+public:
+private:
+};
