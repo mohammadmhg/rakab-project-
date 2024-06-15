@@ -949,4 +949,21 @@ int main ()
             }
         }//winner while
 
+        for(int i =0; i< play.GetPlayer() ;i++){
+            if(Pplay[i].Getbahar() ){
+                Pplay[i].Calculate_Yellow_cards();
+                Pplay[i].Calculate_Purple_cards();
+                Pplay[i].Setbahar();
+            }
+            else if(Pplay[i].Getzemestan() ){
+                Pplay[i].Calculate_Yellow_cards();
+                Pplay[i].Setzemestan();
+                Pplay[i].Calculate_Purple_cards();
+            }
+            else{
+                Pplay[i].Calculate_Yellow_cards();
+                Pplay[i].Calculate_Purple_cards();
+            }
+        }
+
     }//end_of_game while
