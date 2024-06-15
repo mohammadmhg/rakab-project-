@@ -889,4 +889,42 @@ int main ()
 
     First_player.SetFirst_Attacker(0);//setting the first Person who star the game by age
     
-    
+    while(!end_of_game)
+    {
+        vector <Control_Cards> Pplay(play.GetPlayer());
+        for(int i = 0; i < play.GetPlayer(); i++){
+            Control_Cards b;
+            Pplay.push_back(b);
+        }
+        for(int i = 0;i < play.GetPlayer() ;i++){///setting cards in random way
+            for(int j = 0; j < 10; j++){
+                int R = rand() % 28 + 1;
+                if(R % 2 == 0){
+                  int n = Yellow[R].GetNumber();
+                  string tempS  = to_string(n);
+                  Pplay[i].SetCards(tempS);
+                }
+                else{
+                    string tempS2  = Purple[R].GetnamePurple();
+                    Pplay[i].SetCards(tempS2);
+                }
+            }
+        }
+        for(int i = 0 ;i < play.GetPlayer();i++){
+            Pplay[i].Print(play.GetPlayer(),i,Player_ID[i]);///this function is only for print
+        }
+        int Players_index = First_player.GetFirst_Attacker() - 1;///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
+        user.Start_War(First_player.GetFirst_Attacker());
+        Warzone.SetWar_sing();
+        bool Check_City = true;
+        while(Check_City){//to check that player can Enter a name of a EMPTY city
+            for(int i = 0; i < play.GetPlayer();i++){
+                if(City[i].Check_Takken_citys(Warzone.GetWar()) ){
+                    City[i].Wrong_city();
+                    Warzone.SetWar_sing();
+                }
+            }
+            Check_City = false;
+        }
+        
+    }//end_of_game while
