@@ -186,3 +186,10 @@ private:
     string color;
     int Non_Neighbor_city =0;
 };
+
+
+
+class War_sign{//this class is for the war_sing in map
+public:
+private:
+};
