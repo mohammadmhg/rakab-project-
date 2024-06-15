@@ -611,6 +611,29 @@ public:
         return Biggest_Played_Card;
     }
 
+    ///methods
+    void Calculate_Yellow_cards(){//set power by yellow cards
+        for(int i = 0 ; i < Play_cards.size() ;i++){
+            if(Play_cards[i] != "matarsak"&&Play_cards[i] != "shah_dokht"&&Play_cards[i] != "tabl_zan"&&Play_cards[i] != "bahar"&&Play_cards[i] !="zemestan"&&Play_cards[i] != "Empty"){
+                Power =Power + stoi(Play_cards[i]);
+            }
+        }
+    }
+    void Calculate_Purple_cards(){//set power by purple cards
+        bool Tabl_zan = false;
+        for(int i = 0; i < Play_cards.size() ;i++){
+            if(Play_cards[i] == "tabl_zan" && Tabl_zan == false){
+                Tabl_zan = true;
+                Power = Power * 2;
+            }
+            if(Play_cards[i] == "shah_dokht"){
+                Power = Power + 10;
+            }
+        }
+
+    }
+
+
 private:
 
     bool Winner = false;
