@@ -692,6 +692,17 @@ public:
         }
     }
 
+    ///method
+    bool Check_Takken_citys(string War_city){//check that player do not enter a name of a taken city
+
+        for(int i = 0 ; i < Taken_city.size() ;i++){
+            if(Taken_city[i] == War_city){
+                return true;
+            }
+        }
+    return false;
+    }
+    
 private:
     vector <string>Taken_city;
 };
