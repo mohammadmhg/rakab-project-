@@ -191,7 +191,17 @@ private:
 
 class War_sign{//this class is for the war_sing in map
 public:
-
+     ///constructor
+    War_sign(){}
+    War_sign(string data): War(data){}
+    ///setter
+    void SetWar(string city){
+        this->War = city;
+    }
+    ///getter
+    string GetWar(){
+        return War;
+    }
 private:
     string War;
 };
