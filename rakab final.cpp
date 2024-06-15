@@ -136,7 +136,33 @@ public:
      ///constructor
     ID_Player(){}
     ID_Player(int data1,string data2,string data3): age(data1), name(data2), color(data3){}
+    ///setter
+    void SetageP(int number){
+        this->age = number;
+    }
+    void SetnameP(string ntemp){
+        this->name = ntemp;
+    }
+    void Setcolor(string temp){
+        this->color = temp;
+    }
+    void SetNon_Neighbor_city(){
+        this->Non_Neighbor_city = Non_Neighbor_city + 1;
+    }
 
+    ///getter
+    string Getname(){
+        return name;
+    }
+    int Getage(){
+        return age;
+    }
+    string Getcolor(){
+        return color;
+    }
+    int GetNon_Neighbor_city(){
+        return Non_Neighbor_city;
+    }
 private:
     int age = 0;
     string name;
