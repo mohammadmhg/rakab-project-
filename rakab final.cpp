@@ -47,7 +47,42 @@ public:
         cout << "Press x or X to Exit: "<<endl;
         Exit();
     }
-
+    void Bahar_Menu(){//explain bahar card
+        system("cls");
+        cout << "Bahar:After playing this card,the army of players or player that played the highest Yellow card(cards) will increase 3" << endl;
+        cout << "more to each card.Remmember that even after battle ends in a city,the Bahar card will remains until Zemestan!!"<< endl;
+        cout << "Press x or X to Exit: "<<endl;
+        Exit();
+    }
+    void Zemestan_Menu(){//explain zemestan card
+        system("cls");
+        cout<< "Zemestan:If a player played this,All the Yellow cards value will be 1!!(This card do not impact the Purple cards)"<<endl<<endl;
+        cout << "Press x or X to Exit: "<<endl;
+        Exit();
+    }
+    void Tabl_Zan_Menu(){//explain tabl_zan card
+        system("cls");
+        cout << "Tabl_zan:if a player use this card in battle,his army strength will boost double!!(but after using this card once,the"<<endl;
+        cout <<"army s strength will not increase one more!!)"<<endl;
+        cout << "Press x or X to Exit: "<<endl;
+        Exit();
+    }
+    void Shah_dokht_Menu(){//explain shah_dokht card
+        system("cls");
+        cout << "Shah_dokht:this card increase the army power 10 more (no other cards can effect this card,Even Zemesta!!)"<<endl;
+        cout << "Press x or X to Exit: "<<endl;
+        Exit();
+    }
+    void Matarsak_Menu(){//explain matarsak card
+        system("cls");
+        cout << "Matarsak:if some player want to return his Yellow played card,he can use Matarsak card, but this card only effects"<<endl;
+        cout <<"on Yellow cards!"<<endl;
+        cout << "Press x or X to Exit: "<<endl;
+        Exit();
+    }
+    void Non_Existed_Card(){
+        cout << "ENTER THE CARD: "<<endl;
+    }
     bool Action(){
         bool flag = true;
         while(flag){
