@@ -1003,4 +1003,14 @@ int main ()
             }
         }
 
+        winner = false;
+        Pplay[0].ReSetMost_Powerful();
+        Pplay[0].Set_Seasons();
+        Pplay[0].SetBiggest_Card();
+
     }//end_of_game while
+
+
+    return 0;
+
+}
