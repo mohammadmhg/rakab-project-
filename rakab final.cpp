@@ -865,3 +865,22 @@ int main ()
 
     play.Sort_Array(Player_ID);//sort players by age
 
+    srand(time(0));
+    vector <Yellow_card> Yellow(58);
+    for(int i = 0; i < 58; i++){
+        Yellow_card a;
+        Yellow.push_back(a);
+    }
+    for(int i = 0; i < 58; i++){
+        Yellow[i].Setcard();
+    }
+    vector <Purple_card> Purple(31);
+    for(int i = 0 ; i < 31 ; i++){
+        Purple_card c;
+        Purple.push_back(c);
+    }
+    for(int i = 0 ; i < 31 ; i++){
+        Purple[i].SetPurple_card(i,Shuffle);
+    }
+
+    
