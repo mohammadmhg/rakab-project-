@@ -643,6 +643,16 @@ public:
         }
     }
 
+    void SetBiggest_Card(){//set the biggest played soldier card in game
+        for(int i = 0; i < Play_cards.size() ;i++){
+            if(Play_cards[i] != "matarsak"&&Play_cards[i] != "shah_dokht"&&Play_cards[i] != "tabl_zan"&&Play_cards[i] != "bahar"&&Play_cards[i] !="zemestan"&&Play_cards[i] != "Empty"){
+                if( stoi( Play_cards[i] ) > Biggest_Played_Card){
+                    Biggest_Played_Card = stoi( Play_cards[i] );
+                }
+            }
+        }
+    }
+
 private:
 
     bool Winner = false;
