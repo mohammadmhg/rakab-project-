@@ -133,6 +133,9 @@ public:
 
 class ID_Player{// this class is for taking the ID of a player during the game
 public:
+     ///constructor
+    ID_Player(){}
+    ID_Player(int data1,string data2,string data3): age(data1), name(data2), color(data3){}
 
 private:
     int age = 0;
