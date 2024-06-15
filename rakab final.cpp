@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <conio.h>
 using namespace std;
 class Menus_of_game{///for setting the menus of game only
 public:
