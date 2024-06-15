@@ -3,6 +3,7 @@
 #include <vector>
 #include <conio.h>
 #include <cstdlib>
+#include <ctime>
 using namespace std;
 class Menus_of_game{///for setting the menus of game only
 public:
