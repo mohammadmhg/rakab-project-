@@ -883,4 +883,8 @@ int main ()
         Purple[i].SetPurple_card(i,Shuffle);
     }
 
+    bool winner = false;
+    bool end_of_game = false;
+    Print_Map_of_game game_map;
+
     
