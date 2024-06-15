@@ -163,6 +163,23 @@ public:
     int GetNon_Neighbor_city(){
         return Non_Neighbor_city;
     }
+    ///method
+    void Defind_players(){// this method is for taking the name and age and color of each player
+        int temp1;
+        string temp2;
+        string temp3;
+        system("cls");
+        cout << "Enter the name and age and color of each person in the Game please : "<<endl;
+        cout << "Enter Name: "<<endl;
+        cin >> temp2;
+        cout <<"Enter age: "<<endl;
+        cin>> temp1;
+        cout <<"Enter color: "<<endl;
+        cin >> temp3;
+        SetnameP(temp2);
+        SetageP(temp1);
+        Setcolor(temp3);
+    }
 private:
     int age = 0;
     string name;
