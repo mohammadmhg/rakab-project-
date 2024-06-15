@@ -152,9 +152,17 @@ public:
     void SetNon_Neighbor_city(){
         this->Non_Neighbor_city = Non_Neighbor_city + 1;
     }
-
+    void SetPlayer(int number){//this method is for taking the number of players
+        if(number > 6 || number < 3){
+            players = 0;
+        }
+        this->players = number;
+    }
 
     ///getter
+    int GetPlayer(){
+        return players;
+    }
     string Getname(){
         return name;
     }
@@ -168,6 +176,16 @@ public:
         return Non_Neighbor_city;
     }
     ///method
+    void SetUsers_player(){//checking that players are in right numbers
+        int temp_players;
+        cin >> temp_players;
+        while(temp_players > 6 || temp_players < 3){
+            cout << "Error!!"<<endl;
+            cin >> temp_players;
+        }
+        SetPlayer(temp_players);
+    }
+
     void Sort_Array(vector <Players>&Player_ID){//sort players by age
         sort(Player_ID.begin(),Player_ID.end(),[](Players& temp1,Players& temp2){
             return temp1.Getage() < temp2.Getage();
@@ -195,6 +213,7 @@ private:
     string name;
     string color;
     int Non_Neighbor_city =0;
+    int players = 0;
 };
 
 
@@ -348,12 +367,7 @@ public:
             Matarsak();
         }
     }
-    void SetPlayer(int number){//this method is for taking the number of players
-        if(number > 6 || number < 3){
-            players = 0;
-        }
-        this->players = number;
-    }
+    
 
     void SetPass_counted(bool temp){
         this->Pass_counted = temp;
@@ -373,9 +387,7 @@ public:
     }
 
     ///getter
-    int GetPlayer(){
-        return players;
-    }
+    
     int GetPassed_Players(){
         return Passed_Players;
     }
@@ -410,15 +422,7 @@ public:
     }
 
     ///method
-    void SetUsers_player(){//checking that players are in right numbers
-        int temp_players;
-        cin >> temp_players;
-        while(temp_players > 6 || temp_players < 3){
-            cout << "Error!!"<<endl;
-            cin >> temp_players;
-        }
-        SetPlayer(temp_players);
-    }
+    
 
     void Print(int numbers,int &i,Players &Player_ID){//print the cards for each player
         system("cls");
@@ -564,7 +568,7 @@ private:
     static int Passed_Players;
     bool Pass = false;
     bool Pass_counted = false;
-    static int players;
+    
 
 };
 
@@ -573,7 +577,6 @@ bool Gameplay::Is_bahar;
 bool Gameplay::Is_zemestan;
 int Gameplay::First_Attacker;
 int Gameplay::Passed_Players;
-int Gameplay::players;
 
 
 
@@ -838,8 +841,8 @@ int main ()
     bool flag = user.Action();
     if(!flag)
     {
-    user.End();
-    return 0;
+        user.End();
+        return 0;
     }
 
     War_sign Warzone;
@@ -852,6 +855,12 @@ int main ()
     vector <Players> Player_ID(play.GetPlayer());
     for(int i = 0; i < play.GetPlayer(); i++){
         Player_ID[i].Defind_players();
+    }
+
+    vector <Citys> City;
+    for(int i = 0 ; i< play.GetPlayer();i++){
+        Citys x;
+        City.push_back(x);
     }
 
     
