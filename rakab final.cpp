@@ -574,9 +574,48 @@ int Gameplay::players;
 
 class Control_Cards:public Gameplay{///this class this for controlling the power of each player army(include normal and some spacial cards related to Army power)
 public:
+
+    ///constructor
+    Control_Cards(){}
+    Control_Cards(string name,string data,int power,bool winner):Gameplay(name,data), Power(power), Winner(winner){}
+    ///setter
+    void SetBiggest_Card_Played(){
+        Biggest_Played_Card = 0;
+    }
+    void SetPower(int& number){
+        this->Power += number;
+    }
+
+    void SetWinner(bool flag){
+        this->Winner = flag;
+    }
+    void SetMost_Powerful(int number){
+        this->Most_Powerful = number;
+    }
+    void ReSetMost_Powerful(){
+        Most_Powerful = 0;
+    }
+    ///getter
+
+    int GetPower(){
+        return Power;
+    }
+    int GetMost_Powerful(){
+        return Most_Powerful;
+    }
+
+    bool GetWinner(){
+        return Winner;
+    }
+    int GetBiggest_Card(){
+        return Biggest_Played_Card;
+    }
+
 private:
+
     bool Winner = false;
     int Power = 0;
     static int Biggest_Played_Card;
     static int Most_Powerful;
+
 };
