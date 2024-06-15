@@ -267,3 +267,20 @@ private:
     int Number = 0;
 
 };
+
+
+
+
+class Purple_card{//this class is for setting the spacial(purple)cards in game
+public:
+    ///constructor
+    Purple_card(){}
+    Purple_card(string name): nameP(name){}
+    ///getter
+    string GetnamePurple(){
+        return nameP;
+    }
+
+private:
+    string nameP;
+};
