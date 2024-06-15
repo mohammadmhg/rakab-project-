@@ -558,3 +558,12 @@ private:
     static int players;
 
 };
+
+
+bool Gameplay::Is_bahar;
+bool Gameplay::Is_zemestan;
+int Gameplay::First_Attacker;
+int Gameplay::Passed_Players;
+int Gameplay::players;
+
+
