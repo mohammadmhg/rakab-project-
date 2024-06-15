@@ -834,6 +834,10 @@ public:
 
 int main ()
 {
-    
+    Menus_of_game user;
+    bool flag = user.Action();
+    if(!flag)
+    {
+    user.End();
     return 0;
-}
+    }
