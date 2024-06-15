@@ -747,3 +747,11 @@ public:
 private:
     vector <string>Taken_city;
 };
+
+
+
+
+class Print_Map_of_game{//print the map of game in each round and show the informations that are needed
+public:
+
+};
