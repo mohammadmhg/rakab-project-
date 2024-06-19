@@ -6,6 +6,7 @@
 #include <ctime>
 #include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 using namespace std;
 class Menus_of_game{///for setting the menus of game only
 public:
