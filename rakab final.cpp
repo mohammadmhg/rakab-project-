@@ -743,7 +743,8 @@ public:
                 for(vector<string>::const_iterator Neighbor = name->second.begin(); Neighbor != name->second.end();Neighbor++){
                     for(int k = i + 1 ; k < Taken_city.size();k++){
                         if(*Neighbor == Taken_city[k]){
-                            Adjacent++;
+                            string Stemp = Taken_city[k];
+                            Check_second_adjacent(Adjacent,k,Mapcitys,Stemp,i);
                             if(Adjacent >= 2){
                                 return true;
                             }
@@ -757,6 +758,22 @@ public:
 
 private:
     vector <string>Taken_city;
+
+    void Check_second_adjacent(int &Adjacent,int k,unordered_map<string, vector<string>> Mapcitys,string Stemp,int i){
+        for(int z = k + 1; z < Taken_city.size() ;z++){
+            auto name1 = Mapcitys.find(Taken_city[z]);
+            if(name1 != Mapcitys.end()){
+                for(vector<string>::const_iterator Neighbor2 = name1->second.begin(); Neighbor2 != name1->second.end();Neighbor2++){
+                    for(int x = 0 ; x < Taken_city.size();x++){
+                        if(Taken_city[x] == *Neighbor2){
+                            Adjacent++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 };
 
 
