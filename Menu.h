@@ -11,7 +11,7 @@ public:
     void bahar_help();
     void zemestan_help();
     void tabl_zan_help();
-    void shah_dokht_help();
+    void shir_dokht_help();
     void matarsak_help();
     void non_existed_card();
     bool action();
