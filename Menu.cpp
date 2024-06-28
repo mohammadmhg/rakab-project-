@@ -24,54 +24,145 @@ using namespace std;
         fstream in;
         in.open("menu.txt",ios::in);
         string line;
-        while( getline(in,line) )
+        while ( getline(in,line) )
         {
             cout << line <<endl;
         }
-        exit();
+        Menus::exit();
     }
 
     void Menus::bahar_help()
     {
         system("cls");
-        cout << "Bahar:After playing this card,the army of players or player that played the highest Yellow card(cards) will increase 3" << endl;
-        cout << "more to each card.Remmember that even after battle ends in a city,the Bahar card will remains until Zemestan!!"<< endl;
-        cout << "Press x or X to Exit: "<<endl;
-        exit();
+        fstream in;
+        in.open("menu.txt",ios::in);
+        string line;
+        while ( getline(in,line) )
+        {
+            if (line == "Bahar")
+            {
+                while ( getline(in,line) )
+                {
+                    if (line == "&&")
+                    {
+                        break;
+                    }
+                    cout << line << endl;
+
+                }
+
+            }
+
+        }
+        Menus::exit();
     }
 
     void Menus::zemestan_help()
     {
         system("cls");
-        cout<< "Zemestan:If a player played this,All the Yellow cards value will be 1!!(This card do not impact the Purple cards)"<<endl<<endl;
+        fstream in;
+        in.open("menu.txt",ios::in);
+        string line;
+        while ( getline(in,line) )
+        {
+            if (line == "Zemestan")
+            {
+                while ( getline(in,line) )
+                {
+                    if (line == "&&")
+                    {
+                        break;
+                    }
+                    cout << line << endl;
+
+                }
+
+            }
+
+        }
         cout << "Press x or X to Exit: "<<endl;
-        exit();
+        Menus::exit();
     }
 
     void Menus::tabl_zan_help()
     {
         system("cls");
-        cout << "Tabl_zan:if a player use this card in battle,his army strength will boost double!!(but after using this card once,the"<<endl;
-        cout <<"army s strength will not increase one more!!)"<<endl;
+        fstream in;
+        in.open("menu.txt",ios::in);
+        string line;
+        while ( getline(in,line) )
+        {
+            if (line == "Tabl_zan")
+            {
+                while ( getline(in,line) )
+                {
+                    if (line == "&&")
+                    {
+                        break;
+                    }
+                    cout << line << endl;
+
+                }
+
+            }
+
+        }
         cout << "Press x or X to Exit: "<<endl;
-        exit();
+        Menus::exit();
     }
 
-    void Menus::shah_dokht_help()
+    void Menus::shir_dokht_help()
     {
         system("cls");
-        cout << "Shir_dokht:this card increase the army power 10 more (no other cards can effect this card,Even Zemesta!!)"<<endl;
+        fstream in;
+        in.open("menu.txt",ios::in);
+        string line;
+        while ( getline(in,line) )
+        {
+            if (line == "Shir_dokht")
+            {
+                while ( getline(in,line) )
+                {
+                    if (line == "&&")
+                    {
+                        break;
+                    }
+                    cout << line << endl;
+
+                }
+
+            }
+
+        }
         cout << "Press x or X to Exit: "<<endl;
-        exit();
+        Menus::exit();
     }
 
     void Menus::matarsak_help()
     {
         system("cls");
-        cout << "Matarsak:if some player want to return his Yellow played card,he can use Matarsak card, but this card only effects"<<endl;
-        cout <<"on Yellow cards!"<<endl;
+        fstream in;
+        in.open("menu.txt",ios::in);
+        string line;
+        while ( getline(in,line) )
+        {
+            if (line == "Matarsak")
+            {
+                while ( getline(in,line) )
+                {
+                    if (line == "&&")
+                    {
+                        break;
+                    }
+                    cout << line << endl;
+
+                }
+
+            }
+
+        }
         cout << "Press x or X to Exit: "<<endl;
-        exit();
+        Menus::exit();
     }
 
     void Menus::non_existed_card()
