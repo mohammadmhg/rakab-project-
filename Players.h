@@ -1,8 +1,15 @@
+#include <iostream>
+#include <vector>
+
 #ifndef PLAYERS_H
 #define PLAYERS_H
-#include <iostream>
-using namespace std;
 
+using namespace std;
+struct Identity{
+    string name;
+    int age;
+    string color;
+};
 
 class Players{
 public:
@@ -23,16 +30,14 @@ public:
     int get_taken_cities();
     int get_player();
     ///method
-    void Sort_Array(vector <Players>&);
+    void Sort_Array(Players &);
     void Defind_players();
     void SetUsers_player();
 
 private:
-    int age;
-    string name;
-    string color;
+    vector <Identity> players;
     int taken_cities;
-    int players;
+    int number_of_players;
 
 };
 
