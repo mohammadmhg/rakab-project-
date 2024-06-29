@@ -15,29 +15,31 @@ class Players{
 public:
     ///constructor
     Players();
-    Players(int,string,string);
+    Players(int,string,string,int);
     ///setter
-    void set_ageP(int);
-    void set_nameP(string);
+    void set_age(int);
+    void set_name(string);
     void set_color(string);
-    void set_taken_cities(int);
+    void set_conquer_cities_number();
     void set_player(int);
     ///getter
-    string Getname() const;
-
-    int getage() const;
-    string getcolor() const;
-    int get_taken_cities();
-    int get_player();
+    string get_name() const;
+    int get_age() const;
+    string get_color() const;
+    int get_conquer_cities_number() const;
+    int get_player() const;
     ///method
-    void Sort_Array(Players &);
-    void Defind_players();
-    void SetUsers_player();
+    void sort_array();
+    void defind_players();
+    void set_player_correct();
 
 private:
     vector <Identity> players;
-    int taken_cities;
+    int conquer_cities_number;
     int number_of_players;
+    int index_of_players = 0;
+    bool check_age(int);
+    bool check_color(string);
 
 };
 
