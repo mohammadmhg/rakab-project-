@@ -18,7 +18,7 @@ public:
     Players(int,string,string);
     ///setter
     void set_ageP(int);
-    void set_nameP(string)
+    void set_nameP(string);
     void set_color(string);
     void set_taken_cities(int);
     void set_player(int);
