@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 #ifndef PLAYERS_H
 #define PLAYERS_H
@@ -23,11 +24,11 @@ public:
     void set_conquer_cities_number();
     void set_player(int);
     ///getter
-    string get_name() const;
-    int get_age() const;
-    string get_color() const;
+    string get_name(int) const;
+    int get_age(int) const;
+    string get_color(int) const;
     int get_conquer_cities_number() const;
-    int get_player() const;
+    int get_number_of_player() const;
     ///method
     void sort_array();
     void defind_players();
@@ -39,7 +40,7 @@ private:
     int number_of_players;
     int index_of_players = 0;
     bool check_age(int);
-    bool check_color(string);
+    bool check_color(string&);
 
 };
 
