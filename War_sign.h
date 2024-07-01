@@ -9,11 +9,11 @@ public:
     War_sign();
     War_sign(string);
     ///setter
-    void SetWar(string);
+    void set_war_sign(string);
     ///getter
-    string GetWar();
+    string get_war_sign();
     ///method
-    void SetWar_sing();
+    void define_war_sing();
 private:
     string War;
 };
