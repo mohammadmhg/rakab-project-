@@ -67,6 +67,9 @@ using namespace std;
 
         system("cls");
         cout << "Enter the name and age and color of each person in the Game please : "<<endl;
+        for ( int i = 0; i < number_of_players ; i++)
+        {
+
         cout << "Enter Name: "<<endl;
         cin >> temp_name;
         cout <<"Enter age: "<<endl;
@@ -87,6 +90,7 @@ using namespace std;
         Players::set_age(temp_age);
         Players::set_color(temp_color);
         index_of_players++;
+        }
     }
 
     void Players::set_player_correct(){
