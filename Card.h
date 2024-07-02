@@ -17,7 +17,8 @@ public:
     string get_purple_card(int) const;
     ///method
 
-    void shuffle_cards();
+    void shuffle_yellow_cards();
+    void shuffle_purple_cards();
 
 private:
     vector <string> purple_cards;
