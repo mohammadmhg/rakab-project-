@@ -9,7 +9,12 @@
 using namespace std;
 
 
-    Players::Players(){}
+    Players::Players()
+    {
+        Players::set_player_correct();
+        Players::defind_players();
+
+    }
     Players::Players(int age,string name,string color,int number_of_players): number_of_players(number_of_players)
     {
 
