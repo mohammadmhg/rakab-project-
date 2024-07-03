@@ -1,6 +1,7 @@
 #include <vector>
 #include "Menu.h"
 #include "War_sign.h"
+#include "Player.h"
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 
@@ -21,7 +22,7 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
 
     void set_played_card(string);
 
-    void set_pass_counted(bool)
+    void set_pass_counted(bool);
 
     void set_seasons();
 
@@ -65,6 +66,7 @@ private:
 
     Menus menu;
     War_Sign war_sign;
+    Players play;
     int chosen_card = 0;
     bool getting_help = false;
     static bool is_zemestan;
