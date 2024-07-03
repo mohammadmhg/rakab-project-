@@ -70,3 +70,50 @@ using namespace std;
     {
         this->passed_players = 0;
     }
+
+    ///getter
+    int Gameplay::get_passed_players() const
+    {
+        return passed_players;
+    }
+
+    bool Gameplay::get_help() const
+    {
+        return getting_help;
+    }
+
+    int Gameplay::get_first_attacker() const
+    {
+        return first_attacker;
+    }
+
+    bool Gameplay::get_pass_counted() const
+    {
+        return pass_counted;
+    }
+
+    bool Gameplay::get_bahar() const
+    {
+        return is_bahar;
+    }
+
+    bool Gameplay::get_zemestan() const
+    {
+        return is_zemestan;
+    }
+
+    int Gameplay::get_play_cards() const
+    {
+        return play_cards.size();
+    }
+
+    string Gameplay::get_play_cards_data(int &i) const
+    {
+        return play_cards[i];
+    }
+
+    bool Gameplay::get_pass() const
+    {
+        return pass;
+    }
+
