@@ -19,7 +19,6 @@ using namespace std;
         is_bahar = false;
         is_zemestan = false;
         first_attacker = 0;
-        Gameplay::setting_card();
     }
     Gameplay::Gameplay(string card,string played_card)
     {
@@ -137,12 +136,20 @@ using namespace std;
     }
 
     ///method
-    void Gameplay::setting_card()
+    void Gameplay::setting_card(Card card_setter,const Players play)
     {
-        int Random = rand() % 5;
-        for(int i = 0 ; i < 10 + play.get_conquer_cities_number() ;i++)
+        if(index_purple_card > 20)
         {
-            if(Random % 2 == 0 && index_purple_card < 31)
+            index_purple_card = 0;
+        }
+        if(index_yellow_card > 47)
+        {
+            index_yellow_card = 0;
+        }
+        int Random = rand() % 5;
+        for(int i = 0 ; i < 10 + play.get_conquer_cities_number(index_of_player) ;i++)
+        {
+            if(Random % 2 == 0)
             {
                 cards.push_back(card_setter.get_purple_card(index_purple_card) );
                 index_purple_card++;
@@ -158,18 +165,15 @@ using namespace std;
 
     }
 
-    void Gameplay::print_cards()
+    void Gameplay::print_cards(const int index,const Players play)
     {//print the cards for each player
-        for(int i = 0 ; i < play.get_number_of_player() ; i++)
-        {
         system("cls");
-        cout <<"We want to show the Player"<<i+1<<" Card(press any key): "<<endl;
+        cout <<"We want to show the Player"<<index+1<<" Card(press any key): "<<endl;
         getch();
-        cout << "Name: " << play.get_name(i) << "\tage: " << play.get_age(i) <<"\tColor : " << play.get_color(i) <<"\tCards: " <<endl;
+        cout << "Name: " << play.get_name(index) << "\tage: " << play.get_age(index) <<"\tColor : " << play.get_color(index) <<"\tCards: " <<endl;
         Gameplay::show_cards_array();
         getch();
         cout << endl<<endl;
-        }
 
     }
 
