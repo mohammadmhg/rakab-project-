@@ -29,12 +29,13 @@ using namespace std;
     void Players::set_color(string data){
         this->players[index_of_players].color = data;
     }
-    void Players::set_conquer_cities_number(){
-        this->conquer_cities_number = conquer_cities_number + 1;
+    void Players::set_conquer_cities_number(int index){
+        this->conquer_cities_number[index] = conquer_cities_number[index] + 1;
     }
     void Players::set_player(int number){
         this->number_of_players = number;
         players.resize(number);
+        conquer_cities_number.resize(number);
     }
     ///getter
     string Players::get_name(int index) const {
@@ -46,8 +47,8 @@ using namespace std;
     string Players::get_color(int index) const{
         return players[index].color;
     }
-    int Players::get_conquer_cities_number() const{
-        return conquer_cities_number;
+    int Players::get_conquer_cities_number(int index) const{
+        return conquer_cities_number[index];
     }
     int Players::get_number_of_player() const{
         return number_of_players;
