@@ -136,7 +136,7 @@ using namespace std;
     }
 
     ///method
-    void Gameplay::setting_card(Card card_setter,const Players play)
+    void Gameplay::setting_card(const Card card_setter,const int conquer_cities_number)
     {
         if(index_purple_card > 20)
         {
@@ -147,7 +147,7 @@ using namespace std;
             index_yellow_card = 0;
         }
         int Random = rand() % 5;
-        for(int i = 0 ; i < 10 + play.get_conquer_cities_number(index_of_player) ;i++)
+        for(int i = 0 ; i < 10 + conquer_cities_number ;i++)
         {
             if(Random % 2 == 0)
             {
