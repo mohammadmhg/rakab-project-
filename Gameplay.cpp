@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <ctime>
+#include <conio.h>
 #include "Gameplay.h"
 #include "Player.h"
 #include "Menu.h"
@@ -14,6 +16,10 @@ using namespace std;
     {
         play_cards.resize(10);
         cards.resize(10);
+        is_bahar = false;
+        is_zemestan = false;
+        first_attacker = 0;
+        Gameplay::setting_card();
     }
     Gameplay::Gameplay(string card,string played_card)
     {
@@ -50,7 +56,7 @@ using namespace std;
             is_zemestan = true;
         }
         if(card == "matarsak"){
-
+            Gameplay::matarsak();
         }
     }
 
@@ -123,7 +129,7 @@ using namespace std;
 
 
     void Gameplay::show_cards_array() const
-    {//showing the unplaed cards
+    {
         for(int i = 0 ; i < cards.size(); i++)
         {
             cout << cards[i] << '\t';
@@ -131,56 +137,84 @@ using namespace std;
     }
 
     ///method
+    void Gameplay::setting_card()
+    {
+        int Random = rand() % 5;
+        for(int i = 0 ; i < 10 + play.get_conquer_cities_number() ;i++)
+        {
+            if(Random % 2 == 0 && index_purple_card < 31)
+            {
+                cards.push_back(card_setter.get_purple_card(index_purple_card) );
+                index_purple_card++;
+            }
+            else
+            {
+                int temp_yellow_card = card_setter.get_yellow_card(index_yellow_card);
+                string temp_string = to_string(temp_yellow_card);
+                cards.push_back( temp_string );
+                index_yellow_card++;
+            }
+        }
+
+    }
 
     void Gameplay::print_cards()
     {//print the cards for each player
+        for(int i = 0 ; i < play.get_number_of_player() ; i++)
+        {
         system("cls");
         cout <<"We want to show the Player"<<i+1<<" Card(press any key): "<<endl;
         getch();
-        cout << "Name: " << Player_ID.Getname() << "\tage: " << Player_ID.Getage() <<"\tColor : " << Player_ID.Getcolor() <<"\tCards: " <<endl;
-        Show_Array();
+        cout << "Name: " << play.get_name(i) << "\tage: " << play.get_age(i) <<"\tColor : " << play.get_color(i) <<"\tCards: " <<endl;
+        Gameplay::show_cards_array();
         getch();
         cout << endl<<endl;
+        }
+
     }
 
-    void Gameplay::show_saturation()
+    void Gameplay::show_saturation(int number)
     {//print the available cards for player and taking his input
-        cout <<endl<< "Player Turn : " << Player_ID.Getname()<<endl;
-        if(Pass){
+        cout <<endl<< "Player Turn Player: " << number +1 <<endl;
+        if(pass){
             cout << "\t Player has Passed the round!!"<<endl;
             getch();
             return;
         }
         cout << "The player available Cards are : " << endl<<endl;
-        Gameplay::Show_Array();
+        Gameplay::show_cards_array();
         cout << endl<<endl<<"Please Enter the value of The Card That you want to play(Enter 0 or say pass if You want to Pass): " <<endl;
-        string temp;
-        getline(cin,temp);
-        while(Check_Exist_Card(temp)==true&&temp!="help"&&temp!="pass"&&temp!="matarsak"&&temp!="shir_dokht"&&temp!="bahar"&&temp!="zemestan"&&temp!="tabl_zan"
-              &&temp!="help bahar"&&temp!="help matarsak"&&temp!="help shir_dokht"&&temp!="help zemestan"&&temp!="help tabl_zan"&&temp!="0"){
-            Non_Existed_Card();
-            getline(cin,temp);
+        string input;
+        getline(cin,input);
+        while(check_exist_card(input)==true&&input!="help"&&input!="pass"&&input!="matarsak"&&input!="shir_dokht"&&input!="bahar"&&input!="zemestan"&&input!="tabl_zan"
+              &&input!="help bahar"&&input!="help matarsak"&&input!="help shir_dokht"&&input!="help zemestan"&&input!="help tabl_zan"&&input!="0")
+        {
+            menu.non_existed_card();
+            getline(cin,input);
         }
-        if(temp == "pass"|| temp == "0"){
-            Pass = true;
+        if(input == "pass"|| input == "0")
+        {
+            pass = true;
             return;
         }
-        if(temp == "help"){
-            Sethelp(true);
-            Menu_of_opsions();
+        if(input == "help")
+        {
+            set_help(true);
+            menu.menu_of_opsions();
             return;
         }
-        if(temp=="help bahar"||temp=="help matarsak"||temp=="help shir_dokht"||temp=="help zemestan"||temp=="help tabl_zan"){
-            Sethelp(true);
-            Cards_helping_Menus(temp);
+        if(input=="help bahar"||input=="help matarsak"||input=="help shir_dokht"||input=="help zemestan"||input=="help tabl_zan")
+        {
+            set_help(true);
+            cards_helping_menus(input);
             return;
         }
 
-        Gameplay::CinChosen_Card(temp);
-        cout << "The Played Card is : " << Cards[Getchosen_card() - 1]<<endl;
+        Gameplay::input_chosen_card(input);
+        cout << "The Played Card is : " << cards[get_chosen_card() - 1]<<endl;
         getch();
-        Played_Card(Cards[Gameplay::Getchosen_card() - 1]);
-        Cards[Getchosen_card() - 1] = "Empty";
+        set_played_card(cards[Gameplay::get_chosen_card() - 1]);
+        cards[Gameplay::get_chosen_card() - 1] = "Empty";
     }
 
     void Gameplay::matarsak()
@@ -192,38 +226,38 @@ using namespace std;
         }
 
         cout<<endl << "Please Enter the Value of The soldier Card you Want to Put Back:(only inter Value of card if there is no soldier card Enter 0)"<<endl;
-        string temp;
-        cin>> temp;
+        string input;
+        cin>> input;
 
-        while(temp != "0"&&temp != "1"&&temp !="2"&&temp != "3"&&temp != "4"&&temp != "5"&&temp != "6"&&temp != "7"&&temp != "8"&&temp != "9"&&temp != "10")
+        while(input != "0"&&input != "1"&&input !="2"&&input != "3"&&input != "4"&&input != "5"&&input != "6"&&input != "7"&&input != "8"&&input != "9"&&input != "10")
         {
             cout <<"ONLY SOLDIERS PLEASE!!"<<endl;
-            cin>> temp;
+            cin>> input;
         }
 
-        if(temp == "0")
+        if(input == "0")
         {
             return;
         }
 
-        if(temp != "0" && Play_cards.size() == 1){
+        if(input != "0" && play_cards.size() == 1){
             cout << "PLAY 0 IF THERE IS NO CARD PLEASE!!"<<endl;
             getch();
             return;
         }
 
-        while(stoi(temp) < 1 || stoi(temp) > 10)
+        while(stoi(input) < 1 || stoi(input) > 10)
         {
             cout <<"Error!!you Entered The wrong Value!!"<< endl;
-            cin>> temp;
+            cin>> input;
         }
 
         for(int i =0 ;i < play_cards.size() ; i++)
         {
-            if(play_cards[i] == temp)
+            if(play_cards[i] == input)
             {
                 play_cards[i] = "Empty";
-                Gameplay::set_cards(temp);
+                Gameplay::set_cards(input);
                 break;
             }
         }
@@ -254,7 +288,7 @@ using namespace std;
 
     }
 
-    void Gameplay::cinchosen_card(string temp)
+    void Gameplay::input_chosen_card(string temp)
     {//setting the index of chosen card by player
         for(int i =0 ; i < cards.size();i++)
         {
@@ -265,16 +299,16 @@ using namespace std;
         }
     }
 
-    int Gameplay::Getchosen_card()
+    int Gameplay::get_chosen_card()
     {
-        return Chosen_card;
+        return chosen_card;
     }
 
-    bool Gameplay::Check_Exist_Card(string Chosen)
+    bool Gameplay::check_exist_card(string chosen)
     {//check that input from player is correct
         for(int i = 0 ; i < cards.size() ; i++)
         {
-            if(chosen == Cards[i] && chosen != "Empty")
+            if(chosen == cards[i] && chosen != "Empty")
             {
                 return false;
             }
