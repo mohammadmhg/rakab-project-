@@ -4,12 +4,16 @@
 #include <ctime>
 #include <conio.h>
 #include "Gameplay.h"
-#include "Player.h"
-#include "Menu.h"
+
 
 using namespace std;
 
-
+bool Gameplay::is_bahar = false;
+bool Gameplay::is_zemestan = false;
+int Gameplay::first_attacker = 0;
+int Gameplay::passed_players = 0;
+int Gameplay::index_yellow_card = 0;
+int Gameplay::index_purple_card = 0;
 
     ///constructor
     Gameplay::Gameplay()
@@ -120,6 +124,7 @@ using namespace std;
     {
         return play_cards[i];
     }
+
 
     bool Gameplay::get_pass() const
     {
