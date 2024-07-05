@@ -47,22 +47,22 @@ using namespace std;
 
     ///getter
 
-    int Control_Cards::get_power()
+    int Control_Cards::get_power() const
     {
         return power;
     }
 
-    int Control_Cards::get_most_powerful()
+    int Control_Cards::get_most_powerful() const
     {
         return most_powerful;
     }
 
-    bool Control_Cards::get_winner()
+    bool Control_Cards::get_winner() const
     {
         return winner;
     }
 
-    int Control_Cards::get_biggest_card()
+    int Control_Cards::get_biggest_card() const
     {
         return biggest_played_card;
     }
@@ -110,7 +110,60 @@ using namespace std;
 
     }
 
+    void Control_Cards::set_bahar_power(const Gameplay game)
+    {//set power when is bahar
 
+        for(int i = 0; i < game.get_play_cards() ;i++)
+        {
+            if(game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"
+               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty")
+
+            {
+                string temp_yellow_card;
+                temp_yellow_card = game.get_play_cards_data(i);
+                if(biggest_played_card <= stoi( temp_yellow_card ) )
+                {
+                    power = power + 3;
+                }
+
+            }
+        }
+    }
+
+    void Control_Cards::set_biggest_card(const Gameplay game)
+    {//set the biggest played soldier card in game
+        for(int i = 0; i < game.get_play_cards() ;i++)
+        {
+
+            if(game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"
+               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty")
+            {
+                string temp_yellow_card;
+                temp_yellow_card = game.get_play_cards_data(i);
+                if( stoi( temp_yellow_card ) > biggest_played_card)
+                {
+                    biggest_played_card = stoi( temp_yellow_card );
+                }
+
+            }
+        }
+    }
+
+    void Control_Cards::set_zemestan_power(const Gameplay game)
+    {//set power when is zemestan
+        for(int i = 0 ; i < game.get_play_cards();i++)
+        {
+            if(game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"
+               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty")
+            {
+                string temp_yellow_card;
+                temp_yellow_card = game.get_play_cards_data(i);
+                power = (power + 1) - ( stoi(temp_yellow_card) );
+            }
+
+        }
+
+    }
 
 
 
