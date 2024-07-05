@@ -23,13 +23,13 @@ public:
     void re_set_most_powerful();
     ///getter
 
-    int get_power();
+    int get_power()const;
 
-    int get_most_powerful();
+    int get_most_powerful()const;
 
-    bool get_winner();
+    bool get_winner()const;
 
-    int get_biggest_card();
+    int get_biggest_card()const;
 
     ///methods
 
