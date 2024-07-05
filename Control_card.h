@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Gameplay.h"
 #ifndef CONTROL_CARD_H
 #define CONTROL_CARD_H
 
@@ -31,15 +32,17 @@ public:
     int get_biggest_card();
 
     ///methods
-    void calculate_yellow_card_power();
 
-    void calculate_purple_card_power();//set power by purple cards
+    void calculate_yellow_card_power(const Gameplay);
 
-    void set_bahar_power();
+    void calculate_purple_card_power(const Gameplay);//set power by purple cards
 
-    void set_biggest_card();//set the biggest played soldier card in game
+    void set_bahar_power(const Gameplay);
 
-    void set_zemestan_ppwer();//set power when is zemestan
+    void set_biggest_card(const Gameplay);//set the biggest played soldier card in game
+
+    void set_zemestan_power( const Gameplay);//set power when is zemestan
+
 
 private:
     bool winner = false;
@@ -47,6 +50,5 @@ private:
     static int biggest_played_card;
     static int most_powerful;
 };
-int Control_Cards::biggest_played_card = 0;
-int Control_Cards::most_powerful = 0;;
+
 #endif
