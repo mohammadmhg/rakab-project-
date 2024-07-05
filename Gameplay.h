@@ -1,6 +1,5 @@
 #include <vector>
 #include "Menu.h"
-#include "War_sign.h"
 #include "Player.h"
 #include "Card.h"
 #ifndef GAMEPLAY_H
@@ -52,7 +51,7 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
     ///method
     void print_cards(const int,const Players);
     void show_saturation(int);
-    void setting_card(Card,const Players);
+    void setting_card(const Card,const int);
 
 protected:
     vector <string> cards;
@@ -67,26 +66,20 @@ private:
     void show_cards_array()const;
 
     Menus menu;
-    War_Sign war_sign;
     int chosen_card = 0;
     bool getting_help = false;
-    static bool is_zemestan;
     static bool is_bahar;
+    static bool is_zemestan;
+
     static int first_attacker;
-    static int index_of_player;
     static int passed_players;
     static int index_yellow_card;
     static int index_purple_card;
     bool pass = false;
     bool pass_counted = false;
 };
-bool Gameplay::is_bahar;
-bool Gameplay::is_zemestan;
-int Gameplay::first_attacker;
-int Gameplay::passed_players = 0;
-int Gameplay::index_yellow_card = 0;
-int Gameplay::index_purple_card = 0;
-int Gameplay::index_of_player = 0;
+
+
 
 
 
