@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-
 #include <ctime>
+
 #include "Card.h"
 
 using namespace std;
@@ -20,7 +20,6 @@ using namespace std;
 
     void Card::set_yellow_card()
     {
-        yellow_cards.resize(58);
         Card::define_yellow_cards(10,1);//set soldier with 1 power
         Card::define_yellow_cards(8,2);//set soldier with 2 power
         Card::define_yellow_cards(8,3);//set soldier with 3 power
@@ -34,7 +33,6 @@ using namespace std;
     }
     void Card::set_purple_card()
     {
-        purple_cards.resize(52);
         Card::define_purple_cards(16,"matarsak");//set matarsak
         Card::define_purple_cards(3,"bahar");//set bahar
         Card::define_purple_cards(3,"zemestan");//set zemestan
@@ -58,8 +56,9 @@ using namespace std;
 
     void Card::shuffle_purple_cards()
     {
+        srand(time(0));
 
-        int Shuff = rand() % 4 + 1;
+        int Shuff = rand() % 10 + 1;
         for(int i = 0; i < 30 ;i++)
         {
             swap(purple_cards[i],purple_cards[Shuff]);
@@ -69,7 +68,7 @@ using namespace std;
     void Card::shuffle_yellow_cards()
     {
 
-        int Shuff = rand() % 4 + 1;
+        int Shuff = rand() % 10 + 1;
         for(int i = 0; i < 50 ;i++)
         {
             swap(yellow_cards[i],yellow_cards[Shuff]);
