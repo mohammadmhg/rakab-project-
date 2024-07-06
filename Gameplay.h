@@ -29,6 +29,8 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
     void set_passed_players();
 
     void re_set_passed_players();
+
+    void re_set_pass();
     ///getter
     int get_passed_players()const;
 
@@ -48,14 +50,16 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
 
     bool get_pass()const;
 
+    int get_empty_hand_players() const;
+
     ///method
     void print_cards(const int,const Players);
     void show_saturation(int);
     void setting_card(const Card,const int);
+    void check_empty_cards();
 
-protected:
-    vector <string> cards;
-    vector <string> play_cards;
+
+
 private:
 
     void matarsak();
@@ -65,6 +69,8 @@ private:
     bool check_exist_card(string);
     void show_cards_array()const;
 
+    vector <string> cards;
+    vector <string> play_cards;
     Menus menu;
     int chosen_card = 0;
     bool getting_help = false;
@@ -75,6 +81,7 @@ private:
     static int passed_players;
     static int index_yellow_card;
     static int index_purple_card;
+    static int empty_hand_players;
     bool pass = false;
     bool pass_counted = false;
 };
