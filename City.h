@@ -7,16 +7,17 @@ using namespace std;
 
 class City{//to control the Map of game and the citys(include every methods and datas needed for controlling the citys)
 public:
+    City();
+
     ///setter
 
     void set_city(string);
 
     ///getter
 
-    string get_city(int);
+    string get_city(int)const ;
     ///method
-
-    void show_taken_city() const;
+    void show_taken_cities() const;
 
     bool check_taken_cities(string);//check that player do not enter a name of a taken city
 
