@@ -80,3 +80,19 @@ using namespace std;
         cout << "--------------------------------------------------";
     }
 
+    void Print_Game::winner_player(int number)
+    {
+        system("cls");
+        cout << "\tTHE WAR ENDS!!!WINNER IS PLAYER"<<number + 1<<endl<<endl;
+        cout <<"<  THANK YOU FOR PAYING>";
+
+    }
+    void Print_Game::round_end(int number)
+    {
+        system("cls");
+        cout <<"THIS WAR END HERE!! Player" << number << " Is winner of this battle!!"<<endl<<endl;
+        cout << "\tNEW ROUND BEGINS!!FIGHT"<<endl;
+        getch();
+
+    }
+
