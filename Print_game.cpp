@@ -90,7 +90,7 @@ using namespace std;
     void Print_Game::round_end(int number)
     {
         system("cls");
-        cout <<"THIS WAR END HERE!! Player" << number << " Is winner of this battle!!"<<endl<<endl;
+        cout <<"THIS WAR END HERE!! Player" << number + 1 << " Is winner of this battle!!"<<endl<<endl;
         cout << "\tNEW ROUND BEGINS!!FIGHT"<<endl;
         getch();
 
