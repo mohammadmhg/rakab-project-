@@ -3,10 +3,8 @@
 
 using namespace std;
 
-    City::City()
-    {
-        taken_city.resize(5);
-    }
+    City::City(){}
+
 
     void City::set_city(string city)
     {
@@ -115,3 +113,5 @@ using namespace std;
             }
         }
     }
+
+
