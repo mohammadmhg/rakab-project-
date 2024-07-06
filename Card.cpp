@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <vector>
+
 #include <ctime>
 #include "Card.h"
 
@@ -60,7 +60,7 @@ using namespace std;
     {
 
         int Shuff = rand() % 4 + 1;
-        for(int i = 0; i < 20 ;i++)
+        for(int i = 0; i < 30 ;i++)
         {
             swap(purple_cards[i],purple_cards[Shuff]);
         }
@@ -70,7 +70,7 @@ using namespace std;
     {
 
         int Shuff = rand() % 4 + 1;
-        for(int i = 0; i < 30 ;i++)
+        for(int i = 0; i < 50 ;i++)
         {
             swap(yellow_cards[i],yellow_cards[Shuff]);
         }
