@@ -1,6 +1,4 @@
 #include <iostream>
-#include <string>
-#include <vector>
 #include <algorithm>
 
 
@@ -20,42 +18,64 @@ using namespace std;
 
     }
     ///setter
-    void Players::set_age(int number){
+    void Players::set_age(int number)
+    {
         this->players[index_of_players].age = number;
     }
-    void Players::set_name(string data){
+
+    void Players::set_name(string data)
+    {
         this->players[index_of_players].name = data;
     }
-    void Players::set_color(string data){
+
+    void Players::set_color(string data)
+    {
         this->players[index_of_players].color = data;
     }
-    void Players::set_conquer_cities_number(int index){
+
+    void Players::set_conquer_cities_number(int index)
+    {
         this->conquer_cities_number[index] = conquer_cities_number[index] + 1;
     }
-    void Players::set_player(int number){
+
+    void Players::set_player(int number)
+    {
         this->number_of_players = number;
         players.resize(number);
         conquer_cities_number.resize(number);
     }
+
     ///getter
-    string Players::get_name(int index) const {
+    string Players::get_name(int index) const
+    {
         return players[index].name;
     }
-    int Players::get_age(int index) const{
+
+    int Players::get_age(int index) const
+    {
         return players[index].age;
     }
-    string Players::get_color(int index) const{
+
+    string Players::get_color(int index) const
+    {
         return players[index].color;
     }
-    int Players::get_conquer_cities_number(int index) const{
+
+    int Players::get_conquer_cities_number(int index) const
+    {
         return conquer_cities_number[index];
     }
-    int Players::get_number_of_player() const{
+
+    int Players::get_number_of_player() const
+    {
         return number_of_players;
     }
+
     ///method
 
-    void Players::sort_array(){//sort arr by age
+    void Players::sort_array()
+
+    {//sort arr by age
         sort(players.begin(),players.end(),[](Identity& temp1,Identity& temp2){
             return temp1.age < temp2.age;
         });
