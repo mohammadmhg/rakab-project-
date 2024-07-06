@@ -2,6 +2,7 @@
 #include <string>
 #include <ctime>
 #include <conio.h>
+
 #include "Gameplay.h"
 
 
@@ -10,19 +11,15 @@ using namespace std;
 bool Gameplay::is_bahar = false;
 bool Gameplay::is_zemestan = false;
 int Gameplay::first_attacker = 0;
+int Gameplay::empty_hand_players = 0;
 int Gameplay::passed_players = 0;
 int Gameplay::index_yellow_card = 0;
 int Gameplay::index_purple_card = 0;
 
+
     ///constructor
-    Gameplay::Gameplay()
-    {
-        play_cards.resize(10);
-        cards.resize(10);
-        is_bahar = false;
-        is_zemestan = false;
-        first_attacker = 0;
-    }
+    Gameplay::Gameplay(){}
+
     Gameplay::Gameplay(string card,string played_card)
     {
         Gameplay::set_cards(card);
@@ -82,6 +79,12 @@ int Gameplay::index_purple_card = 0;
     {
         this->passed_players = 0;
     }
+    void Gameplay::re_set_pass()
+    {
+        pass = false;
+        pass_counted = false;
+        play_cards.clear();
+    }
 
     ///getter
     int Gameplay::get_passed_players() const
@@ -92,6 +95,11 @@ int Gameplay::index_purple_card = 0;
     bool Gameplay::get_help() const
     {
         return getting_help;
+    }
+
+    int Gameplay::get_empty_hand_players() const
+    {
+        return empty_hand_players;
     }
 
     int Gameplay::get_first_attacker() const
@@ -142,6 +150,7 @@ int Gameplay::index_purple_card = 0;
     ///method
     void Gameplay::setting_card(const Card card_setter,const int conquer_cities_number)
     {
+        srand(time(0));
         if(index_purple_card > 20)
         {
             index_purple_card = 0;
@@ -150,12 +159,16 @@ int Gameplay::index_purple_card = 0;
         {
             index_yellow_card = 0;
         }
-        int Random = rand() % 5;
+
         for(int i = 0 ; i < 10 + conquer_cities_number ;i++)
         {
+
+            int Random = rand() % 6 + 1;
+
             if(Random % 2 == 0)
             {
-                cards.push_back(card_setter.get_purple_card(index_purple_card) );
+                string temp_purple = card_setter.get_purple_card(index_purple_card);
+                cards.push_back(temp_purple);
                 index_purple_card++;
             }
             else
@@ -194,8 +207,8 @@ int Gameplay::index_purple_card = 0;
         cout << endl<<endl<<"Please Enter the value of The Card That you want to play(Enter 0 or say pass if You want to Pass): " <<endl;
         string input;
         getline(cin,input);
-        while(check_exist_card(input)==true&&input!="help"&&input!="pass"&&input!="matarsak"&&input!="shir_dokht"&&input!="bahar"&&input!="zemestan"&&input!="tabl_zan"
-              &&input!="help bahar"&&input!="help matarsak"&&input!="help shir_dokht"&&input!="help zemestan"&&input!="help tabl_zan"&&input!="0")
+        while ( check_exist_card(input)==true&& input!="help"&& input!="pass"&& input!="matarsak"&& input!="shir_dokht"&& input!="bahar"&& input!="zemestan"&& input!="tabl_zan"
+              && input!="help bahar"&& input!="help matarsak"&& input!="help shir_dokht"&& input!="help zemestan"&& input!="help tabl_zan"&& input!="0")
         {
             menu.non_existed_card();
             getline(cin,input);
@@ -232,34 +245,41 @@ int Gameplay::index_purple_card = 0;
         {
             cout << play_cards[i] << '\t';
         }
-
         cout<<endl << "Please Enter the Value of The soldier Card you Want to Put Back:(only inter Value of card if there is no soldier card Enter 0)"<<endl;
         string input;
         cin>> input;
-
         while(input != "0"&&input != "1"&&input !="2"&&input != "3"&&input != "4"&&input != "5"&&input != "6"&&input != "7"&&input != "8"&&input != "9"&&input != "10")
         {
             cout <<"ONLY SOLDIERS PLEASE!!"<<endl;
             cin>> input;
         }
-
         if(input == "0")
         {
             return;
         }
-
+        while( check_exist_card(input) )
+        {
+            cout << "There is no Card with this Value!!"<<endl;
+            cin>> input;
+            if(input == "0")
+            {
+                return;
+            }
+        }
         if(input != "0" && play_cards.size() == 1){
             cout << "PLAY 0 IF THERE IS NO CARD PLEASE!!"<<endl;
             getch();
             return;
         }
-
-        while(stoi(input) < 1 || stoi(input) > 10)
+        while(stoi(input) < 0 || stoi(input) > 10)
         {
             cout <<"Error!!you Entered The wrong Value!!"<< endl;
             cin>> input;
+            if(input == "0")
+            {
+                return;
+            }
         }
-
         for(int i =0 ;i < play_cards.size() ; i++)
         {
             if(play_cards[i] == input)
@@ -322,5 +342,20 @@ int Gameplay::index_purple_card = 0;
             }
         }
         return true;
+    }
+    void Gameplay::check_empty_cards()
+    {
+        int empty_hand = 0;
+        for(int i = 0; i < cards.size() ;i++)
+        {
+            if (cards[i] == "Empty")
+            {
+                empty_hand++;
+            }
+        }
+        if (empty_hand >= cards.size() )
+        {
+            empty_hand_players++;
+        }
     }
 
