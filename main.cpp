@@ -103,22 +103,9 @@ public:
             }
 
             starting_the_round(game_gameplay,game_control,play,game_city);
-
             set_power_of_army(game_gameplay,game_control,play);
+            set_most_powerful_army(game_gameplay,game_control,play);
 
-
-            system("cls");
-            for(int i =0 ; i< play.get_number_of_player() ; i++)
-            {
-                game_gameplay[i].re_set_pass();
-                if (game_control[i].get_power() > game_control[i].get_most_powerful() )
-                {
-                    game_control[i].set_most_powerful( game_control[i].get_power() );
-                    game_gameplay[i].set_first_attacker(i);
-                    game_control[i].set_winner(true);
-
-                }
-            }
             system("cls");
             cout << "Army_power in order from Player1 to Player" <<play.get_number_of_player()<<endl;
             for(int i =0 ; i < play.get_number_of_player();i++)
@@ -216,6 +203,22 @@ public:
                 }
             }
 
+    }
+
+    void set_most_powerful_army(vector <Gameplay> &game_gameplay,vector <Control_Cards> &game_control,Players &play)
+    {
+            system("cls");
+            for(int i =0 ; i< play.get_number_of_player() ; i++)
+            {
+                game_gameplay[i].re_set_pass();
+                if (game_control[i].get_power() > game_control[i].get_most_powerful() )
+                {
+                    game_control[i].set_most_powerful( game_control[i].get_power() );
+                    game_gameplay[i].set_first_attacker(i);
+                    game_control[i].set_winner(true);
+
+                }
+            }
     }
 
 
