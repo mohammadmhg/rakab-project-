@@ -102,7 +102,7 @@ public:
                 }
             }
 
-            starting_the_round();
+            starting_the_round(game_gameplay,game_control,play,game_city);
 
             for(int i =0; i< play.get_number_of_player() ;i++)
             {
@@ -177,7 +177,7 @@ public:
 
     }
 
-    void starting_the_round()
+    void starting_the_round(vector <Gameplay> &game_gameplay,vector <Control_Cards> &game_control,Players &play,vector <City> &game_city)
     {
         int players_index = game_gameplay[0].get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
         while(!winner)
