@@ -87,7 +87,7 @@ public:
                 game_gameplay[i].print_cards(i,play);///this function is only for print
             }
 
-            int players_index = game_gameplay[0].get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
+
             system("cls");
             warzone.define_war_sign();
 
@@ -102,7 +102,7 @@ public:
                 }
             }
 
-
+            starting_the_round();
 
             for(int i =0; i< play.get_number_of_player() ;i++)
             {
@@ -174,6 +174,39 @@ public:
             game_gameplay[0].set_seasons();
             game_control[0].set_biggest_card_played();
         }//end_of_game while
+
+    }
+
+    void starting_the_round()
+    {
+        int players_index = game_gameplay[0].get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
+        while(!winner)
+        {
+            for(players_index ; players_index < play.get_number_of_player(); players_index++)
+            {
+                game_map.showing_map( play.get_number_of_player(),warzone.get_war_sign(),game_gameplay,game_city);
+                game_gameplay[players_index].show_saturation(players_index);
+                game_control[players_index].set_biggest_card(game_gameplay[players_index]);
+                game_gameplay[players_index].check_empty_cards();
+
+                if(game_gameplay[players_index].get_pass() == true && game_gameplay[players_index].get_pass_counted() == false)
+                {
+                    game_gameplay[players_index].set_pass_counted(true);//to sure that we already count this pass
+                    game_gameplay[players_index].set_passed_players();
+                }
+                if( game_gameplay[players_index].get_help() )
+                {
+                    game_gameplay[players_index].set_help(false);
+                    players_index--;
+                }
+            }
+            players_index = 0;//to restart
+            if (game_gameplay[players_index].get_passed_players() >= play.get_number_of_player() )
+            {//to end the round on fight in a city
+                game_gameplay[players_index].re_set_passed_players();
+                winner = true;
+            }
+        }//winner while
 
     }
 
