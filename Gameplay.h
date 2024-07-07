@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 #include "Menu.h"
 #include "Player.h"
 #include "Card.h"
@@ -68,6 +69,7 @@ private:
     int get_chosen_card();
     bool check_exist_card(string);
     void show_cards_array()const;
+    void validation_of_input(string&);
 
     vector <string> cards;
     vector <string> play_cards;
