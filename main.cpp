@@ -31,6 +31,29 @@ public:
             exit = true;
         }
     }
+    void setting_game()
+    {
+        Players play;
+        vector <City> game_city;
+        for(int i = 0 ; i< play.get_number_of_player();i++)
+        {
+            City x;
+            game_city.push_back(x);
+        }
+
+
+        vector <Gameplay> game_gameplay( play.get_number_of_player() );
+        for(int i = 0; i < play.get_number_of_player(); i++)
+        {
+            Gameplay b;
+            game_gameplay.push_back(b);
+        }
+    }
+
+    void game_started()
+    {
+
+    }
 
 
 
@@ -45,7 +68,12 @@ public:
 
 private:
     Menus user;
-    bool exit = false
+    War_Sign warzone;
+    Card game_card;
+    Print_Game game_map;
+    bool winner = false;
+    bool end_of_game = false;
+    bool exit = false;
 
 };
 using namespace std;
@@ -53,7 +81,11 @@ using namespace std;
 int main()
 {
     srand(time(0));
-
+    Game game_start;
+    if( game_start.get_exit_game() )
+    {
+        return 0;
+    }
 
     Players play;
 
