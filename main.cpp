@@ -106,33 +106,10 @@ public:
             set_power_of_army(game_gameplay,game_control,play);
             set_most_powerful_army(game_gameplay,game_control,play);
             show_power_of_army(game_control,play);
+            set_winner_of_battle(game_gameplay,game_control,play,game_city);
 
 
-            getch();
-            if ( game_control[game_gameplay[0].get_first_attacker()].get_winner() )
-            {
-                game_map.round_end( game_gameplay[0].get_first_attacker() );
-                play.set_conquer_cities_number( game_gameplay[0].get_first_attacker() );
-                game_city[game_gameplay[0].get_first_attacker()].set_city( warzone.get_war_sign() );
-            }
 
-
-            for(int k = 0; k < play.get_number_of_player() ;k++)
-            {
-                if (play.get_conquer_cities_number(k) >= 3)
-                {
-                    if(game_city[k].set_adjacent_cities() )
-                    {//end of game by adjacent
-                        game_map.winner_player(k);
-                        end_of_game = true;
-                    }
-                    if(play.get_conquer_cities_number(k) >= 5)
-                    {//end of game by taking the citys
-                        game_map.winner_player(k);
-                        end_of_game = true;
-                    }
-                }
-            }
             winner = false;
 
             game_control[0].re_set_most_powerful();
@@ -225,6 +202,33 @@ public:
         {
             cout << game_control[i].get_power()<<"  ";
         }
+    }
+
+    void set_winner_of_battle(vector <Gameplay> &game_gameplay,vector <Control_Cards> &game_control,Players &play,vector <City> &game_city)
+    {
+            getch();
+            if ( game_control[game_gameplay[0].get_first_attacker()].get_winner() )
+            {
+                game_map.round_end( game_gameplay[0].get_first_attacker() );
+                play.set_conquer_cities_number( game_gameplay[0].get_first_attacker() );
+                game_city[game_gameplay[0].get_first_attacker()].set_city( warzone.get_war_sign() );
+            }
+            for(int k = 0; k < play.get_number_of_player() ;k++)
+            {
+                if (play.get_conquer_cities_number(k) >= 3)
+                {
+                    if(game_city[k].set_adjacent_cities() )
+                    {//end of game by adjacent
+                        game_map.winner_player(k);
+                        end_of_game = true;
+                    }
+                    if(play.get_conquer_cities_number(k) >= 5)
+                    {//end of game by taking the citys
+                        game_map.winner_player(k);
+                        end_of_game = true;
+                    }
+                }
+            }
     }
 
 
