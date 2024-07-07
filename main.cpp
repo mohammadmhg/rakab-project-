@@ -104,26 +104,8 @@ public:
 
             starting_the_round(game_gameplay,game_control,play,game_city);
 
-            for(int i =0; i< play.get_number_of_player() ;i++)
-            {
-                if( game_gameplay[i].get_bahar() )
-                {
-                    game_control[i].calculate_yellow_card_power( game_gameplay[i] );
-                    game_control[i].calculate_purple_card_power( game_gameplay[i] );
-                    game_control[i].set_bahar_power( game_gameplay[i] );
-                }
-                else if (game_gameplay[i].get_zemestan() )
-                {
-                    game_control[i].calculate_yellow_card_power( game_gameplay[i] );
-                    game_control[i].set_zemestan_power( game_gameplay[i] );
-                    game_control[i].calculate_purple_card_power( game_gameplay[i] );
-                }
-                else
-                {
-                    game_control[i].calculate_yellow_card_power( game_gameplay[i] );
-                    game_control[i].calculate_purple_card_power( game_gameplay[i] );
-                }
-            }
+            set_power_of_army(game_gameplay,game_control,play);
+
 
             system("cls");
             for(int i =0 ; i< play.get_number_of_player() ; i++)
@@ -207,6 +189,32 @@ public:
                 winner = true;
             }
         }//winner while
+
+    }
+
+    void set_power_of_army(vector <Gameplay> &game_gameplay,vector <Control_Cards> &game_control,Players &play)
+    {
+
+        for(int i =0; i< play.get_number_of_player() ;i++)
+            {
+                if( game_gameplay[i].get_bahar() )
+                {
+                    game_control[i].calculate_yellow_card_power( game_gameplay[i] );
+                    game_control[i].calculate_purple_card_power( game_gameplay[i] );
+                    game_control[i].set_bahar_power( game_gameplay[i] );
+                }
+                else if (game_gameplay[i].get_zemestan() )
+                {
+                    game_control[i].calculate_yellow_card_power( game_gameplay[i] );
+                    game_control[i].set_zemestan_power( game_gameplay[i] );
+                    game_control[i].calculate_purple_card_power( game_gameplay[i] );
+                }
+                else
+                {
+                    game_control[i].calculate_yellow_card_power( game_gameplay[i] );
+                    game_control[i].calculate_purple_card_power( game_gameplay[i] );
+                }
+            }
 
     }
 
