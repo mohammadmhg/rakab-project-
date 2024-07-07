@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <ctime>
 #include <conio.h>
 
@@ -207,12 +206,20 @@ int Gameplay::index_purple_card = 0;
         cout << endl<<endl<<"Please Enter the value of The Card That you want to play(Enter 0 or say pass if You want to Pass): " <<endl;
         string input;
         getline(cin,input);
-        while ( check_exist_card(input)==true&& input!="help"&& input!="pass"&& input!="matarsak"&& input!="shir_dokht"&& input!="bahar"&& input!="zemestan"&& input!="tabl_zan"
-              && input!="help bahar"&& input!="help matarsak"&& input!="help shir_dokht"&& input!="help zemestan"&& input!="help tabl_zan"&& input!="0")
+        while(input!="help"&&input!="pass"&&input!="matarsak"&&input!="shir_dokht"&&input!="bahar"&&input!="zemestan"&&input!="tabl_zan"&&
+              input!="help bahar"&&input!="help matarsak"&&input!="help shir_dokht"&&input!="help zemestan"&&input!="help tabl_zan"&&input!="0")
         {
-            menu.non_existed_card();
-            getline(cin,input);
+            if( Gameplay::check_exist_card(input) )
+            {
+                break;
+            }
+            else
+            {
+                cout << "Enter Please:"<<endl;
+                getline(cin,input);
+            }
         }
+
         if(input == "pass"|| input == "0")
         {
             pass = true;
@@ -257,7 +264,7 @@ int Gameplay::index_purple_card = 0;
         {
             return;
         }
-        while( check_exist_card(input) )
+        while( check_exist_card(input)== false )
         {
             cout << "There is no Card with this Value!!"<<endl;
             cin>> input;
@@ -338,10 +345,10 @@ int Gameplay::index_purple_card = 0;
         {
             if(chosen == cards[i] && chosen != "Empty")
             {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
     void Gameplay::check_empty_cards()
     {
@@ -358,4 +365,5 @@ int Gameplay::index_purple_card = 0;
             empty_hand_players++;
         }
     }
+
 
