@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Gameplay.h"
 #ifndef CONTROL_CARD_H
 #define CONTROL_CARD_H
