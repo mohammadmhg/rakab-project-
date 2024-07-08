@@ -3,13 +3,13 @@
 #include <conio.h>
 #include "Menu.h"
 #include "Rish_sefid.h"
+#include "Peace_sign.h"
 #include "Player.h"
 #include "Gameplay.h"
 #include "Print_game.h"
 #include "War_sign.h"
 #include "Control_card.h"
 #include "City.h"
-#include "Print_game.h"
 
 class Game{
 public:
@@ -88,8 +88,15 @@ public:
                 game_gameplay[i].print_cards(i,play);///this function is only for print
             }
 
+            if( rish_sefid_handel.get_used_rish_sefid_card() )
+            {
+                rish_sefid_handel.set_used_rish_sefid_card(false);
+                peacezone.define_peace_sign(rish_sefid_handel.get_last_played_card_index() );
+            }
+            validation_of_peace_sign(game_city,play);
             system("cls");
             warzone.define_war_sign();
+
 
             for(int i = 0; i < play.get_number_of_player();i++)//to check that player can Enter a name of a EMPTY city
             {
@@ -98,7 +105,6 @@ public:
                         cout << "Invalid City!!" << endl;
                         i = 0;
                         warzone.define_war_sign();
-
                 }
             }
             starting_the_round(game_gameplay,game_control,play,game_city);
@@ -226,11 +232,26 @@ public:
             }
     }
 
+    void validation_of_peace_sign(vector <City> &game_city,Players &play)
+    {
+
+        for(int i = 0; i < play.get_number_of_player();i++)//to check that player can Enter a name of a EMPTY city
+            {
+                while(game_city[i].check_taken_cities( peacezone.get_peace_sign() ) )
+                {
+                        cout << "Invalid City!!" << endl;
+                        i = 0;
+                        peacezone.define_peace_sign( rish_sefid_handel.get_last_played_card_index() );
+                }
+            }
+    }
+
 private:
     Menus user;
     War_Sign warzone;
     Card game_card;
     Print_Game game_map;
+    Peace_Sign peacezone;
     Rish_Sefid rish_sefid_handel;
     bool winner = false;
     bool end_of_game = false;
