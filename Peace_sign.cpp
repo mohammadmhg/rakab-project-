@@ -18,8 +18,10 @@ using namespace std;
         return peace;
     }
     ///method
-    void Peace_Sign::define_peace_sign()
+    void Peace_Sign::define_peace_sign(int player)
     {
+        system("cls");
+        cout << "Player" << player + 1<<" has played the rish_sefid card.Enter the name of an Empty city to put Sign on it:"<<endl;
         string temp_sign;
         cin>> temp_sign;
         while (temp_sign!="BELLA"&&temp_sign!="CALINE"&&temp_sign!="ENNA"&&temp_sign!="ATELA"&&temp_sign!="PLADACI"&&temp_sign!="BORGE"&&temp_sign!="DIMASE"&&temp_sign!="MORINA"&&
