@@ -201,10 +201,6 @@ int Gameplay::index_purple_card = 0;
             getch();
             return;
         }
-        if ( rish_sefid_handel.get_rish_sefid_card() )
-        {
-            Gameplay::handel_rish_sefid(number,number_of_players);
-        }
         cout << "The player available Cards are : " << endl<<endl;
         Gameplay::show_cards_array();
         cout << endl<<endl<<"Please Enter the value of The Card That you want to play(Enter 0 or say pass if You want to Pass): " <<endl;
@@ -224,8 +220,10 @@ int Gameplay::index_purple_card = 0;
         }
         if(input == "rish_sefid")
         {
+            rish_sefid_handel.set_used_rish_sefid_card(true);
             rish_sefid_handel.set_biggest_card_value(biggest_played_card);
-            Gameplay::handel_rish_sefid(number,number_of_players);
+            rish_sefid_handel.set_rish_sefid_card(true);
+            rish_sefid_handel.set_last_played_card_index(number);
         }
         if(input == "pass"|| input == "0")
         {
@@ -372,16 +370,23 @@ int Gameplay::index_purple_card = 0;
             empty_hand_players++;
         }
     }
-    void Gameplay::handel_rish_sefid(int number,int number_of_players)
+    void Gameplay::handel_rish_sefid(int number_of_players,vector <Gameplay> &game_gameplay)
     {
-        rish_sefid_handel.set_rish_sefid_card(true);
-        if ( rish_sefid_handel.get_number_of_players() >= number_of_players )
+        for(int j = 0; j < number_of_players ; j++)
         {
-            rish_sefid_handel.set_rish_sefid_card(false);
-            rish_sefid_handel.set_number_of_players(0);
-            return;
+            for (int i = 0; i < game_gameplay[j].play_cards.size() ;i++)
+            {
+                if(game_gameplay[j].play_cards[i] == "1"||game_gameplay[j].play_cards[i] == "2"||game_gameplay[j].play_cards[i] == "3"||game_gameplay[j].play_cards[i] == "4"||
+                   game_gameplay[j].play_cards[i] == "5"||game_gameplay[j].play_cards[i] == "6"||game_gameplay[j].play_cards[i] == "7"||game_gameplay[j].play_cards[i] == "8"||
+                   game_gameplay[j].play_cards[i] == "9"||game_gameplay[j].play_cards[i] == "10" )
+                {
+                    if( stoi(game_gameplay[j].play_cards[i]) == rish_sefid_handel.get_biggest_card_value() )
+                    {
+                        game_gameplay[j].play_cards[i] = "Empty";
+                    }
+                }
+            }
         }
-
     }
 
 
