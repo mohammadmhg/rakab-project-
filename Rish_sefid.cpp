@@ -24,6 +24,16 @@ int Rish_Sefid::biggest_card_value = 0;
         number_of_players = number;
     }
 
+    void Rish_Sefid::set_last_played_card_index(int number)
+    {
+        last_played_card_index = number;
+    }
+
+    void Rish_Sefid::set_rish_sefid_card(bool card)
+    {
+        rish_sefid_card = card;
+    }
+
     ///getter
 
     int Rish_Sefid::get_last_played_card_index()
@@ -36,16 +46,27 @@ int Rish_Sefid::biggest_card_value = 0;
         return rish_sefid_card;
     }
 
+    int Rish_Sefid::get_number_of_players()
+    {
+        return number_of_players;
+    }
     ///method
 
-    void Rish_Sefid::setting_rish_sefid(int biggest_played_card,vector <string> &play_cards)
+    void Rish_Sefid::setting_rish_sefid(vector <string> &play_cards)
     {
-        if( biggest_played_card == 0)
+
+        for (int i = 0; i < play_cards.size() ;i++)
         {
-            return;
+            if(play_cards[i] == "1"||play_cards[i] == "2"||play_cards[i] == "3"||play_cards[i] == "4"||play_cards[i] == "5"||play_cards[i] == "6"||play_cards[i] == "7"||
+               play_cards[i] == "8"||play_cards[i] == "9"||play_cards[i] == "10" )
+            {
+                if( stoi(play_cards[i]) == biggest_card_value )
+                {
+                    play_cards[i] = "Empty";
+                }
+            }
         }
-
-
+        number_of_players++;
 
     }
 
