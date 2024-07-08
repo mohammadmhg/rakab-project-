@@ -193,7 +193,7 @@ int Gameplay::index_purple_card = 0;
 
     }
 
-    void Gameplay::show_saturation(int number)
+    void Gameplay::show_saturation(int number,int number_of_players,int biggest_played_card)
     {//print the available cards for player and taking his input
         cout <<endl<< "Player Turn Player: " << number +1 <<endl;
         if(pass){
@@ -201,13 +201,16 @@ int Gameplay::index_purple_card = 0;
             getch();
             return;
         }
+        if ( rish_sefid_handel.get_rish_sefid_card() )
+        {
+            Gameplay::handel_rish_sefid(number,number_of_players);
+        }
         cout << "The player available Cards are : " << endl<<endl;
         Gameplay::show_cards_array();
         cout << endl<<endl<<"Please Enter the value of The Card That you want to play(Enter 0 or say pass if You want to Pass): " <<endl;
         string input;
         getline(cin,input);
-        while(input!="help"&&input!="pass"&&input!="matarsak"&&input!="shir_dokht"&&input!="bahar"&&input!="zemestan"&&input!="tabl_zan"&&
-              input!="help bahar"&&input!="help matarsak"&&input!="help shir_dokht"&&input!="help zemestan"&&input!="help tabl_zan"&&input!="0")
+        while(input!="help"&&input!="pass"&&input!="help bahar"&&input!="help matarsak"&&input!="help shir_dokht"&&input!="help zemestan"&&input!="help tabl_zan"&&input!="0")
         {
             if( Gameplay::check_exist_card(input) )
             {
@@ -215,11 +218,15 @@ int Gameplay::index_purple_card = 0;
             }
             else
             {
-                cout << "Enter Please:"<<endl;
+                cout << "Enter Value Please:"<<endl;
                 getline(cin,input);
             }
         }
-
+        if(input == "rish_sefid")
+        {
+            rish_sefid_handel.set_biggest_card_value(biggest_played_card);
+            Gameplay::handel_rish_sefid(number,number_of_players);
+        }
         if(input == "pass"|| input == "0")
         {
             pass = true;
@@ -365,5 +372,17 @@ int Gameplay::index_purple_card = 0;
             empty_hand_players++;
         }
     }
+    void Gameplay::handel_rish_sefid(int number,int number_of_players)
+    {
+        rish_sefid_handel.set_rish_sefid_card(true);
+        if ( rish_sefid_handel.get_number_of_players() >= number_of_players )
+        {
+            rish_sefid_handel.set_rish_sefid_card(false);
+            rish_sefid_handel.set_number_of_players(0);
+            return;
+        }
+
+    }
+
 
 
