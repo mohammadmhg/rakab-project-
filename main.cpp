@@ -1,7 +1,8 @@
-#include <iostream>
+
 #include <ctime>
 #include <conio.h>
 #include "Menu.h"
+#include "Rish_sefid.h"
 #include "Player.h"
 #include "Gameplay.h"
 #include "Print_game.h"
@@ -121,7 +122,7 @@ public:
             for(players_index ; players_index < play.get_number_of_player(); players_index++)
             {
                 game_map.showing_map( play.get_number_of_player(),warzone.get_war_sign(),game_gameplay,game_city);
-                game_gameplay[players_index].show_saturation(players_index);
+                game_gameplay[players_index].show_saturation(players_index,play.get_number_of_player(),game_control[players_index].get_biggest_card() );
                 game_control[players_index].set_biggest_card(game_gameplay[players_index]);
                 game_gameplay[players_index].check_empty_cards();
 
@@ -230,6 +231,7 @@ private:
     War_Sign warzone;
     Card game_card;
     Print_Game game_map;
+    Rish_Sefid rish_sefid_handel;
     bool winner = false;
     bool end_of_game = false;
     bool exit = false;
