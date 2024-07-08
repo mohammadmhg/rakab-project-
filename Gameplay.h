@@ -2,6 +2,7 @@
 #include <string>
 #include "Menu.h"
 #include "Player.h"
+#include "Rish_sefid.h"
 #include "Card.h"
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
@@ -9,6 +10,7 @@
 using namespace std;
 
 class Gameplay{///this class is for Gameplay during each round and setting Cards and Played Cards for User and Controlling every thing related to Cards in a round
+
     public:
     ///constructor
     Gameplay();
@@ -55,7 +57,7 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
 
     ///method
     void print_cards(const int,const Players);
-    void show_saturation(int);
+    void show_saturation(int,int,int);
     void setting_card(const Card,const int);
     void check_empty_cards();
 
@@ -70,6 +72,7 @@ private:
     bool check_exist_card(string);
     void show_cards_array()const;
     void validation_of_input(string&);
+    void handel_rish_sefid(int,int);
 
     vector <string> cards;
     vector <string> play_cards;
@@ -78,7 +81,7 @@ private:
     bool getting_help = false;
     static bool is_bahar;
     static bool is_zemestan;
-
+    Rish_Sefid rish_sefid_handel;
     static int first_attacker;
     static int passed_players;
     static int index_yellow_card;
