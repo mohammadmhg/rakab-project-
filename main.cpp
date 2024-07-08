@@ -93,14 +93,13 @@ public:
                 rish_sefid_handel.set_used_rish_sefid_card(false);
                 peacezone.define_peace_sign(rish_sefid_handel.get_last_played_card_index() );
             }
+
             validation_of_peace_sign(game_city,play);
             system("cls");
             warzone.define_war_sign();
-
-
             for(int i = 0; i < play.get_number_of_player();i++)//to check that player can Enter a name of a EMPTY city
             {
-                while(game_city[i].check_taken_cities( warzone.get_war_sign() ) )
+                while(game_city[i].check_taken_cities( warzone.get_war_sign(),peacezone.get_peace_sign() ) )
                 {
                         cout << "Invalid City!!" << endl;
                         i = 0;
@@ -136,6 +135,11 @@ public:
                 {
                     game_gameplay[players_index].set_pass_counted(true);//to sure that we already count this pass
                     game_gameplay[players_index].set_passed_players();
+                }
+                if (rish_sefid_handel.get_rish_sefid_card() )
+                {
+                    game_gameplay[players_index].handel_rish_sefid(play.get_number_of_player(),game_gameplay);
+                    rish_sefid_handel.set_rish_sefid_card(false);
                 }
                 if( game_gameplay[players_index].get_help() )
                 {
@@ -234,16 +238,16 @@ public:
 
     void validation_of_peace_sign(vector <City> &game_city,Players &play)
     {
-
+        string temp_war = "none";
         for(int i = 0; i < play.get_number_of_player();i++)//to check that player can Enter a name of a EMPTY city
-            {
-                while(game_city[i].check_taken_cities( peacezone.get_peace_sign() ) )
+        {
+                while(game_city[i].check_taken_cities( peacezone.get_peace_sign(),temp_war ) )
                 {
                         cout << "Invalid City!!" << endl;
                         i = 0;
                         peacezone.define_peace_sign( rish_sefid_handel.get_last_played_card_index() );
                 }
-            }
+        }
     }
 
 private:
