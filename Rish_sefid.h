@@ -13,9 +13,10 @@ public:
 
     ///setter
     void set_biggest_card_value(int);
-    void set_number_of_players(int);
     void set_last_played_card_index(int);
     void set_rish_sefid_card(bool);
+    void set_used_rish_sefid_card(bool);
+
 
 
 
@@ -24,16 +25,15 @@ public:
 
     bool get_rish_sefid_card();
 
-    int get_number_of_players();
 
-    ///method
-    void setting_rish_sefid(vector <string>&);
+    bool get_used_rish_sefid_card();
 
+    int get_biggest_card_value();
 
 private:
     static int last_played_card_index;
+    static bool used_rish_sefid_card;
     static bool rish_sefid_card;
-    static int number_of_players;
     static int biggest_card_value;
 
 };
