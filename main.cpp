@@ -61,6 +61,7 @@ public:
 
     void game_started(Players play,vector <City> game_city,vector <Gameplay> game_gameplay)
     {
+        Control_Cards game_control;
         while(!end_of_game)
         {
             if( game_gameplay[0].get_empty_hand_players() >= (play.get_number_of_player() - 1) )
@@ -75,12 +76,6 @@ public:
                 {
                     game_gameplay[i].setting_card(game_card,play.get_conquer_cities_number(i) );
                 }
-            }
-            vector <Control_Cards> game_control( play.get_number_of_player() );
-            for(int i = 0; i < play.get_number_of_player(); i++)
-            {
-                Control_Cards b;
-                game_control.push_back(b);
             }
 
             for(int i = 0 ;i < play.get_number_of_player();i++)
@@ -113,22 +108,22 @@ public:
             set_winner_of_battle(game_gameplay,game_control,play,game_city);
 
             winner = false;
-            game_control[0].re_set_most_powerful();
+            game_control.re_set_most_powerful();
             game_gameplay[0].set_seasons();
-            game_control[0].set_biggest_card_played();
+            game_control.set_biggest_card_played();
         }//end_of_game while
     }
 
-    void starting_the_round(vector <Gameplay> &game_gameplay,vector <Control_Cards> &game_control,Players &play,vector <City> &game_city)
+    void starting_the_round(vector <Gameplay> &game_gameplay,Control_Cards &game_control,Players &play,vector <City> &game_city)
     {
-        int players_index = game_gameplay[0].get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
+        int players_index = game_control.get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
         while(!winner)
         {
             for(players_index ; players_index < play.get_number_of_player(); players_index++)
             {
                 game_map.showing_map( play.get_number_of_player(),warzone.get_war_sign(),game_gameplay,game_city);
-                game_gameplay[players_index].show_saturation(players_index,play.get_number_of_player(),game_control[players_index].get_biggest_card() );
-                game_control[players_index].set_biggest_card(game_gameplay[players_index]);
+                game_gameplay[players_index].show_saturation(players_index,play.get_number_of_player(),game_control.get_biggest_card() );
+                game_control.set_biggest_card(game_gameplay[players_index]);
                 game_gameplay[players_index].check_empty_cards();
 
                 if(game_gameplay[players_index].get_pass() == true && game_gameplay[players_index].get_pass_counted() == false)
@@ -162,66 +157,58 @@ public:
 
     }
 
-    void set_power_of_army(vector <Gameplay> &game_gameplay,vector <Control_Cards> &game_control,Players &play)
+    void set_power_of_army(vector <Gameplay> &game_gameplay,Control_Cards &game_control,Players &play)
     {
 
         for(int i =0; i< play.get_number_of_player() ;i++)
             {
                 if( game_gameplay[i].get_bahar() )
                 {
-                    game_control[i].calculate_yellow_card_power( game_gameplay[i] );
-                    game_control[i].calculate_purple_card_power( game_gameplay[i],i );
-                    game_control[i].set_bahar_power( game_gameplay[i] );
+                    game_control.calculate_yellow_card_power( game_gameplay[i],i );
+                    game_control.calculate_purple_card_power( game_gameplay[i],i );
+                    game_control.set_bahar_power( game_gameplay[i],i );
                 }
                 else if (game_gameplay[i].get_zemestan() )
                 {
-                    game_control[i].calculate_yellow_card_power( game_gameplay[i] );
-                    game_control[i].set_zemestan_power( game_gameplay[i] );
-                    game_control[i].calculate_purple_card_power( game_gameplay[i],i );
+                    game_control.calculate_yellow_card_power( game_gameplay[i],i );
+                    game_control.set_zemestan_power( game_gameplay[i],i );
+                    game_control.calculate_purple_card_power( game_gameplay[i],i );
                 }
                 else
                 {
-                    game_control[i].calculate_yellow_card_power( game_gameplay[i] );
-                    game_control[i].calculate_purple_card_power( game_gameplay[i],i );
+                    game_control.calculate_yellow_card_power( game_gameplay[i],i );
+                    game_control.calculate_purple_card_power( game_gameplay[i],i );
                 }
             }
 
     }
 
-    void set_most_powerful_army(vector <Gameplay> &game_gameplay,vector <Control_Cards> &game_control,Players &play)
+    void set_most_powerful_army(vector <Gameplay> &game_gameplay,Control_Cards &game_control,Players &play)
     {
             system("cls");
             for(int i =0 ; i< play.get_number_of_player() ; i++)
             {
                 game_gameplay[i].re_set_pass();
-                if (game_control[i].get_power() > game_control[i].get_most_powerful() )
-                {
-                    game_control[i].set_most_powerful( game_control[i].get_power() );
-                    game_gameplay[i].set_first_attacker(i);
-                    game_control[i].set_winner(true);
-
-                }
             }
+            game_control.set_battle_city_chooser();
+            game_control.set_winner(true);
     }
 
-    void show_power_of_army(vector <Control_Cards> &game_control,Players &play)
+    void show_power_of_army(Control_Cards &game_control,Players &play)
     {
         system("cls");
         cout << "Army_power in order from Player1 to Player" <<play.get_number_of_player()<<endl;
-        for(int i =0 ; i < play.get_number_of_player();i++)
-        {
-            cout << game_control[i].get_power()<<"  ";
-        }
+        game_control.show_power();
     }
 
-    void set_winner_of_battle(vector <Gameplay> &game_gameplay,vector <Control_Cards> &game_control,Players &play,vector <City> &game_city)
+    void set_winner_of_battle(vector <Gameplay> &game_gameplay,Control_Cards &game_control,Players &play,vector <City> &game_city)
     {
             getch();
-            if ( game_control[game_gameplay[0].get_first_attacker()].get_winner() )
+            if ( game_control.get_winner() )
             {
-                game_map.round_end( game_gameplay[0].get_first_attacker() );
-                play.set_conquer_cities_number( game_gameplay[0].get_first_attacker() );
-                game_city[game_gameplay[0].get_first_attacker()].set_city( warzone.get_war_sign() );
+                game_map.round_end( game_control.get_first_attacker() );
+                play.set_conquer_cities_number( game_control.get_first_attacker() );
+                game_city[game_control.get_first_attacker()].set_city( warzone.get_war_sign() );
             }
             for(int k = 0; k < play.get_number_of_player() ;k++)
             {
