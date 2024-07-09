@@ -9,11 +9,13 @@ using namespace std;
 
 bool Gameplay::is_bahar = false;
 bool Gameplay::is_zemestan = false;
+bool Gameplay::used_parcham_dar = false;
 int Gameplay::first_attacker = 0;
 int Gameplay::empty_hand_players = 0;
 int Gameplay::passed_players = 0;
 int Gameplay::index_yellow_card = 0;
 int Gameplay::index_purple_card = 0;
+int Gameplay::last_player_passed = 0;
 
 
     ///constructor
@@ -78,11 +80,18 @@ int Gameplay::index_purple_card = 0;
     {
         this->passed_players = 0;
     }
+
     void Gameplay::re_set_pass()
     {
         pass = false;
+        last_player_passed = 0;
         pass_counted = false;
         play_cards.clear();
+    }
+
+    void Gameplay::re_set_parcham_dar()
+    {
+        used_parcham_dar = false;
     }
 
     ///getter
@@ -91,6 +100,10 @@ int Gameplay::index_purple_card = 0;
         return passed_players;
     }
 
+    bool Gameplay::get_parcham_dar()const
+    {
+        return used_parcham_dar;
+    }
     bool Gameplay::get_help() const
     {
         return getting_help;
@@ -218,6 +231,11 @@ int Gameplay::index_purple_card = 0;
                 getline(cin,input);
             }
         }
+        if (input == "parcham_dar")
+        {
+            used_parcham_dar = true;
+            return;
+        }
         if(input == "rish_sefid")
         {
             rish_sefid_handel.set_used_rish_sefid_card(true);
@@ -244,6 +262,11 @@ int Gameplay::index_purple_card = 0;
         }
 
         Gameplay::input_chosen_card(input);
+        Gameplay::setting_the_input_card();
+    }
+
+    void Gameplay::setting_the_input_card()
+    {
         cout << "The Played Card is : " << cards[get_chosen_card() - 1]<<endl;
         getch();
         set_played_card(cards[Gameplay::get_chosen_card() - 1]);
