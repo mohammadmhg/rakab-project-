@@ -20,9 +20,13 @@ public:
     void set_most_powerful(int);
 
     void re_set_most_powerful();
+
+    void set_first_attacker(int);
     ///getter
 
-    int get_power()const;
+    int get_power(int)const;
+
+    int get_shir_zan_size()const;
 
     int get_most_powerful()const;
 
@@ -30,26 +34,34 @@ public:
 
     int get_biggest_card()const;
 
-    ///methods
+    int get_first_attacker()const;
 
-    void calculate_yellow_card_power(const Gameplay);
+    ///methods
+    void show_power()const;
+
+    void calculate_yellow_card_power(const Gameplay,int);
 
     void calculate_purple_card_power(const Gameplay,int);//set power by purple cards
 
-    void set_bahar_power(const Gameplay);
+    void set_bahar_power(const Gameplay,int);
 
     void set_biggest_card(const Gameplay);//set the biggest played soldier card in game
 
-    void set_zemestan_power( const Gameplay);//set power when is zemestan
+    void set_zemestan_power( const Gameplay,int);//set power when is zemestan
+
+    void set_battle_city_chooser();
+
+    void set_shir_zan_effect();
 
 
 private:
     bool winner = false;
-    int power = 0;
-    static int shir_zan_numbers;
-    static int most_used_shir_zan_player;
+    vector<int> power;
+    vector<int> shir_zan_numbers;
     static int biggest_played_card;
     static int most_powerful;
+    static int first_attacker;
+    int battle_city_choser = 0;
 };
 
 #endif
