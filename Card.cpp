@@ -36,8 +36,13 @@ using namespace std;
         Card::define_purple_cards(16,"matarsak");//set matarsak
         Card::define_purple_cards(3,"bahar");//set bahar
         Card::define_purple_cards(3,"zemestan");//set zemestan
+        Card::define_purple_cards(6,"rish_sefid");//set rish_sefid
         Card::define_purple_cards(3,"shir_dokht");//set shir_dokht
-        Card::define_purple_cards(6,"tabl_zan");//set shir_dokht
+        Card::define_purple_cards(6,"tabl_zan");//set tabl_zan
+        Card::define_purple_cards(12,"shir_zan");//set shir_zan
+        Card::define_purple_cards(3,"parcham_dar");//set parcham_dar
+
+
         Card::shuffle_purple_cards();
 
 
@@ -58,8 +63,8 @@ using namespace std;
     {
         srand(time(0));
 
-        int Shuff = rand() % 10 + 1;
-        for(int i = 0; i < 30 ;i++)
+        int Shuff = rand() % 50 + 1;
+        for(int i = 0; i < 51 ;i++)
         {
             swap(purple_cards[i],purple_cards[Shuff]);
         }
@@ -68,8 +73,8 @@ using namespace std;
     void Card::shuffle_yellow_cards()
     {
 
-        int Shuff = rand() % 10 + 1;
-        for(int i = 0; i < 50 ;i++)
+        int Shuff = rand() % 57 + 1;
+        for(int i = 0; i < 57 ;i++)
         {
             swap(yellow_cards[i],yellow_cards[Shuff]);
         }
