@@ -146,6 +146,11 @@ public:
                     game_gameplay[players_index].set_help(false);
                     players_index--;
                 }
+                if( game_gameplay[players_index].get_parcham_dar() )
+                {
+                    game_gameplay[players_index].re_set_parcham_dar();
+                    winner = true;//ending while
+                }
             }
             players_index = 0;//to restart
             if (game_gameplay[players_index].get_passed_players() >= play.get_number_of_player() )
@@ -165,19 +170,19 @@ public:
                 if( game_gameplay[i].get_bahar() )
                 {
                     game_control[i].calculate_yellow_card_power( game_gameplay[i] );
-                    game_control[i].calculate_purple_card_power( game_gameplay[i] );
+                    game_control[i].calculate_purple_card_power( game_gameplay[i],i );
                     game_control[i].set_bahar_power( game_gameplay[i] );
                 }
                 else if (game_gameplay[i].get_zemestan() )
                 {
                     game_control[i].calculate_yellow_card_power( game_gameplay[i] );
                     game_control[i].set_zemestan_power( game_gameplay[i] );
-                    game_control[i].calculate_purple_card_power( game_gameplay[i] );
+                    game_control[i].calculate_purple_card_power( game_gameplay[i],i );
                 }
                 else
                 {
                     game_control[i].calculate_yellow_card_power( game_gameplay[i] );
-                    game_control[i].calculate_purple_card_power( game_gameplay[i] );
+                    game_control[i].calculate_purple_card_power( game_gameplay[i],i );
                 }
             }
 
