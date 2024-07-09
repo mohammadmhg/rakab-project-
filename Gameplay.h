@@ -34,10 +34,14 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
     void re_set_passed_players();
 
     void re_set_pass();
+
+    void re_set_parcham_dar();
     ///getter
     int get_passed_players()const;
 
     bool get_help()const ;
+
+    bool get_parcham_dar()const;
 
     int get_first_attacker()const;
 
@@ -73,6 +77,8 @@ private:
     bool check_exist_card(string);
     void show_cards_array()const;
     void validation_of_input(string&);
+    void setting_the_input_card();
+
 
     vector <string> cards;
     vector <string> play_cards;
@@ -87,6 +93,8 @@ private:
     static int index_yellow_card;
     static int index_purple_card;
     static int empty_hand_players;
+    static bool used_parcham_dar;
+    static int last_player_passed;
     bool pass = false;
     bool pass_counted = false;
 };
