@@ -8,15 +8,18 @@
 
 int Control_Cards::biggest_played_card = 0;
 int Control_Cards::most_powerful = 0;
-int Control_Cards::shir_zan_numbers = 0;
-int Control_Cards::most_used_shir_zan_player = 0;
+int Control_Cards::first_attacker = 0;
+
 
 
 
 using namespace std;
 
     ///constructor
-    Control_Cards::Control_Cards(){}
+    Control_Cards::Control_Cards()
+    {
+        power.resize(3);
+    }
     Control_Cards::Control_Cards(int temp_power,bool temp_winner)
     {
         Control_Cards::set_winner(temp_winner);
@@ -27,9 +30,15 @@ using namespace std;
     {
         biggest_played_card = 0;
     }
+
+    void Control_Cards::set_first_attacker(int number)
+    {
+        this->first_attacker = number;
+    }
+
     void Control_Cards::set_power(int number)
     {
-        this->power += number;
+        this->power.push_back(number);
     }
 
     void Control_Cards::set_winner(bool flag)
@@ -45,15 +54,25 @@ using namespace std;
     void Control_Cards::re_set_most_powerful()
     {
         most_powerful = 0;
-        shir_zan_numbers = 0;
-        most_used_shir_zan_player = 0;
+        shir_zan_numbers.clear();
+        winner = false;
+        power.clear();
     }
 
     ///getter
-
-    int Control_Cards::get_power() const
+    int Control_Cards::get_shir_zan_size()const
     {
-        return power;
+        return shir_zan_numbers.size();
+    }
+
+    int Control_Cards::get_first_attacker() const
+    {
+        return first_attacker;
+    }
+
+    int Control_Cards::get_power(int index) const
+    {
+        return power[index];
     }
 
     int Control_Cards::get_most_powerful() const
@@ -73,7 +92,15 @@ using namespace std;
 
     ///methods
 
-    void Control_Cards::calculate_yellow_card_power(const Gameplay game)
+    void Control_Cards::show_power()const
+    {
+        for(int i = 0 ; i < power.size() ;i++)
+        {
+            cout << power[i] << '\t';
+        }
+    }
+
+    void Control_Cards::calculate_yellow_card_power(const Gameplay game,int index_of_player)
     {//set power by yellow cards
 
         for(int i = 0 ; i < game.get_play_cards() ;i++)
@@ -85,7 +112,7 @@ using namespace std;
             {
 
                 string temp_data = game.get_play_cards_data(i);
-                power =power + stoi(temp_data);
+                power[index_of_player] = power[index_of_player] + stoi(temp_data);
 
             }
         }
@@ -103,7 +130,7 @@ using namespace std;
             if(game.get_play_cards_data(i) == "tabl_zan" && tabl_zan == false)
             {
                 tabl_zan = true;
-                power = power * 2;
+                power[index_of_player] = power[index_of_player] * 2;
             }
 
             if(game.get_play_cards_data(i) == "shir_dokht")
@@ -115,17 +142,13 @@ using namespace std;
                 temp_shir_zan++;
             }
         }
-        power = power + temp_shir_zan;
-        power = power + temp_shir_dokht;
-        if( temp_shir_zan > shir_zan_numbers )
-        {
-            shir_zan_numbers = temp_shir_zan;
-            most_used_shir_zan_player = index_of_player;
-        }
+        power[index_of_player] = power[index_of_player] + temp_shir_zan;
+        power[index_of_player] = power[index_of_player] + temp_shir_dokht;
+        shir_zan_numbers.push_back(temp_shir_zan);
 
     }
 
-    void Control_Cards::set_bahar_power(const Gameplay game)
+    void Control_Cards::set_bahar_power(const Gameplay game,int index_of_player)
     {//set power when is bahar
 
         for(int i = 0; i < game.get_play_cards() ;i++)
@@ -139,7 +162,7 @@ using namespace std;
                 temp_yellow_card = game.get_play_cards_data(i);
                 if(biggest_played_card <= stoi( temp_yellow_card ) )
                 {
-                    power = power + 3;
+                    power[index_of_player] = power[index_of_player] + 3;
                 }
 
             }
@@ -166,7 +189,7 @@ using namespace std;
         }
     }
 
-    void Control_Cards::set_zemestan_power(const Gameplay game)
+    void Control_Cards::set_zemestan_power(const Gameplay game,int index_of_player)
     {//set power when is zemestan
         for(int i = 0 ; i < game.get_play_cards();i++)
         {
@@ -176,13 +199,30 @@ using namespace std;
             {
                 string temp_yellow_card;
                 temp_yellow_card = game.get_play_cards_data(i);
-                power = (power + 1) - ( stoi(temp_yellow_card) );
+                power[index_of_player] = (power[index_of_player] + 1) - ( stoi(temp_yellow_card) );
             }
 
         }
 
     }
 
+    void Control_Cards::set_battle_city_chooser()
+    {
+        int biggest_power = 0;
+        for(int i = 0; i < power.size() ;i++)
+        {
+            if( power[i] > biggest_power)
+            {
+                biggest_power = power[i];
+                first_attacker = i;
+            }
+        }
+    }
+
+    void Control_Cards::set_shir_zan_effect()
+    {
+
+    }
 
 
 
