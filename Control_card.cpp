@@ -8,6 +8,8 @@
 
 int Control_Cards::biggest_played_card = 0;
 int Control_Cards::most_powerful = 0;
+int Control_Cards::shir_zan_numbers = 0;
+int Control_Cards::most_used_shir_zan_player = 0;
 
 
 
@@ -43,6 +45,8 @@ using namespace std;
     void Control_Cards::re_set_most_powerful()
     {
         most_powerful = 0;
+        shir_zan_numbers = 0;
+        most_used_shir_zan_player = 0;
     }
 
     ///getter
@@ -76,7 +80,8 @@ using namespace std;
         {
 
             if (game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"&&
-               game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty")
+               game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty"&&game.get_play_cards_data(i) != "rish_sefid"&&game.get_play_cards_data(i) != "parcham_dar"&&
+              game.get_play_cards_data(i) != "shir_zan")
             {
 
                 string temp_data = game.get_play_cards_data(i);
@@ -87,10 +92,11 @@ using namespace std;
     }
 
 
-    void Control_Cards::calculate_purple_card_power(const Gameplay game)
+    void Control_Cards::calculate_purple_card_power(const Gameplay game,int index_of_player)
     {//set power by purple cards
         bool tabl_zan = false;
         int temp_shir_dokht = 0;
+        int temp_shir_zan = 0;
         for(int i = 0; i < game.get_play_cards() ;i++)
             {
 
@@ -104,9 +110,18 @@ using namespace std;
             {
                 temp_shir_dokht = temp_shir_dokht + 10;
             }
-
+            if(game.get_play_cards_data(i) == "shir_zan")
+            {
+                temp_shir_zan++;
+            }
         }
+        power = power + temp_shir_zan;
         power = power + temp_shir_dokht;
+        if( temp_shir_zan > shir_zan_numbers )
+        {
+            shir_zan_numbers = temp_shir_zan;
+            most_used_shir_zan_player = index_of_player;
+        }
 
     }
 
@@ -116,7 +131,8 @@ using namespace std;
         for(int i = 0; i < game.get_play_cards() ;i++)
         {
             if(game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"
-               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty")
+               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty"&&game.get_play_cards_data(i) != "rish_sefid"&&game.get_play_cards_data(i) != "shir_zan"&&
+               game.get_play_cards_data(i) != "parcham_dar")
 
             {
                 string temp_yellow_card;
@@ -136,7 +152,8 @@ using namespace std;
         {
 
             if(game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"
-               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty")
+               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty"&&game.get_play_cards_data(i) != "rish_sefid"&&game.get_play_cards_data(i) != "shir_zan"&&
+               game.get_play_cards_data(i) != "parcham_dar")
             {
                 string temp_yellow_card;
                 temp_yellow_card = game.get_play_cards_data(i);
@@ -154,7 +171,8 @@ using namespace std;
         for(int i = 0 ; i < game.get_play_cards();i++)
         {
             if(game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"
-               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty")
+               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty"&&game.get_play_cards_data(i) != "rish_sefid"&&game.get_play_cards_data(i) != "shir_zan"&&
+               game.get_play_cards_data(i) != "shir_zan")
             {
                 string temp_yellow_card;
                 temp_yellow_card = game.get_play_cards_data(i);

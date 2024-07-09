@@ -34,7 +34,7 @@ public:
 
     void calculate_yellow_card_power(const Gameplay);
 
-    void calculate_purple_card_power(const Gameplay);//set power by purple cards
+    void calculate_purple_card_power(const Gameplay,int);//set power by purple cards
 
     void set_bahar_power(const Gameplay);
 
@@ -46,6 +46,8 @@ public:
 private:
     bool winner = false;
     int power = 0;
+    static int shir_zan_numbers;
+    static int most_used_shir_zan_player;
     static int biggest_played_card;
     static int most_powerful;
 };
