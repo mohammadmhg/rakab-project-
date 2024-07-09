@@ -19,8 +19,6 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
     ///setter
     void set_help(bool);
 
-    void set_first_attacker(int);
-
     void set_cards(string);
 
     void set_played_card(string);
@@ -42,8 +40,6 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
     bool get_help()const ;
 
     bool get_parcham_dar()const;
-
-    int get_first_attacker()const;
 
     bool get_pass_counted() const;
 
@@ -88,7 +84,6 @@ private:
     static bool is_bahar;
     static bool is_zemestan;
     Rish_Sefid rish_sefid_handel;
-    static int first_attacker;
     static int passed_players;
     static int index_yellow_card;
     static int index_purple_card;

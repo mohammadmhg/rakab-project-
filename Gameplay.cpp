@@ -10,7 +10,7 @@ using namespace std;
 bool Gameplay::is_bahar = false;
 bool Gameplay::is_zemestan = false;
 bool Gameplay::used_parcham_dar = false;
-int Gameplay::first_attacker = 0;
+
 int Gameplay::empty_hand_players = 0;
 int Gameplay::passed_players = 0;
 int Gameplay::index_yellow_card = 0;
@@ -32,11 +32,6 @@ int Gameplay::last_player_passed = 0;
     void Gameplay::set_help(bool help)
     {
         this->getting_help = help;
-    }
-
-    void Gameplay::set_first_attacker(int number)
-    {
-        this->first_attacker = number;
     }
 
     void Gameplay::set_cards(string card)
@@ -112,11 +107,6 @@ int Gameplay::last_player_passed = 0;
     int Gameplay::get_empty_hand_players() const
     {
         return empty_hand_players;
-    }
-
-    int Gameplay::get_first_attacker() const
-    {
-        return first_attacker;
     }
 
     bool Gameplay::get_pass_counted() const
@@ -245,6 +235,7 @@ int Gameplay::last_player_passed = 0;
         }
         if(input == "pass"|| input == "0")
         {
+            last_player_passed = number;
             pass = true;
             return;
         }
