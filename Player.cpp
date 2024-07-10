@@ -7,12 +7,8 @@
 using namespace std;
 
 
-    Players::Players()
-    {
-        Players::set_player_correct();
-        Players::defind_players();
+    Players::Players(){}
 
-    }
     Players::Players(int age,string name,string color,int number_of_players): number_of_players(number_of_players)
     {
 
@@ -129,6 +125,7 @@ using namespace std;
             cin >> temp_players;
         }
         Players::set_player(temp_players);
+        Players::defind_players();
     }
 
     bool Players::check_age(int temp_age)
