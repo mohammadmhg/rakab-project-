@@ -66,6 +66,7 @@ public:
         {
             if( game_gameplay[0].get_empty_hand_players() >= (play.get_number_of_player() - 1) )
             {
+                game_gameplay[0].re_set_empty_hand_players();
                 game_gameplay.clear();
                 for(int i = 0; i < play.get_number_of_player(); i++)
                 {
@@ -87,18 +88,18 @@ public:
             {
                 rish_sefid_handel.set_used_rish_sefid_card(false);
                 peacezone.define_peace_sign(rish_sefid_handel.get_last_played_card_index() );
+                validation_of_peace_sign(game_city,play);
             }
 
-            validation_of_peace_sign(game_city,play);
             system("cls");
-            warzone.define_war_sign();
+            warzone.define_war_sign( game_control.get_battle_city_chooser() );
             for(int i = 0; i < play.get_number_of_player();i++)//to check that player can Enter a name of a EMPTY city
             {
                 while(game_city[i].check_taken_cities( warzone.get_war_sign(),peacezone.get_peace_sign() ) )
                 {
                         cout << "Invalid City!!" << endl;
                         i = 0;
-                        warzone.define_war_sign();
+                        warzone.define_war_sign( game_control.get_battle_city_chooser() );
                 }
             }
             starting_the_round(game_gameplay,game_control,play,game_city);
@@ -123,7 +124,6 @@ public:
             {
                 game_map.showing_map( play.get_number_of_player(),warzone.get_war_sign(),game_gameplay,game_city);
                 game_gameplay[players_index].show_saturation(players_index,play.get_number_of_player(),game_control.get_biggest_card() );
-                game_control.set_biggest_card(game_gameplay[players_index]);
                 game_gameplay[players_index].check_empty_cards();
 
                 if(game_gameplay[players_index].get_pass() == true && game_gameplay[players_index].get_pass_counted() == false)
@@ -135,8 +135,12 @@ public:
                 if (rish_sefid_handel.get_rish_sefid_card() )
                 {
                     game_gameplay[players_index].handel_rish_sefid(play.get_number_of_player(),game_gameplay);
+                    game_control.set_biggest_card_played();
                     rish_sefid_handel.set_rish_sefid_card(false);
                 }
+
+                game_control.set_biggest_card(game_gameplay[players_index]);//set the biggest played card
+
                 if( game_gameplay[players_index].get_help() )
                 {
                     game_gameplay[players_index].set_help(false);
@@ -144,8 +148,9 @@ public:
                 }
                 if( game_gameplay[players_index].get_parcham_dar() )
                 {
-                    game_gameplay[players_index].re_set_parcham_dar();
                     winner = true;//ending while
+                    game_gameplay[players_index].re_set_parcham_dar();
+                    break;
                 }
             }
             players_index = 0;//to restart
@@ -192,6 +197,10 @@ public:
                 game_gameplay[i].re_set_pass();
             }
             game_control.set_battle_city_chooser();
+            if( game_control.get_shir_zan_got_used() )
+            {
+                game_control.set_shir_zan_effect();
+            }
             game_control.set_winner(true);
     }
 
