@@ -17,8 +17,10 @@ using namespace std;
         return war;
     }
         ///method
-    void War_Sign::define_war_sing()
+    void War_Sign::define_war_sign(int player)
     {
+
+        cout <<"Player " << player+1<< " has the war_sign . Enter an empty city to start attack :"<<endl;
         string temp_sign;
         cin>> temp_sign;
         while (temp_sign!="BELLA"&&temp_sign!="CALINE"&&temp_sign!="ENNA"&&temp_sign!="ATELA"&&temp_sign!="PLADACI"&&temp_sign!="BORGE"&&temp_sign!="DIMASE"&&temp_sign!="MORINA"&&
