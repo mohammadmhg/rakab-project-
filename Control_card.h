@@ -40,6 +40,12 @@ public:
 
     int get_first_attacker()const;
 
+    bool get_shir_zan_got_used()const;
+
+    int get_battle_city_chooser() const;
+
+    int get_passed_players_number()const;
+
     ///methods
     void show_power()const;
 
@@ -67,7 +73,7 @@ private:
     static int biggest_played_card;
     static int most_powerful;
     static int first_attacker;
-    int battle_city_choser = 0;
+    int battle_city_chooser = 0;
     bool shir_zan_got_used = false;
     vector <int> handel_passed_players;
 };
