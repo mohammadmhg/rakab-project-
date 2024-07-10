@@ -57,6 +57,14 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
 
     int get_empty_hand_players() const;
 
+    string get_cards_data(int &) const;
+
+    int get_cards_size()const;
+
+    int get_index_purple_card()const;
+
+    int get_index_yellow_card()const;
+
     ///method
     void print_cards(const int,const Players);
     void show_saturation(int,int,int);

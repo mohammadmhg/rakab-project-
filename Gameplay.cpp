@@ -10,12 +10,10 @@ using namespace std;
 bool Gameplay::is_bahar = false;
 bool Gameplay::is_zemestan = false;
 bool Gameplay::used_parcham_dar = false;
-
 int Gameplay::empty_hand_players = 0;
 int Gameplay::passed_players = 0;
 int Gameplay::index_yellow_card = 0;
 int Gameplay::index_purple_card = 0;
-int Gameplay::last_player_passed = 0;
 
 
     ///constructor
@@ -28,6 +26,11 @@ int Gameplay::last_player_passed = 0;
 
     }
     ///setter
+
+    void Gameplay::re_set_empty_hand_players()
+    {
+        empty_hand_players = 0;
+    }
 
     void Gameplay::set_help(bool help)
     {
@@ -79,7 +82,6 @@ int Gameplay::last_player_passed = 0;
     void Gameplay::re_set_pass()
     {
         pass = false;
-        last_player_passed = 0;
         pass_counted = false;
         play_cards.clear();
     }
@@ -134,10 +136,29 @@ int Gameplay::last_player_passed = 0;
         return play_cards[i];
     }
 
+    int Gameplay::get_cards_size() const
+    {
+        return cards.size();
+    }
+
+    string Gameplay::get_cards_data(int & index) const
+    {
+        return cards[index];
+    }
 
     bool Gameplay::get_pass() const
     {
         return pass;
+    }
+
+    int Gameplay::get_index_yellow_card() const
+    {
+        return index_yellow_card;
+    }
+
+    int Gameplay::get_index_purple_card() const
+    {
+        return index_purple_card;
     }
 
 
@@ -153,11 +174,11 @@ int Gameplay::last_player_passed = 0;
     void Gameplay::setting_card(const Card card_setter,const int conquer_cities_number)
     {
         srand(time(0));
-        if(index_purple_card > 20)
+        if(index_purple_card > 50)
         {
             index_purple_card = 0;
         }
-        if(index_yellow_card > 47)
+        if(index_yellow_card > 56)
         {
             index_yellow_card = 0;
         }
@@ -224,7 +245,6 @@ int Gameplay::last_player_passed = 0;
         if (input == "parcham_dar")
         {
             used_parcham_dar = true;
-            return;
         }
         if(input == "rish_sefid")
         {
@@ -235,7 +255,6 @@ int Gameplay::last_player_passed = 0;
         }
         if(input == "pass"|| input == "0")
         {
-            last_player_passed = number;
             pass = true;
             return;
         }
