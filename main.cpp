@@ -61,7 +61,7 @@ public:
 
     void game_started(Players play,vector <City> game_city,vector <Gameplay> game_gameplay)
     {
-        Control_Cards game_control;
+        Control_Cards game_control{ play.get_number_of_player() };
         while(!end_of_game)
         {
             if( game_gameplay[0].get_empty_hand_players() >= (play.get_number_of_player() - 1) )
@@ -108,7 +108,7 @@ public:
             set_winner_of_battle(game_gameplay,game_control,play,game_city);
 
             winner = false;
-            game_control.re_set_most_powerful();
+            game_control.re_set_most_powerful( play.get_number_of_player() );
             game_gameplay[0].set_seasons();
             game_control.set_biggest_card_played();
         }//end_of_game while
@@ -130,6 +130,7 @@ public:
                 {
                     game_gameplay[players_index].set_pass_counted(true);//to sure that we already count this pass
                     game_gameplay[players_index].set_passed_players();
+                    game_control.set_handel_passed_players(players_index);
                 }
                 if (rish_sefid_handel.get_rish_sefid_card() )
                 {
