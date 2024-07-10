@@ -84,7 +84,7 @@ using namespace std;
     {
         system("cls");
         cout << "\tTHE WAR ENDS!!!WINNER IS PLAYER"<<number + 1<<endl<<endl;
-        cout <<"<  THANK YOU FOR PAYING>";
+        cout <<"<  THANK YOU FOR PAYING  >";
 
     }
     void Print_Game::round_end(int number)

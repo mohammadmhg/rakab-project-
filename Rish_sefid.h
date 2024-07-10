@@ -21,14 +21,13 @@ public:
 
 
     ///getter
-    int get_last_played_card_index();
+    int get_last_played_card_index() const;
 
-    bool get_rish_sefid_card();
+    bool get_rish_sefid_card() const;
 
+    bool get_used_rish_sefid_card() const;
 
-    bool get_used_rish_sefid_card();
-
-    int get_biggest_card_value();
+    int get_biggest_card_value() const;
 
 private:
     static int last_played_card_index;

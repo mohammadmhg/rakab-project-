@@ -38,23 +38,23 @@ int Rish_Sefid::biggest_card_value = 0;
 
     ///getter
 
-    int Rish_Sefid::get_last_played_card_index()
+    int Rish_Sefid::get_last_played_card_index() const
     {
         return last_played_card_index;
     }
 
-    bool Rish_Sefid::get_used_rish_sefid_card()
+    bool Rish_Sefid::get_used_rish_sefid_card() const
     {
         return used_rish_sefid_card;
     }
 
-    bool Rish_Sefid::get_rish_sefid_card()
+    bool Rish_Sefid::get_rish_sefid_card() const
     {
         return rish_sefid_card;
     }
 
 
-    int Rish_Sefid::get_biggest_card_value()
+    int Rish_Sefid::get_biggest_card_value() const
     {
         return biggest_card_value;
     }
