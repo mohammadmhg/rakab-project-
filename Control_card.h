@@ -9,7 +9,7 @@ class Control_Cards{///this class this for controlling the power of each player 
 public:
     ///constructor
     Control_Cards();
-    Control_Cards(int,bool);
+    Control_Cards(int);
     ///setter
     void set_biggest_card_played();
 
@@ -19,10 +19,14 @@ public:
 
     void set_most_powerful(int);
 
-    void re_set_most_powerful();
+    void re_set_most_powerful(int);
 
     void set_first_attacker(int);
+
+    void set_handel_passed_players(int);
     ///getter
+
+    int power_size()const;
 
     int get_power(int)const;
 
@@ -53,6 +57,8 @@ public:
 
     void set_shir_zan_effect();
 
+    int check_handel_passed_players(int);
+
 
 private:
     bool winner = false;
@@ -62,6 +68,8 @@ private:
     static int most_powerful;
     static int first_attacker;
     int battle_city_choser = 0;
+    bool shir_zan_got_used = false;
+    vector <int> handel_passed_players;
 };
 
 #endif
