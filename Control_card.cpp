@@ -73,6 +73,11 @@ using namespace std;
         return shir_zan_numbers.size();
     }
 
+    int Control_Cards::get_passed_players_number()const
+    {
+        return handel_passed_players.size();
+    }
+
     int Control_Cards::get_first_attacker() const
     {
         return first_attacker;
@@ -101,6 +106,16 @@ using namespace std;
     int Control_Cards::power_size() const
     {
         return power.size();
+    }
+
+    bool Control_Cards::get_shir_zan_got_used()const
+    {
+        return shir_zan_got_used;
+    }
+
+    int Control_Cards::get_battle_city_chooser() const
+    {
+        return battle_city_chooser;
     }
 
     ///methods
@@ -250,11 +265,31 @@ using namespace std;
                 }
             }
         }
-        battle_city_choser = first_attacker;
+        battle_city_chooser = first_attacker;
     }
 
     void Control_Cards::set_shir_zan_effect()
     {
+        int biggest_shir_zan = 0;
+        for(int i = 0; i < shir_zan_numbers.size() ;i++)
+        {
+            if( shir_zan_numbers[i] > biggest_shir_zan)
+            {
+                biggest_shir_zan = shir_zan_numbers[i];
+                battle_city_chooser = i;
+            }
+        }
+
+        for(int i = 0; i < shir_zan_numbers.size() ;i++)
+        {
+            for(int j = i+1 ;j < shir_zan_numbers.size() ;j++)
+            {
+                if( shir_zan_numbers[i] == shir_zan_numbers[j] && shir_zan_numbers[i] == biggest_shir_zan)
+                {
+                    battle_city_chooser = first_attacker;
+                }
+            }
+        }
 
     }
 
@@ -269,6 +304,8 @@ using namespace std;
         }
         return 0;
     }
+
+
 
 
 
