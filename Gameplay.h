@@ -34,6 +34,8 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
     void re_set_pass();
 
     void re_set_parcham_dar();
+
+    void re_set_empty_hand_players();
     ///getter
     int get_passed_players()const;
 
@@ -89,7 +91,6 @@ private:
     static int index_purple_card;
     static int empty_hand_players;
     static bool used_parcham_dar;
-    static int last_player_passed;
     bool pass = false;
     bool pass_counted = false;
 };
