@@ -18,12 +18,11 @@ using namespace std;
     ///constructor
     Control_Cards::Control_Cards()
     {
-        power.resize(3);
     }
-    Control_Cards::Control_Cards(int temp_power,bool temp_winner)
+    Control_Cards::Control_Cards(int temp_size)
     {
-        Control_Cards::set_winner(temp_winner);
-        Control_Cards::set_power(temp_power);
+        power.resize(temp_size);
+        shir_zan_numbers.resize(temp_size);
     }
     ///setter
     void Control_Cards::set_biggest_card_played()
@@ -51,12 +50,21 @@ using namespace std;
         this->most_powerful = number;
     }
 
-    void Control_Cards::re_set_most_powerful()
+    void Control_Cards::re_set_most_powerful(int number)
     {
         most_powerful = 0;
         shir_zan_numbers.clear();
+        shir_zan_numbers.resize(number);
         winner = false;
+        shir_zan_got_used = false;
         power.clear();
+        power.resize(number);
+        handel_passed_players.clear();
+    }
+
+    void Control_Cards::set_handel_passed_players(int index_of_player)
+    {
+        handel_passed_players.push_back(index_of_player);
     }
 
     ///getter
@@ -88,6 +96,11 @@ using namespace std;
     int Control_Cards::get_biggest_card() const
     {
         return biggest_played_card;
+    }
+
+    int Control_Cards::power_size() const
+    {
+        return power.size();
     }
 
     ///methods
@@ -140,11 +153,12 @@ using namespace std;
             if(game.get_play_cards_data(i) == "shir_zan")
             {
                 temp_shir_zan++;
+                shir_zan_got_used = true;
             }
         }
         power[index_of_player] = power[index_of_player] + temp_shir_zan;
         power[index_of_player] = power[index_of_player] + temp_shir_dokht;
-        shir_zan_numbers.push_back(temp_shir_zan);
+        shir_zan_numbers[index_of_player] = temp_shir_zan;
 
     }
 
@@ -217,11 +231,43 @@ using namespace std;
                 first_attacker = i;
             }
         }
+        for(int i = 0; i < power.size() ;i++)
+        {
+            for(int j = i+1 ;j < power.size() ;j++)
+            {
+                if( power[i] == power[j] && power[i] == biggest_power)
+                {
+                    int first_player = check_handel_passed_players(i);
+                    int second_player = check_handel_passed_players(j);
+                    if( first_player > second_player)
+                    {
+                        first_attacker = i;
+                    }
+                    if( first_player < second_player)
+                    {
+                        first_attacker = j;
+                    }
+                }
+            }
+        }
+        battle_city_choser = first_attacker;
     }
 
     void Control_Cards::set_shir_zan_effect()
     {
 
+    }
+
+    int Control_Cards::check_handel_passed_players(int index_of_player)
+    {
+        for(int k = 0; k < handel_passed_players.size() ;k++)
+        {
+            if( handel_passed_players[k] == index_of_player)
+            {
+                return k;
+            }
+        }
+        return 0;
     }
 
 
