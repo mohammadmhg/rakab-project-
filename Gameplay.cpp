@@ -32,6 +32,26 @@ int Gameplay::index_purple_card = 0;
         empty_hand_players = 0;
     }
 
+    void Gameplay::set_bahar(bool season)
+    {
+        is_bahar = season;
+    }
+
+    void Gameplay::set_zemestan(bool season)
+    {
+        is_zemestan = season;
+    }
+
+    void Gameplay::set_index_yellow_card(int index)
+    {
+        index_yellow_card = index;
+    }
+
+    void Gameplay::set_index_purple_card(int index)
+    {
+        index_purple_card = index;
+    }
+
     void Gameplay::set_help(bool help)
     {
         this->getting_help = help;
@@ -74,6 +94,11 @@ int Gameplay::index_purple_card = 0;
         this->passed_players = passed_players + 1;
     }
 
+    void Gameplay::add_passed_players_number(int number)
+    {
+        passed_players = number;
+    }
+
     void Gameplay::re_set_passed_players()
     {
         this->passed_players = 0;
@@ -89,6 +114,11 @@ int Gameplay::index_purple_card = 0;
     void Gameplay::re_set_parcham_dar()
     {
         used_parcham_dar = false;
+    }
+
+    void Gameplay::add_play_cards(string card)
+    {
+        play_cards.push_back(card);
     }
 
     ///getter
@@ -161,7 +191,6 @@ int Gameplay::index_purple_card = 0;
         return index_purple_card;
     }
 
-
     void Gameplay::show_cards_array() const
     {
         for(int i = 0 ; i < cards.size(); i++)
@@ -169,6 +198,7 @@ int Gameplay::index_purple_card = 0;
             cout << cards[i] << '\t';
         }
     }
+
 
     ///method
     void Gameplay::setting_card(const Card card_setter,const int conquer_cities_number)
