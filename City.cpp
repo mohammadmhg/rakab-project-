@@ -18,6 +18,11 @@ using namespace std;
         return taken_city[index];
     }
 
+    int City::get_size_of_city()const
+    {
+        return taken_city.size();
+    }
+
     ///method
 
     void City::show_taken_cities() const
@@ -28,8 +33,13 @@ using namespace std;
         }
     }
 
-    bool City::check_taken_cities(string war_city)
+    bool City::check_taken_cities(string war_city,string peace_city)
     {//check that player do not enter a name of a taken city
+
+        if( peace_city == war_city)
+        {
+                return true;
+        }
 
         for(int i = 0 ; i < taken_city.size() ;i++)
         {
