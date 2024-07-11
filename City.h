@@ -1,5 +1,6 @@
-#include <iostream>
 #include <unordered_map>
+#include <iostream>
+#include <unordered_set>
 #include <vector>
 #ifndef CITY_H
 #define CITY_H
@@ -15,11 +16,14 @@ public:
 
     ///getter
 
-    string get_city(int)const ;
+    string get_city(int)const;
+
+    int get_size_of_city()const;
+
     ///method
     void show_taken_cities() const;
 
-    bool check_taken_cities(string);//check that player do not enter a name of a taken city
+    bool check_taken_cities(string,string);//check that player do not enter a name of a taken city
 
     bool set_adjacent_cities();//check adjacent for the taken citys by a player
 
