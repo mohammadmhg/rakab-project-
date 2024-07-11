@@ -3,11 +3,22 @@
 #include <conio.h>
 #include <fstream>
 using namespace std;
+
+    void Menus::set_loading_game(bool upload)
+    {
+        upload_game = upload;
+    }
+
+    bool Menus::get_loading_game()const
+    {
+        return upload_game;
+    }
+
     void Menus::start_menu()
     {
         system("cls");
         cout <<endl << " Welcome to rakab Game!!"<<endl << endl<< "*********************" << endl<<endl;
-        cout << "  1-Start the game" << endl << "  2-Menu of opsions" << endl << "  3-Exit" << endl<<endl;
+        cout << "  1-Start the game" << endl << "  2-Menu of opsions" << endl << "  3-Exit" << endl << "4-Load last game" << endl<<endl;
         cout << "*********************"<<endl;
     }
 
@@ -177,17 +188,26 @@ using namespace std;
             start_menu();
             int number;
             cin >> number;
-            while(number > 3 || number < 1){
+            while(number > 4 || number < 1)
+            {
                 cin >> number;
             }
-            if(number == 1){
+            if(number == 1)
+            {
                 return true;
             }
-            if(number == 2){
+            if(number == 2)
+            {
                 menu_of_opsions();
             }
-            if(number == 3){
+            if(number == 3)
+            {
                 return false;
+            }
+            if(number == 4)
+            {
+                upload_game = true;
+                return true;
             }
 
         }
@@ -197,7 +217,8 @@ using namespace std;
     void Menus::exit()
     {
         char user = getch();
-        while(user != 'x' && user != 'X'){
+        while(user != 'x' && user != 'X')
+        {
             cout <<"Unknown input!!!try again"<<endl;
             char user = getch();
         }

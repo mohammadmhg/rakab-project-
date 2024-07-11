@@ -5,6 +5,9 @@
 
 class Menus{
 public:
+    void set_loading_game(bool);
+    bool get_loading_game()const;
+
     void start_menu();
     void start_war(int);
     void menu_of_opsions();
@@ -19,6 +22,8 @@ public:
     void ending();
     void enter_players();
     void enter_details();
+private:
+    bool upload_game = false;
 };
 
 #endif
