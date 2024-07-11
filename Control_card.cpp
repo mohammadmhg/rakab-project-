@@ -24,14 +24,19 @@ using namespace std;
         shir_zan_numbers.resize(temp_size);
     }
     ///setter
-    void Control_Cards::set_biggest_card_played()
+    void Control_Cards::set_biggest_card_played(int number)
     {
-        biggest_played_card = 0;
+        biggest_played_card = number;
     }
 
     void Control_Cards::set_first_attacker(int number)
     {
         this->first_attacker = number;
+    }
+
+    void Control_Cards::set_shir_zan_got_used(bool shir_zan)
+    {
+        shir_zan_got_used = shir_zan;
     }
 
     void Control_Cards::setting_size(int temp_size)

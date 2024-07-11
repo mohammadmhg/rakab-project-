@@ -11,7 +11,7 @@ public:
     Control_Cards();
     Control_Cards(int);
     ///setter
-    void set_biggest_card_played();
+    void set_biggest_card_played(int);
 
     void set_power(int);
 
@@ -24,6 +24,8 @@ public:
     void set_first_attacker(int);
 
     void set_handel_passed_players(int);
+
+    void set_shir_zan_got_used(bool);
 
     void setting_size(int);
     ///getter
