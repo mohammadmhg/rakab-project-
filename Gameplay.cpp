@@ -52,6 +52,11 @@ int Gameplay::index_purple_card = 0;
         index_purple_card = index;
     }
 
+    void Gameplay::set_empty_hand_players(int empty_hand)
+    {
+        empty_hand_players = empty_hand;
+    }
+
     void Gameplay::set_help(bool help)
     {
         this->getting_help = help;
@@ -76,6 +81,11 @@ int Gameplay::index_purple_card = 0;
         if(card == "matarsak"){
             Gameplay::matarsak();
         }
+    }
+
+    void Gameplay::set_pass(bool passed)
+    {
+        pass = passed;
     }
 
     void Gameplay::set_pass_counted(bool pass)
