@@ -18,6 +18,7 @@ using namespace std;
             output_player_identity << play.get_color(i) << endl;
             output_player_identity << play.get_conquer_cities_number(i) << endl;
         }
+        output_player_identity.close();
 
     }
 
@@ -31,7 +32,7 @@ using namespace std;
             {
                 output_gameplay_cards << game_gameplay[i].get_cards_data(j)<< " ";
             }
-            output_gameplay_cards << endl << "player"<<i<<endl;
+            output_gameplay_cards << endl << "player" <<endl;
         }
 
         for(int i = 0 ; i < number_of_players ;i++)
@@ -40,8 +41,11 @@ using namespace std;
             {
                 output_gameplay_play_card << game_gameplay[i].get_play_cards_data(j)<< " ";
             }
-            output_gameplay_play_card << endl << "player"<<i<<endl;
+            output_gameplay_play_card << endl << "player" <<endl;
         }
+
+        output_gameplay_cards.close();
+        output_gameplay_play_card.close();
     }
 
     void Saved_Game::saving_gamplay_data(const int number_of_players,const vector<Gameplay>& game_gameplay,const Rish_Sefid& rish_sefid)
@@ -59,12 +63,13 @@ using namespace std;
         {
             output_gameplay_data << game_gameplay[i].get_pass() <<endl;
             output_gameplay_data << game_gameplay[i].get_pass_counted() <<endl;
-            output_gameplay_data << "player" << i <<endl;
+            output_gameplay_data << "player" <<endl;
         }
 
         output_gameplay_data << rish_sefid.get_last_played_card_index() << endl;
         output_gameplay_data << rish_sefid.get_biggest_card_value() << endl;
         output_gameplay_data << rish_sefid.get_used_rish_sefid_card() << endl;
+        output_gameplay_data.close();
     }
 
     void Saved_Game::saving_control_data(const int number_of_player,const Control_Cards& game_control)
@@ -74,10 +79,12 @@ using namespace std;
         output_control_data << number_of_player <<endl;
         output_control_data << game_control.get_biggest_card() <<endl;
         output_control_data << game_control.get_shir_zan_got_used() <<endl;
+        output_control_data << game_control.get_passed_players_number() << endl;
         for(int i = 0; i < game_control.get_passed_players_number() ;i++)
         {
             output_control_data << game_control.get_passed_players_data(i) << endl;
         }
+        output_control_data.close();
     }
 
     void Saved_Game::saving_cities_data(const int number_of_player,const War_Sign& warzone,const Peace_Sign& peacezone,const vector<City>& game_city)
@@ -90,13 +97,14 @@ using namespace std;
 
         for(int i = 0; i < number_of_player ; i++)
         {
-            for(int j = 0 ; j < 5 ;j++)
+            for(int j = 0 ; j < game_city[i].get_size_of_city() ;j++)
             {
-                output_cities_data << game_city[i].get_city(j);
+                output_cities_data << game_city[i].get_city(j) << endl;
             }
+            output_cities_data << "player" << endl;
         }
+        output_cities_data.close();
     }
-
 
 
 
