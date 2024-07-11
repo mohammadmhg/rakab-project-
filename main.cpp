@@ -10,6 +10,7 @@
 #include "War_sign.h"
 #include "Control_card.h"
 #include "City.h"
+#include "Saved_game.h"
 
 class Game{
 public:
@@ -31,37 +32,41 @@ public:
             user.ending();
             exit = true;
         }
+        if( user.get_loading_game() )
+        {
+            user.set_loading_game(false);
+
+        }
     }
     void setting_game()
     {
-        Players play;
-        vector <City> game_city;
+        play.set_player_correct();
+
         for(int i = 0 ; i< play.get_number_of_player();i++)
         {
             City x;
             game_city.push_back(x);
         }
 
-
-        vector <Gameplay> game_gameplay( play.get_number_of_player() );
         for(int i = 0; i < play.get_number_of_player(); i++)
         {
             Gameplay b;
             game_gameplay.push_back(b);
         }
 
+        game_control.setting_size(play.get_number_of_player());
+
         for(int i = 0; i< play.get_number_of_player() ; i++)
         {
             game_gameplay[i].setting_card(game_card,play.get_conquer_cities_number(i) );
         }
 
-        game_started(play,game_city,game_gameplay);
+        game_started();
 
     }
 
-    void game_started(Players play,vector <City> game_city,vector <Gameplay> game_gameplay)
+    void game_started()
     {
-        Control_Cards game_control{ play.get_number_of_player() };
         while(!end_of_game)
         {
             if( game_gameplay[0].get_empty_hand_players() >= (play.get_number_of_player() - 1) )
@@ -88,7 +93,7 @@ public:
             {
                 rish_sefid_handel.set_used_rish_sefid_card(false);
                 peacezone.define_peace_sign(rish_sefid_handel.get_last_played_card_index() );
-                validation_of_peace_sign(game_city,play);
+                validation_of_peace_sign();
             }
 
             system("cls");
@@ -102,11 +107,11 @@ public:
                         warzone.define_war_sign( game_control.get_battle_city_chooser() );
                 }
             }
-            starting_the_round(game_gameplay,game_control,play,game_city);
-            set_power_of_army(game_gameplay,game_control,play);
-            set_most_powerful_army(game_gameplay,game_control,play);
-            show_power_of_army(game_control,play);
-            set_winner_of_battle(game_gameplay,game_control,play,game_city);
+            starting_the_round();
+            set_power_of_army();
+            set_most_powerful_army();
+            show_power_of_army();
+            set_winner_of_battle();
 
             winner = false;
             game_control.re_set_most_powerful( play.get_number_of_player() );
@@ -115,7 +120,7 @@ public:
         }//end_of_game while
     }
 
-    void starting_the_round(vector <Gameplay> &game_gameplay,Control_Cards &game_control,Players &play,vector <City> &game_city)
+    void starting_the_round()
     {
         int players_index = game_control.get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
         while(!winner)
@@ -140,6 +145,7 @@ public:
                 }
 
                 game_control.set_biggest_card(game_gameplay[players_index]);//set the biggest played card
+                saving_the_game_data();
 
                 if( game_gameplay[players_index].get_help() )
                 {
@@ -163,7 +169,7 @@ public:
 
     }
 
-    void set_power_of_army(vector <Gameplay> &game_gameplay,Control_Cards &game_control,Players &play)
+    void set_power_of_army()
     {
 
         for(int i =0; i< play.get_number_of_player() ;i++)
@@ -189,7 +195,7 @@ public:
 
     }
 
-    void set_most_powerful_army(vector <Gameplay> &game_gameplay,Control_Cards &game_control,Players &play)
+    void set_most_powerful_army()
     {
             system("cls");
             for(int i =0 ; i< play.get_number_of_player() ; i++)
@@ -204,14 +210,14 @@ public:
             game_control.set_winner(true);
     }
 
-    void show_power_of_army(Control_Cards &game_control,Players &play)
+    void show_power_of_army()
     {
         system("cls");
         cout << "Army_power in order from Player1 to Player" <<play.get_number_of_player()<<endl;
         game_control.show_power();
     }
 
-    void set_winner_of_battle(vector <Gameplay> &game_gameplay,Control_Cards &game_control,Players &play,vector <City> &game_city)
+    void set_winner_of_battle()
     {
             getch();
             if ( game_control.get_winner() )
@@ -238,7 +244,7 @@ public:
             }
     }
 
-    void validation_of_peace_sign(vector <City> &game_city,Players &play)
+    void validation_of_peace_sign()
     {
         string temp_war = "none";
         for(int i = 0; i < play.get_number_of_player();i++)//to check that player can Enter a name of a EMPTY city
@@ -252,6 +258,15 @@ public:
         }
     }
 
+    void saving_the_game_data()
+    {
+        game_saver.saving_the_player_identity(play);
+        game_saver.saving_gamplay_cards(play.get_number_of_player(),game_gameplay);
+        game_saver.saving_gamplay_data(play.get_number_of_player(),game_gameplay,rish_sefid_handel);
+        game_saver.saving_control_data(play.get_number_of_player(),game_control);
+        game_saver.saving_cities_data(play.get_number_of_player(),warzone,peacezone,game_city);
+    }
+
 private:
     Menus user;
     War_Sign warzone;
@@ -259,6 +274,11 @@ private:
     Print_Game game_map;
     Peace_Sign peacezone;
     Rish_Sefid rish_sefid_handel;
+    Saved_Game game_saver;
+    Players play;
+    vector <Gameplay> game_gameplay;
+    Control_Cards game_control;
+    vector <City> game_city;
     bool winner = false;
     bool end_of_game = false;
     bool exit = false;
