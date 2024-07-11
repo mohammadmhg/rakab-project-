@@ -82,7 +82,19 @@ using namespace std;
 
     void Saved_Game::saving_cities_data(const int number_of_player,const War_Sign& warzone,const Peace_Sign& peacezone,const vector<City>& game_city)
     {
+        output_cities_data.open("city_data.txt");
 
+        output_cities_data << peacezone.get_peace_sign() <<endl;
+        output_cities_data << warzone.get_war_sign() << endl;
+        output_cities_data << number_of_player << endl;
+
+        for(int i = 0; i < number_of_player ; i++)
+        {
+            for(int j = 0 ; j < 5 ;j++)
+            {
+                output_cities_data << game_city[i].get_city(j);
+            }
+        }
     }
 
 
