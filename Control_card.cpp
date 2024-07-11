@@ -7,7 +7,6 @@
 
 
 int Control_Cards::biggest_played_card = 0;
-int Control_Cards::most_powerful = 0;
 int Control_Cards::first_attacker = 0;
 
 
@@ -35,6 +34,12 @@ using namespace std;
         this->first_attacker = number;
     }
 
+    void Control_Cards::setting_size(int temp_size)
+    {
+        power.resize(temp_size);
+        shir_zan_numbers.resize(temp_size);
+    }
+
     void Control_Cards::set_power(int number)
     {
         this->power.push_back(number);
@@ -45,14 +50,9 @@ using namespace std;
         this->winner = flag;
     }
 
-    void Control_Cards::set_most_powerful(int number)
-    {
-        this->most_powerful = number;
-    }
 
     void Control_Cards::re_set_most_powerful(int number)
     {
-        most_powerful = 0;
         shir_zan_numbers.clear();
         shir_zan_numbers.resize(number);
         winner = false;
@@ -78,6 +78,11 @@ using namespace std;
         return handel_passed_players.size();
     }
 
+    int Control_Cards::get_passed_players_data(int index) const
+    {
+        return handel_passed_players[index];
+    }
+
     int Control_Cards::get_first_attacker() const
     {
         return first_attacker;
@@ -86,11 +91,6 @@ using namespace std;
     int Control_Cards::get_power(int index) const
     {
         return power[index];
-    }
-
-    int Control_Cards::get_most_powerful() const
-    {
-        return most_powerful;
     }
 
     bool Control_Cards::get_winner() const
