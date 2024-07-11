@@ -44,16 +44,44 @@ using namespace std;
         }
     }
 
-    void Saved_Game::saving_gamplay_data(const int number_of_players,const vector<Gameplay>& game_gameplay)
+    void Saved_Game::saving_gamplay_data(const int number_of_players,const vector<Gameplay>& game_gameplay,const Rish_Sefid& rish_sefid)
     {
         output_gameplay_data.open("gameplay_data");
-
         output_gameplay_data << game_gameplay[0].get_bahar() << endl;
         output_gameplay_data << game_gameplay[0].get_zemestan() << endl;
         output_gameplay_data << game_gameplay[0].get_passed_players() << endl;
         output_gameplay_data << game_gameplay[0].get_index_yellow_card() << endl;
         output_gameplay_data << game_gameplay[0].get_index_purple_card() << endl;
         output_gameplay_data << game_gameplay[0].get_empty_hand_players() << endl;
+        output_gameplay_data << number_of_players << endl;
+
+        for(int i = 0; i < number_of_players ; i++)
+        {
+            output_gameplay_data << game_gameplay[i].get_pass() <<endl;
+            output_gameplay_data << game_gameplay[i].get_pass_counted() <<endl;
+            output_gameplay_data << "player" << i <<endl;
+        }
+
+        output_gameplay_data << rish_sefid.get_last_played_card_index() << endl;
+        output_gameplay_data << rish_sefid.get_biggest_card_value() << endl;
+        output_gameplay_data << rish_sefid.get_used_rish_sefid_card() << endl;
+    }
+
+    void Saved_Game::saving_control_data(const int number_of_player,const Control_Cards& game_control)
+    {
+        output_control_data.open("control_data.txt");
+
+        output_control_data << number_of_player <<endl;
+        output_control_data << game_control.get_biggest_card() <<endl;
+        output_control_data << game_control.get_shir_zan_got_used() <<endl;
+        for(int i = 0; i < game_control.get_passed_players_number() ;i++)
+        {
+            output_control_data << game_control.get_passed_players_data(i) << endl;
+        }
+    }
+
+    void Saved_Game::saving_cities_data(const int number_of_player,const War_Sign& warzone,const Peace_Sign& peacezone,const vector<City>& game_city)
+    {
 
     }
 
