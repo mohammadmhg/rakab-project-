@@ -41,6 +41,16 @@ using namespace std;
         conquer_cities_number.resize(number);
     }
 
+    void Players::add_index_of_players()
+    {
+        index_of_players++;
+    }
+
+    void Players::add_conquer_cities_number(int number)
+    {
+        conquer_cities_number[index_of_players] = number;
+    }
+
     ///getter
     string Players::get_name(int index) const
     {

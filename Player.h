@@ -23,6 +23,8 @@ public:
     void set_color(string);
     void set_conquer_cities_number(int);
     void set_player(int);
+    void add_index_of_players();
+    void add_conquer_cities_number(int);
     ///getter
     string get_name(int) const;
     int get_age(int) const;
