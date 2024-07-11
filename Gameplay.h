@@ -25,6 +25,16 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
 
     void set_pass_counted(bool);
 
+    void set_bahar(bool);
+
+    void set_zemestan(bool);
+
+    void add_passed_players_number(int);
+
+    void set_index_yellow_card(int);
+
+    void set_index_purple_card(int);
+
     void set_seasons();
 
     void set_passed_players();
@@ -36,6 +46,8 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
     void re_set_parcham_dar();
 
     void re_set_empty_hand_players();
+
+    void add_play_cards(string);
     ///getter
     int get_passed_players()const;
 
