@@ -5,7 +5,10 @@
 using namespace std;
 
     ///constructor
-    Peace_Sign::Peace_Sign(){}
+    Peace_Sign::Peace_Sign()
+    {
+        peace = "none";
+    }
     Peace_Sign::Peace_Sign(string name): peace(name){}
     ///setter
     void Peace_Sign::set_peace_sign(string name)
@@ -13,7 +16,7 @@ using namespace std;
         this->peace = name;
     }
     ///getter
-    string Peace_Sign::get_peace_sign()
+    string Peace_Sign::get_peace_sign() const
     {
         return peace;
     }

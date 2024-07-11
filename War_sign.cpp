@@ -4,7 +4,10 @@
 
 using namespace std;
 
-    War_Sign::War_Sign(){}
+    War_Sign::War_Sign()
+    {
+        war = "none";
+    }
     War_Sign::War_Sign(string data): war(data){}
     ///setter
     void War_Sign::set_war_sign(string city)
