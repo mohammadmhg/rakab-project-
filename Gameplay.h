@@ -17,6 +17,8 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
     Gameplay(string,string);
 
     ///setter
+    void set_players_turn(int);
+
     void set_help(bool);
 
     void set_cards(string);
@@ -81,6 +83,8 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
 
     int get_index_yellow_card()const;
 
+    int get_players_turn()const;
+
     ///method
     void print_cards(const int,const Players);
     void show_saturation(int,int,int);
@@ -100,6 +104,7 @@ private:
     void show_cards_array()const;
     void validation_of_input(string&);
     void setting_the_input_card();
+    void define_players_turn(int,int);
 
 
     vector <string> cards;
@@ -114,6 +119,7 @@ private:
     static int index_yellow_card;
     static int index_purple_card;
     static int empty_hand_players;
+    static int players_turn;
     static bool used_parcham_dar;
     bool pass = false;
     bool pass_counted = false;
