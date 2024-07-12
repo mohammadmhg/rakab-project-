@@ -14,6 +14,17 @@
 class Game{
 public:
     Game();
+///getter
+    bool get_exit_game()const;
+
+///method
+    void open_the_menu();
+
+    void setting_game();
+
+    void continue_the_last_game();
+
+    void game_started();
 
     void starting_the_round(int);
 
