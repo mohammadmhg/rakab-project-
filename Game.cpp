@@ -197,3 +197,51 @@ using namespace std;
         }//winner while
 
     }
+
+    void Game::set_power_of_army()
+    {
+
+        for(int i =0; i< play.get_number_of_player() ;i++)
+            {
+                if( game_gameplay[i].get_bahar() )
+                {
+                    game_control.calculate_yellow_card_power( game_gameplay[i],i );
+                    game_control.calculate_purple_card_power( game_gameplay[i],i );
+                    game_control.set_bahar_power( game_gameplay[i],i );
+                }
+                else if (game_gameplay[i].get_zemestan() )
+                {
+                    game_control.calculate_yellow_card_power( game_gameplay[i],i );
+                    game_control.set_zemestan_power( game_gameplay[i],i );
+                    game_control.calculate_purple_card_power( game_gameplay[i],i );
+                }
+                else
+                {
+                    game_control.calculate_yellow_card_power( game_gameplay[i],i );
+                    game_control.calculate_purple_card_power( game_gameplay[i],i );
+                }
+            }
+
+    }
+
+    void Game::set_most_powerful_army()
+    {
+            system("cls");
+            for(int i =0 ; i< play.get_number_of_player() ; i++)
+            {
+                game_gameplay[i].re_set_pass();
+            }
+            game_control.set_battle_city_chooser();
+            if( game_control.get_shir_zan_got_used() )
+            {
+                game_control.set_shir_zan_effect();
+            }
+            game_control.set_winner(true);
+    }
+
+    void Game::show_power_of_army()
+    {
+        system("cls");
+        cout << "Army_power in order from Player1 to Player" <<play.get_number_of_player()<<endl;
+        game_control.show_power();
+    }
