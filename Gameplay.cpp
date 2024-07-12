@@ -14,6 +14,7 @@ int Gameplay::empty_hand_players = 0;
 int Gameplay::passed_players = 0;
 int Gameplay::index_yellow_card = 0;
 int Gameplay::index_purple_card = 0;
+int Gameplay::players_turn = 0;
 
 
     ///constructor
@@ -26,6 +27,11 @@ int Gameplay::index_purple_card = 0;
 
     }
     ///setter
+
+    void Gameplay::set_players_turn(int number)
+    {
+        players_turn = number;
+    }
 
     void Gameplay::re_set_empty_hand_players()
     {
@@ -132,6 +138,11 @@ int Gameplay::index_purple_card = 0;
     }
 
     ///getter
+    int Gameplay::get_players_turn() const
+    {
+        return players_turn;
+    }
+
     int Gameplay::get_passed_players() const
     {
         return passed_players;
@@ -260,6 +271,7 @@ int Gameplay::index_purple_card = 0;
     void Gameplay::show_saturation(int number,int number_of_players,int biggest_played_card)
     {//print the available cards for player and taking his input
         cout <<endl<< "Player Turn Player: " << number +1 <<endl;
+        define_players_turn(number,number_of_players);
         if(pass){
             cout << "\t Player has Passed the round!!"<<endl;
             getch();
@@ -373,6 +385,15 @@ int Gameplay::index_purple_card = 0;
                 Gameplay::set_cards(input);
                 break;
             }
+        }
+    }
+
+    void Gameplay::define_players_turn(int number,int number_of_players)
+    {
+        players_turn = number + 1;
+        if(players_turn == number_of_players)
+        {
+            players_turn = 0;
         }
     }
 
