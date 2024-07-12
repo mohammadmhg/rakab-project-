@@ -31,12 +31,26 @@ public:
         {
             user.ending();
             exit = true;
+            return;
         }
         if( user.get_loading_game() )
-        {
-            user.set_loading_game(false);
-
+        {//uploading last game and continue it
+            continue_the_last_game();
+            set_power_of_army();
+            set_most_powerful_army();
+            show_power_of_army();
+            set_winner_of_battle();
+            winner = false;
+            game_control.re_set_most_powerful( play.get_number_of_player() );
+            game_gameplay[0].set_seasons();
+            game_control.set_biggest_card_played(0);
+            game_started();
         }
+        if( user.get_loading_game() == false)//starting a new game
+        {
+            setting_game();
+        }
+
     }
     void setting_game()
     {
@@ -63,6 +77,29 @@ public:
 
         game_started();
 
+    }
+
+    void continue_the_last_game()
+    {
+        system("cls");
+        game_saver.uploading_the_player_identity(play);
+        for(int i = 0; i < play.get_number_of_player() ;i++)
+        {
+            Gameplay x;
+            game_gameplay.push_back(x);
+        }
+        game_saver.uploading_gamplay_cards(play.get_number_of_player(),game_gameplay);
+        game_saver.uploading_gamplay_data(play.get_number_of_player(),game_gameplay,rish_sefid_handel);
+        game_control.setting_size(play.get_number_of_player());
+        game_saver.uploading_control_data(play.get_number_of_player(),game_control);
+        for(int i = 0 ; i< play.get_number_of_player();i++)
+        {
+            City z;
+            game_city.push_back(z);
+        }
+        game_saver.uploading_cities_data(play.get_number_of_player(),warzone,peacezone,game_city);
+        int players_index = game_gameplay[0].get_players_turn();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
+        starting_the_round(players_index);
     }
 
     void game_started()
@@ -107,7 +144,8 @@ public:
                         warzone.define_war_sign( game_control.get_battle_city_chooser() );
                 }
             }
-            starting_the_round();
+            int players_index = game_control.get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
+            starting_the_round(players_index);
             set_power_of_army();
             set_most_powerful_army();
             show_power_of_army();
@@ -116,17 +154,17 @@ public:
             winner = false;
             game_control.re_set_most_powerful( play.get_number_of_player() );
             game_gameplay[0].set_seasons();
-            game_control.set_biggest_card_played();
+            game_control.set_biggest_card_played(0);
         }//end_of_game while
     }
 
-    void starting_the_round()
+    void starting_the_round(int players_index)
     {
-        int players_index = game_control.get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
         while(!winner)
         {
             for(players_index ; players_index < play.get_number_of_player(); players_index++)
             {
+                saving_the_game_data();
                 game_map.showing_map( play.get_number_of_player(),warzone.get_war_sign(),game_gameplay,game_city);
                 game_gameplay[players_index].show_saturation(players_index,play.get_number_of_player(),game_control.get_biggest_card() );
                 game_gameplay[players_index].check_empty_cards();
@@ -140,12 +178,11 @@ public:
                 if (rish_sefid_handel.get_rish_sefid_card() )
                 {
                     game_gameplay[players_index].handel_rish_sefid(play.get_number_of_player(),game_gameplay);
-                    game_control.set_biggest_card_played();
+                    game_control.set_biggest_card_played(0);
                     rish_sefid_handel.set_rish_sefid_card(false);
                 }
 
                 game_control.set_biggest_card(game_gameplay[players_index]);//set the biggest played card
-                saving_the_game_data();
 
                 if( game_gameplay[players_index].get_help() )
                 {
@@ -294,6 +331,5 @@ int main()
     {
         return 0;
     }
-    game_start.setting_game();
     return 0;
 }
