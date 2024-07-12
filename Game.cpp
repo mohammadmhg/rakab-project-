@@ -10,7 +10,7 @@ using namespace std;
     }
 
     ///getter
-    bool Game::get_exit_game()
+    bool Game::get_exit_game()const
     {
         return exit;
     }
@@ -244,4 +244,54 @@ using namespace std;
         system("cls");
         cout << "Army_power in order from Player1 to Player" <<play.get_number_of_player()<<endl;
         game_control.show_power();
+    }
+
+    void Game::set_winner_of_battle()
+    {
+            getch();
+            if ( game_control.get_winner() )
+            {
+                game_map.round_end( game_control.get_first_attacker() );
+                play.set_conquer_cities_number( game_control.get_first_attacker() );
+                game_city[game_control.get_first_attacker()].set_city( warzone.get_war_sign() );
+            }
+            for(int k = 0; k < play.get_number_of_player() ;k++)
+            {
+                if (play.get_conquer_cities_number(k) >= 3)
+                {
+                    if(game_city[k].set_adjacent_cities() )
+                    {//end of game by adjacent
+                        game_map.winner_player(k);
+                        end_of_game = true;
+                    }
+                    if(play.get_conquer_cities_number(k) >= 5)
+                    {//end of game by taking the citys
+                        game_map.winner_player(k);
+                        end_of_game = true;
+                    }
+                }
+            }
+    }
+
+    void Game::validation_of_peace_sign()
+    {
+        string temp_war = "none";
+        for(int i = 0; i < play.get_number_of_player();i++)//to check that player can Enter a name of a EMPTY city
+        {
+                while(game_city[i].check_taken_cities( peacezone.get_peace_sign(),temp_war ) )
+                {
+                        cout << "Invalid City!!" << endl;
+                        i = 0;
+                        peacezone.define_peace_sign( rish_sefid_handel.get_last_played_card_index() );
+                }
+        }
+    }
+
+    void Game::saving_the_game_data()
+    {
+        game_saver.saving_the_player_identity(play);
+        game_saver.saving_gamplay_cards(play.get_number_of_player(),game_gameplay);
+        game_saver.saving_gamplay_data(play.get_number_of_player(),game_gameplay,rish_sefid_handel);
+        game_saver.saving_control_data(play.get_number_of_player(),game_control);
+        game_saver.saving_cities_data(play.get_number_of_player(),warzone,peacezone,game_city);
     }
