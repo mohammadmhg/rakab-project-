@@ -34,6 +34,8 @@ public:
 
     void uploading_control_data(const int,Control_Cards&);
 
+    void uploading_cities_data(const int,War_Sign&,Peace_Sign&,vector<City>&);
+
 private:
     ofstream output_player_identity;
     ofstream output_gameplay_cards;
