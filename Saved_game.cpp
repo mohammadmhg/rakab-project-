@@ -133,3 +133,33 @@ using namespace std;
         }
         input_player_identity.close();
     }
+
+
+
+    void Saved_Game::uploading_gamplay_cards(const int number_of_player,vector<Gameplay>& game_gameplay)
+    {
+        input_gameplay_cards.open("gameplay_cards.txt");
+        input_gameplay_play_card.open("gameplay_play_card.txt");
+        string card_reader;
+
+        for(int i = 0 ; i < number_of_player ; i++)
+        {
+            input_gameplay_cards >> card_reader;
+            while( card_reader != "player")
+            {
+                game_gameplay[i].set_cards(card_reader);
+                input_gameplay_cards >> card_reader;
+            }
+        }
+        for(int i = 0 ; i < number_of_player ; i++)
+        {
+            input_gameplay_play_card >> card_reader;
+            while( card_reader != "player")
+            {
+                game_gameplay[i].add_play_cards(card_reader);
+                input_gameplay_play_card >> card_reader;
+            }
+        }
+        input_gameplay_cards.close();
+        input_gameplay_play_card.close();
+    }
