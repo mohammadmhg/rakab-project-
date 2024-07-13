@@ -28,6 +28,8 @@ public:
 
     void uploading_the_player_identity(Players&);
 
+    void uploading_gamplay_cards(const int,vector<Gameplay>&);
+
 private:
     ofstream output_player_identity;
     ofstream output_gameplay_cards;
