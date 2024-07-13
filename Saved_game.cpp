@@ -204,3 +204,29 @@ using namespace std;
 
         input_gameplay_data.close();
     }
+
+
+
+
+    void Saved_Game::uploading_control_data(const int number_of_player,Control_Cards& game_control)
+    {
+        game_control.setting_size(number_of_player);
+        input_control_data.open("control_data.txt");
+        int int_reader = 0;
+        int index_passed_players = 0;
+        bool bool_reader = 0;
+
+        input_control_data >> int_reader;
+        game_control.set_biggest_card_played(int_reader);
+        input_control_data >> bool_reader;
+        game_control.set_shir_zan_got_used(bool_reader);
+        input_control_data >> int_reader;
+
+        for(int i = 0; i < int_reader; i++)
+        {
+            input_control_data >> index_passed_players;
+            game_control.set_handel_passed_players(index_passed_players);
+        }
+
+        input_control_data.close();
+    }
