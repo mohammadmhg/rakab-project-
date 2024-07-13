@@ -43,6 +43,13 @@ private:
     ofstream output_gameplay_data;
     ofstream output_control_data;
     ofstream output_cities_data;
+
+    ifstream input_player_identity;
+    ifstream input_gameplay_cards;
+    ifstream input_gameplay_play_card;
+    ifstream input_gameplay_data;
+    ifstream input_control_data;
+    ifstream input_cities_data;
 };
 
 
