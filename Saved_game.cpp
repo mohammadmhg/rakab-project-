@@ -108,5 +108,28 @@ using namespace std;
 
 
 
+    void Saved_Game::uploading_the_player_identity(Players& play)
+    {
+        input_player_identity.open("saved_game_identity.txt");
+        int number_of_player = 0;
+        int number_of_cities = 0;
+        string name;
+        int age = 0;
+        string color;
+        input_player_identity >> number_of_player;
+        play.set_player(number_of_player);
 
-
+        for(int i = 0; i < number_of_player ;i++)
+        {
+            input_player_identity >> name;
+            input_player_identity >> age;
+            input_player_identity >> color;
+            input_player_identity >> number_of_cities;
+            play.set_name(name);
+            play.set_age(age);
+            play.set_color(color);
+            play.set_conquer_cities_number(number_of_cities);
+            play.add_index_of_players();
+        }
+        input_player_identity.close();
+    }
