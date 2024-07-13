@@ -26,6 +26,8 @@ public:
 
     void saving_cities_data(const int,const War_Sign&,const Peace_Sign&,const vector<City>&);
 
+    void uploading_the_player_identity(Players&);
+
 private:
     ofstream output_player_identity;
     ofstream output_gameplay_cards;
