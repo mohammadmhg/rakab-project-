@@ -163,3 +163,44 @@ using namespace std;
         input_gameplay_cards.close();
         input_gameplay_play_card.close();
     }
+
+
+
+    void Saved_Game::uploading_gamplay_data(const int number_of_player,vector<Gameplay>& game_gameplay,Rish_Sefid& rish_sefid)
+    {
+        input_gameplay_data.open("gameplay_data.txt");
+        bool bool_reader;
+        int int_reader = 0;
+
+        input_gameplay_data >>  bool_reader;
+        game_gameplay[0].set_bahar(bool_reader);
+        input_gameplay_data >> bool_reader;
+        game_gameplay[0].set_zemestan(bool_reader);
+        input_gameplay_data >> int_reader;
+        game_gameplay[0].add_passed_players_number(int_reader);
+        input_gameplay_data >> int_reader;
+        game_gameplay[0].set_index_yellow_card(int_reader);
+        input_gameplay_data >> int_reader;
+        game_gameplay[0].set_index_purple_card(int_reader);
+        input_gameplay_data >> int_reader;
+        game_gameplay[0].set_empty_hand_players(int_reader);
+        input_gameplay_data >> int_reader;
+        game_gameplay[0].set_players_turn(int_reader);
+
+        for(int i = 0; i < number_of_player ; i++)
+        {
+            input_gameplay_data >> bool_reader;
+            game_gameplay[i].set_pass(bool_reader);
+            input_gameplay_data >> bool_reader;
+            game_gameplay[i].set_pass_counted(bool_reader);
+        }
+
+        input_gameplay_data >> int_reader;
+        rish_sefid.set_last_played_card_index(int_reader);
+        input_gameplay_data >> int_reader;
+        rish_sefid.set_biggest_card_value(int_reader);
+        input_gameplay_data >> bool_reader;
+        rish_sefid.set_used_rish_sefid_card(bool_reader);
+
+        input_gameplay_data.close();
+    }
