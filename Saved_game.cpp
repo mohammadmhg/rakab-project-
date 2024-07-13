@@ -230,3 +230,27 @@ using namespace std;
 
         input_control_data.close();
     }
+
+
+
+    void Saved_Game::uploading_cities_data(const int number_of_player,War_Sign &warzone,Peace_Sign &peacezone,vector <City> &game_city)
+    {
+        input_cities_data.open("city_data.txt");
+        string city_reader;
+
+        input_cities_data >> city_reader;
+        peacezone.set_peace_sign(city_reader);
+        input_cities_data >> city_reader;
+        warzone.set_war_sign(city_reader);
+
+        for(int i = 0; i < number_of_player ; i++)
+        {
+            input_cities_data >> city_reader;
+            while( city_reader != "player")
+            {
+                game_city[i].set_city(city_reader);
+                input_cities_data >> city_reader;
+            }
+        }
+        input_cities_data.close();
+    }   
