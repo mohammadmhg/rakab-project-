@@ -32,6 +32,8 @@ public:
 
     void uploading_gamplay_data(const int,vector<Gameplay>&,Rish_Sefid&);
 
+    void uploading_control_data(const int,Control_Cards&);
+
 private:
     ofstream output_player_identity;
     ofstream output_gameplay_cards;
