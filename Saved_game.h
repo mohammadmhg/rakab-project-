@@ -30,6 +30,8 @@ public:
 
     void uploading_gamplay_cards(const int,vector<Gameplay>&);
 
+    void uploading_gamplay_data(const int,vector<Gameplay>&,Rish_Sefid&);
+
 private:
     ofstream output_player_identity;
     ofstream output_gameplay_cards;
