@@ -368,15 +368,6 @@ int Gameplay::players_turn = 0;
             getch();
             return;
         }
-        while(stoi(input) < 0 || stoi(input) > 10)
-        {
-            cout <<"Error!!you Entered The wrong Value!!"<< endl;
-            cin>> input;
-            if(input == "0")
-            {
-                return;
-            }
-        }
         for(int i =0 ;i < play_cards.size() ; i++)
         {
             if(play_cards[i] == input)
@@ -419,6 +410,18 @@ int Gameplay::players_turn = 0;
             menu.shir_dokht_help();
             return;
         }
+        if(temp == "help rish_sefid")
+        {
+
+        }
+        if(temp == "help shir_zan")
+        {
+
+        }
+        if(temp == "help parcham_dar")
+        {
+
+        }
 
     }
 
@@ -451,18 +454,14 @@ int Gameplay::players_turn = 0;
     }
     void Gameplay::check_empty_cards()
     {
-        int empty_hand = 0;
         for(int i = 0; i < cards.size() ;i++)
         {
-            if (cards[i] == "Empty")
+            if (cards[i] == "1"||cards[i] == "2"||cards[i] == "3"||cards[i] == "4"||cards[i] == "5"||cards[i] == "6"||cards[i] == "10")
             {
-                empty_hand++;
+                return;
             }
         }
-        if (empty_hand >= cards.size() )
-        {
-            empty_hand_players++;
-        }
+        empty_hand_players++;
     }
     void Gameplay::handel_rish_sefid(int number_of_players,vector <Gameplay> &game_gameplay)
     {
