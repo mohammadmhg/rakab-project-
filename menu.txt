@@ -18,7 +18,7 @@ if a player use this card in battle,his army strength will boost double!!(but af
 army s strength will not increase one more!!)
 &&
 Shir_dokht
-this card increase the army power 10 more (no other cards can effect this card,Even Zemesta!!)
+this card increase the army power 10 more (no other cards can effect this card,Even zemestan!!)
 &&
 Bahar
 After playing this card,the army of players or player that played the highest Yellow card(cards) will increase 3
@@ -27,5 +27,16 @@ more to each card.Remmember that even after battle ends in a city,the Bahar card
 &&
 Zemestan
 If a player played this,All the Yellow cards value will be 1!!(This card do not impact the Purple cards)
+&&
+Rish_sefid
+after playing this card,the biggest soldier played card will lose and the player of this card will have 
+the peace sign
+&&
+Shir_zan
+this card will increase the power of army by 1 and the player who played most shir_zan will choose
+the next battle city and take war_sign
+&&
+Parcham_dar
+after playing this card,the battle ends emminently
 &&
 Press x or X to Exit: 
