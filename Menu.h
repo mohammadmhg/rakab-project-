@@ -16,6 +16,9 @@ public:
     void tabl_zan_help();
     void shir_dokht_help();
     void matarsak_help();
+    void rish_sefid_help();
+    void parcham_dar_help();
+    void shir_zan_help();
     void non_existed_card();
     bool action();
     void exit();
