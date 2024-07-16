@@ -101,6 +101,7 @@ private:
     void input_chosen_card(string);
     int get_chosen_card();
     bool check_exist_card(string);
+    bool check_exist_played_card(string)const;
     void show_cards_array()const;
     void validation_of_input(string&);
     void setting_the_input_card();
