@@ -203,6 +203,60 @@ using namespace std;
         Menus::exit();
     }
 
+    void Menus::parcham_dar_help()
+    {
+        system("cls");
+        fstream in;
+        in.open("menu.txt",ios::in);
+        string line;
+        while ( getline(in,line) )
+        {
+            if (line == "Parcham_dar")
+            {
+                while ( getline(in,line) )
+                {
+                    if (line == "&&")
+                    {
+                        break;
+                    }
+                    cout << line << endl;
+
+                }
+
+            }
+
+        }
+        cout << "Press x or X to Exit: "<<endl;
+        Menus::exit();
+    }
+
+    void Menus::shir_zan_help()
+    {
+        system("cls");
+        fstream in;
+        in.open("menu.txt",ios::in);
+        string line;
+        while ( getline(in,line) )
+        {
+            if (line == "Shir_zan")
+            {
+                while ( getline(in,line) )
+                {
+                    if (line == "&&")
+                    {
+                        break;
+                    }
+                    cout << line << endl;
+
+                }
+
+            }
+
+        }
+        cout << "Press x or X to Exit: "<<endl;
+        Menus::exit();
+    }
+
     void Menus::non_existed_card()
     {
         cout << "ENTER THE CRAD PLEASE: "<<endl;
