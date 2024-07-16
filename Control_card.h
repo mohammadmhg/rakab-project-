@@ -76,8 +76,8 @@ private:
     bool winner = false;
     vector<int> power;
     vector<int> shir_zan_numbers;
-    static int biggest_played_card;
-    static int first_attacker;
+    int biggest_played_card = 0;
+    int first_attacker = 0;
     int battle_city_chooser = 0;
     bool shir_zan_got_used = false;
     vector <int> handel_passed_players;

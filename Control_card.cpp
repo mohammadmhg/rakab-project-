@@ -6,9 +6,6 @@
 
 
 
-int Control_Cards::biggest_played_card = 0;
-int Control_Cards::first_attacker = 0;
-
 
 
 
