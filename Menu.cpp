@@ -18,7 +18,7 @@ using namespace std;
     {
         system("cls");
         cout <<endl << " Welcome to rakab Game!!"<<endl << endl<< "*********************" << endl<<endl;
-        cout << "  1-Start the game" << endl << "  2-Menu of opsions" << endl << "  3-Exit" << endl << "4-Load last game" << endl<<endl;
+        cout << "  1-Start the game" << endl << "  2-Menu of opsions" << endl << "  3-Exit" << endl << "  4-Load last game" << endl<<endl;
         cout << "*********************"<<endl;
     }
 
@@ -176,6 +176,33 @@ using namespace std;
         Menus::exit();
     }
 
+    void Menus::rish_sefid_help()
+    {
+        system("cls");
+        fstream in;
+        in.open("menu.txt",ios::in);
+        string line;
+        while ( getline(in,line) )
+        {
+            if (line == "Rish_sefid")
+            {
+                while ( getline(in,line) )
+                {
+                    if (line == "&&")
+                    {
+                        break;
+                    }
+                    cout << line << endl;
+
+                }
+
+            }
+
+        }
+        cout << "Press x or X to Exit: "<<endl;
+        Menus::exit();
+    }
+
     void Menus::non_existed_card()
     {
         cout << "ENTER THE CRAD PLEASE: "<<endl;
@@ -220,7 +247,7 @@ using namespace std;
         while(user != 'x' && user != 'X')
         {
             cout <<"Unknown input!!!try again"<<endl;
-            char user = getch();
+            user = getch();
         }
         system("cls");
     }
