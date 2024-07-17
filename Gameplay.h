@@ -89,7 +89,7 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
     void print_cards(const int,const Players);
     void show_saturation(int,int,int);
     void setting_card(const Card,const int);
-    void check_empty_cards();
+    void check_empty_cards(int,vector <Gameplay>);
     void handel_rish_sefid(int,vector <Gameplay> &);
 
 
