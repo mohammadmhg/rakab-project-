@@ -74,22 +74,23 @@ using namespace std;
     void Game::continue_the_last_game()
     {
         system("cls");
-        game_saver.uploading_the_player_identity(play);
+        Upload_Game game_upload;
+        game_upload.uploading_the_player_identity(play);
         for(int i = 0; i < play.get_number_of_player() ;i++)
         {
             Gameplay x;
             game_gameplay.push_back(x);
         }
-        game_saver.uploading_gamplay_cards(play.get_number_of_player(),game_gameplay);
-        game_saver.uploading_gamplay_data(play.get_number_of_player(),game_gameplay,rish_sefid_handel);
+        game_upload.uploading_gamplay_cards(play.get_number_of_player(),game_gameplay);
+        game_upload.uploading_gamplay_data(play.get_number_of_player(),game_gameplay,rish_sefid_handel);
         game_control.setting_size(play.get_number_of_player());
-        game_saver.uploading_control_data(play.get_number_of_player(),game_control);
+        game_upload.uploading_control_data(play.get_number_of_player(),game_control);
         for(int i = 0 ; i< play.get_number_of_player();i++)
         {
             City z;
             game_city.push_back(z);
         }
-        game_saver.uploading_cities_data(play.get_number_of_player(),warzone,peacezone,game_city);
+        game_upload.uploading_cities_data(play.get_number_of_player(),warzone,peacezone,game_city);
         int players_index = game_gameplay[0].get_players_turn();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
         starting_the_round(players_index);
     }
@@ -159,7 +160,6 @@ using namespace std;
                 saving_the_game_data();
                 game_map.showing_map( play.get_number_of_player(),warzone.get_war_sign(),game_gameplay,game_city);
                 game_gameplay[players_index].show_saturation(players_index,play.get_number_of_player(),game_control.get_biggest_card() );
-                game_gameplay[players_index].check_empty_cards();
 
                 if(game_gameplay[players_index].get_pass() == true && game_gameplay[players_index].get_pass_counted() == false)
                 {
@@ -192,6 +192,7 @@ using namespace std;
             if (game_gameplay[players_index].get_passed_players() >= play.get_number_of_player() )
             {//to end the round on fight in a city
                 game_gameplay[players_index].re_set_passed_players();
+                game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
                 winner = true;
             }
         }//winner while
@@ -236,7 +237,6 @@ using namespace std;
             {
                 game_control.set_shir_zan_effect();
             }
-            game_control.set_winner(true);
     }
 
     void Game::show_power_of_army()
