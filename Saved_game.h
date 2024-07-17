@@ -50,6 +50,7 @@ private:
     ifstream input_gameplay_data;
     ifstream input_control_data;
     ifstream input_cities_data;
+
 };
 
 
