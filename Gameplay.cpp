@@ -467,17 +467,26 @@ int Gameplay::players_turn = 0;
         }
         return false;
     }
-    void Gameplay::check_empty_cards()
+    void Gameplay::check_empty_cards(int number_of_players,vector <Gameplay> game_gameplay)
     {
-        for(int i = 0; i < cards.size() ;i++)
+        int empty_cards_number = 0;
+        for(int i = 0 ; i < number_of_players ; i++)
         {
-            if (cards[i] == "1"||cards[i] == "2"||cards[i] == "3"||cards[i] == "4"||cards[i] == "5"||cards[i] == "6"||cards[i] == "10")
+            for(int j = 0; j < game_gameplay[i].cards.size() ;j++)
             {
-                return;
+                if (game_gameplay[i].cards[j] == "Empty")
+                {
+                    empty_cards_number++;
+                }
+                if(empty_cards_number == game_gameplay[i].cards.size() )
+                {
+                    empty_hand_players++;
+                    empty_cards_number = 0;
+                }
             }
         }
-        empty_hand_players++;
     }
+
     void Gameplay::handel_rish_sefid(int number_of_players,vector <Gameplay> &game_gameplay)
     {
         for(int j = 0; j < number_of_players ; j++)
