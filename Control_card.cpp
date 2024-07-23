@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <math.h>
 #include "Control_card.h"
 
 
@@ -150,27 +151,30 @@ using namespace std;
 
     void Control_Cards::calculate_purple_card_power(const Gameplay game,int index_of_player)
     {//set power by purple cards
-        bool tabl_zan = false;
+        int tabl_zan_numbers = 0;
         int temp_shir_dokht = 0;
         int temp_shir_zan = 0;
         for(int i = 0; i < game.get_play_cards() ;i++)
         {
-
-            if(game.get_play_cards_data(i) == "tabl_zan" && tabl_zan == false)
+            if(game.get_play_cards_data(i) == "tabl_zan")
             {
-                tabl_zan = true;
-                power[index_of_player] = power[index_of_player] * 2;
+                tabl_zan_numbers++;
             }
 
             if(game.get_play_cards_data(i) == "shir_dokht")
             {
                 temp_shir_dokht = temp_shir_dokht + 10;
             }
+
             if(game.get_play_cards_data(i) == "shir_zan")
             {
                 temp_shir_zan++;
                 shir_zan_got_used = true;
             }
+        }
+        if(tabl_zan_numbers != 0)
+        {
+            power[index_of_player] = power[index_of_player] * pow(1.5,tabl_zan_numbers);
         }
         power[index_of_player] = power[index_of_player] + temp_shir_zan;
         power[index_of_player] = power[index_of_player] + temp_shir_dokht;
