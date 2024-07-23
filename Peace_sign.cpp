@@ -28,7 +28,7 @@ using namespace std;
         string temp_sign;
         cin>> temp_sign;
         while (temp_sign!="BELLA"&&temp_sign!="CALINE"&&temp_sign!="ENNA"&&temp_sign!="ATELA"&&temp_sign!="PLADACI"&&temp_sign!="BORGE"&&temp_sign!="DIMASE"&&temp_sign!="MORINA"&&
-        temp_sign!="OLIVADI"&&temp_sign!="ROLLO"&&temp_sign!="TALMONE"&&temp_sign!="ARMENTO"&&temp_sign!="LIA"&&temp_sign!="ELINIA")
+        temp_sign!="OLIVADI"&&temp_sign!="ROLLO"&&temp_sign!="TALMONE"&&temp_sign!="ARMENTO"&&temp_sign!="LIA"&&temp_sign!="ELINIA"&&temp_sign!="ATEN")
         {
             cout <<"WRONG NAME!!"<<endl;
             cin>>temp_sign;
