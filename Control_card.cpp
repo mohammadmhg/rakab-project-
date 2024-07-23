@@ -154,7 +154,7 @@ using namespace std;
         int temp_shir_dokht = 0;
         int temp_shir_zan = 0;
         for(int i = 0; i < game.get_play_cards() ;i++)
-            {
+        {
 
             if(game.get_play_cards_data(i) == "tabl_zan" && tabl_zan == false)
             {
@@ -188,7 +188,7 @@ using namespace std;
             if(temp_played_card == "1"||temp_played_card == "2"||temp_played_card == "3"||temp_played_card =="4"||temp_played_card == "5"||temp_played_card == "6"
                ||temp_played_card == "10"||temp_played_card == "shir_dokht")
             {
-                if(temp_played_card == "shir_dokht")
+                if(temp_played_card == "shir_dokht"&& biggest_played_card == 10)
                 {
                     power[index_of_player] = power[index_of_player] + 3;
                     continue;
@@ -204,18 +204,25 @@ using namespace std;
 
     void Control_Cards::set_biggest_card(const Gameplay game)
     {//set the biggest played soldier card in game
-        string temp_yellow_card;
+        string temp_played_card;
         for(int i = 0; i < game.get_play_cards() ;i++)
         {
 
+            temp_played_card = game.get_play_cards_data(i);
 
-            if(temp_yellow_card == "1"||temp_yellow_card == "2"||temp_yellow_card == "3"||temp_yellow_card =="4"||temp_yellow_card == "5"||temp_yellow_card == "6"
-               ||temp_yellow_card == "10")
+            if(temp_played_card == "1"||temp_played_card == "2"||temp_played_card == "3"||temp_played_card =="4"||temp_played_card == "5"||temp_played_card == "6"
+               ||temp_played_card == "10"||temp_played_card == "shir_dokht")
             {
 
-                if( stoi( temp_yellow_card ) > biggest_played_card)
+                if(temp_played_card == "shir_dokht")
                 {
-                    biggest_played_card = stoi( temp_yellow_card );
+                    biggest_played_card = 10;
+                    continue;
+                }
+
+                if( stoi( temp_played_card ) > biggest_played_card)
+                {
+                    biggest_played_card = stoi( temp_played_card );
                 }
 
             }
@@ -232,7 +239,8 @@ using namespace std;
             if(temp_yellow_card == "1"||temp_yellow_card == "2"||temp_yellow_card == "3"||temp_yellow_card == "4"||temp_yellow_card == "5"||temp_yellow_card == "6"
                ||temp_yellow_card == "10")
             {
-                power[index_of_player] = (power[index_of_player] + 1) - ( stoi(temp_yellow_card) );
+                int half_power = stoi(temp_yellow_card);
+                power[index_of_player] += half_power/2;
             }
 
         }
