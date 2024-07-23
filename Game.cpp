@@ -44,7 +44,7 @@ using namespace std;
 
     }
 
-    void Game::setting_game()
+    void Game::setting_game()//setting the needed data before match
     {
         play.set_player_correct();
 
@@ -71,7 +71,7 @@ using namespace std;
 
     }
 
-    void Game::continue_the_last_game()
+    void Game::continue_the_last_game()//setting the needed data before match(when is continued)
     {
         system("cls");
         Upload_Game game_upload;
@@ -100,7 +100,7 @@ using namespace std;
         while(!end_of_game)
         {
             if( game_gameplay[0].get_empty_hand_players() >= (play.get_number_of_player() - 1) )
-            {
+            {//setting cards when the hands are empty
                 game_gameplay[0].re_set_empty_hand_players();
                 game_gameplay.clear();
                 for(int i = 0; i < play.get_number_of_player(); i++)
@@ -212,7 +212,6 @@ using namespace std;
                 }
                 else if (game_gameplay[i].get_zemestan() )
                 {
-                    game_control.calculate_yellow_card_power( game_gameplay[i],i );
                     game_control.set_zemestan_power( game_gameplay[i],i );
                     game_control.calculate_purple_card_power( game_gameplay[i],i );
                 }
