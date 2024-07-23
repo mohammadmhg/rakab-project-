@@ -59,19 +59,20 @@ using namespace std;
 
         map_citys = {
         {"BELLA", {"CALINE","PLADACI","BORGE"}},
-        {"CALINE", {"BELLA","PLADACI","BORGE","ENNA","ATELA"}},
-        {"ENNA", {"CALINE","ATELA","BORGE","DIMASE"}},
-        {"ATELA", {"CALINE","ENNA","DIMASE"}},
+        {"CALINE", {"BELLA","PLADACI","BORGE","LIA","ATELA"}},
+        {"LIA", {"CALINE","ATELA","BORGE","DIMASE"}},
+        {"ATELA", {"CALINE","LIA","DIMASE","ATEN"}},
         {"PLADACI", {"BORGE","MORINA","ROLLO"}},
-        {"BORGE", {"BELLA","CALINE","ENNA","DIMASE","PLADACI","DIMASE","MORINA","OLIVADI"}},
-        {"DIMASE", {"ENNA","ATELA","BORGE","OLIVADI"}},
+        {"BORGE", {"BELLA","CALINE","LIA","DIMASE","PLADACI","DIMASE","MORINA","OLIVADI"}},
+        {"DIMASE", {"LIA","ATELA","BORGE","OLIVADI","ATEN"}},
         {"MORINA", {"PLADACI","BORGE","OLIVADI","ROLLO","TALMONE","ARMENTO"}},
-        {"OLIVADI", {"BORGE","DIMASE","MORINA","ARMENTO","LIA"}},
+        {"OLIVADI", {"BORGE","DIMASE","MORINA","ARMENTO","ENNA"}},
         {"ROLLO", {"PLADACI","MORINA","TALMONE","ELINIA"}},
         {"TALMONE", {"MORINA","ROLLO","ARMENTO","ELINIA"}},
-        {"ARMENTO", {"MORINA","OLIVADI","LIA","TALMONE"}},
-        {"LIA", {"OLIVADI","ARMENTO"}},
-        {"ELINIA", {"ROLLO","TALMONE"}}
+        {"ARMENTO", {"MORINA","OLIVADI","ENNA","TALMONE"}},
+        {"ENNA", {"OLIVADI","ARMENTO"}},
+        {"ELINIA", {"ROLLO","TALMONE"}},
+        {"ATEN", {"ATELA","DIMASE"}}
         };
         int adjacent = 0;
         for (int i = 0; i< taken_city.size();i++)
