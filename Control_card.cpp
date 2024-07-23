@@ -54,7 +54,7 @@ using namespace std;
 
 
     void Control_Cards::re_set_most_powerful(int number)
-    {
+    {//resetting the data
         shir_zan_numbers.clear();
         shir_zan_numbers.resize(number);
         winner = false;
@@ -132,17 +132,16 @@ using namespace std;
 
     void Control_Cards::calculate_yellow_card_power(const Gameplay game,int index_of_player)
     {//set power by yellow cards
-
+        string temp_data_soldier;
         for(int i = 0 ; i < game.get_play_cards() ;i++)
         {
+            temp_data_soldier = game.get_play_cards_data(i);
 
-            if (game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"&&
-               game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty"&&game.get_play_cards_data(i) != "rish_sefid"&&game.get_play_cards_data(i) != "parcham_dar"&&
-              game.get_play_cards_data(i) != "shir_zan")
+            if(temp_data_soldier == "1"||temp_data_soldier == "2"||temp_data_soldier == "3"||temp_data_soldier =="4"||temp_data_soldier == "5"||temp_data_soldier == "6"
+               ||temp_data_soldier == "10")
             {
 
-                string temp_data = game.get_play_cards_data(i);
-                power[index_of_player] = power[index_of_player] + stoi(temp_data);
+                power[index_of_player] = power[index_of_player] + stoi(temp_data_soldier);
 
             }
         }
@@ -181,17 +180,20 @@ using namespace std;
 
     void Control_Cards::set_bahar_power(const Gameplay game,int index_of_player)
     {//set power when is bahar
-
+        string temp_played_card;
         for(int i = 0; i < game.get_play_cards() ;i++)
         {
-            if(game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"
-               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty"&&game.get_play_cards_data(i) != "rish_sefid"&&game.get_play_cards_data(i) != "shir_zan"&&
-               game.get_play_cards_data(i) != "parcham_dar")
+            temp_played_card = game.get_play_cards_data(i);
 
+            if(temp_played_card == "1"||temp_played_card == "2"||temp_played_card == "3"||temp_played_card =="4"||temp_played_card == "5"||temp_played_card == "6"
+               ||temp_played_card == "10"||temp_played_card == "shir_dokht")
             {
-                string temp_yellow_card;
-                temp_yellow_card = game.get_play_cards_data(i);
-                if(biggest_played_card <= stoi( temp_yellow_card ) )
+                if(temp_played_card == "shir_dokht")
+                {
+                    power[index_of_player] = power[index_of_player] + 3;
+                    continue;
+                }
+                if(biggest_played_card <= stoi( temp_played_card ) )
                 {
                     power[index_of_player] = power[index_of_player] + 3;
                 }
@@ -202,15 +204,15 @@ using namespace std;
 
     void Control_Cards::set_biggest_card(const Gameplay game)
     {//set the biggest played soldier card in game
+        string temp_yellow_card;
         for(int i = 0; i < game.get_play_cards() ;i++)
         {
 
-            if(game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"
-               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty"&&game.get_play_cards_data(i) != "rish_sefid"&&game.get_play_cards_data(i) != "shir_zan"&&
-               game.get_play_cards_data(i) != "parcham_dar")
+
+            if(temp_yellow_card == "1"||temp_yellow_card == "2"||temp_yellow_card == "3"||temp_yellow_card =="4"||temp_yellow_card == "5"||temp_yellow_card == "6"
+               ||temp_yellow_card == "10")
             {
-                string temp_yellow_card;
-                temp_yellow_card = game.get_play_cards_data(i);
+
                 if( stoi( temp_yellow_card ) > biggest_played_card)
                 {
                     biggest_played_card = stoi( temp_yellow_card );
@@ -222,14 +224,14 @@ using namespace std;
 
     void Control_Cards::set_zemestan_power(const Gameplay game,int index_of_player)
     {//set power when is zemestan
+        string temp_yellow_card;
         for(int i = 0 ; i < game.get_play_cards();i++)
         {
-            if(game.get_play_cards_data(i) != "matarsak"&&game.get_play_cards_data(i) != "shir_dokht"&&game.get_play_cards_data(i) != "tabl_zan"&&game.get_play_cards_data(i) != "bahar"
-               &&game.get_play_cards_data(i) !="zemestan"&&game.get_play_cards_data(i) != "Empty"&&game.get_play_cards_data(i) != "rish_sefid"&&game.get_play_cards_data(i) != "shir_zan"&&
-               game.get_play_cards_data(i) != "shir_zan")
+            temp_yellow_card = game.get_play_cards_data(i);
+
+            if(temp_yellow_card == "1"||temp_yellow_card == "2"||temp_yellow_card == "3"||temp_yellow_card == "4"||temp_yellow_card == "5"||temp_yellow_card == "6"
+               ||temp_yellow_card == "10")
             {
-                string temp_yellow_card;
-                temp_yellow_card = game.get_play_cards_data(i);
                 power[index_of_player] = (power[index_of_player] + 1) - ( stoi(temp_yellow_card) );
             }
 
@@ -238,7 +240,7 @@ using namespace std;
     }
 
     void Control_Cards::set_battle_city_chooser()
-    {
+    {//setting the person who start war when no shir_zan palyed
         int biggest_power = 0;
         for(int i = 0; i < power.size() ;i++)
         {
@@ -246,6 +248,7 @@ using namespace std;
             {
                 biggest_power = power[i];
                 first_attacker = i;
+                winner = true;
             }
         }
         for(int i = 0; i < power.size() ;i++)
@@ -271,7 +274,7 @@ using namespace std;
     }
 
     void Control_Cards::set_shir_zan_effect()
-    {
+    {//setting the shir_zan effect when some player played it
         int biggest_shir_zan = 0;
         for(int i = 0; i < shir_zan_numbers.size() ;i++)
         {
@@ -296,7 +299,7 @@ using namespace std;
     }
 
     int Control_Cards::check_handel_passed_players(int index_of_player)
-    {
+    {//checking that which player passed sooner
         for(int k = 0; k < handel_passed_players.size() ;k++)
         {
             if( handel_passed_players[k] == index_of_player)
