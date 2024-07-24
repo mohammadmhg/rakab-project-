@@ -71,6 +71,8 @@ public:
 
     int check_handel_passed_players(int);
 
+    void setting_parcham_dar_effect(int,int);
+
 
 private:
     bool winner = false;
