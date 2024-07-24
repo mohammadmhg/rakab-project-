@@ -99,10 +99,12 @@ int Gameplay::players_turn = 0;
         this->pass_counted = pass;
     }
 
-    void Gameplay::set_seasons()
+    void Gameplay::re_set_data()
     {//re_setting the bahar and zemestan
         is_bahar = false;
         is_zemestan = false;
+        passed_players = 0;
+        used_parcham_dar = false;
     }
 
     void Gameplay::set_passed_players()
@@ -115,21 +117,11 @@ int Gameplay::players_turn = 0;
         passed_players = number;
     }
 
-    void Gameplay::re_set_passed_players()
-    {
-        this->passed_players = 0;
-    }
-
     void Gameplay::re_set_pass()
     {
         pass = false;
         pass_counted = false;
         play_cards.clear();
-    }
-
-    void Gameplay::re_set_parcham_dar()
-    {
-        used_parcham_dar = false;
     }
 
     void Gameplay::add_play_cards(string card)
@@ -393,7 +385,7 @@ int Gameplay::players_turn = 0;
     }
 
     void Gameplay::define_players_turn(int number,int number_of_players)
-    {
+    {//setting the plater turn in match
         players_turn = number + 1;
         if(players_turn == number_of_players)
         {
@@ -468,8 +460,9 @@ int Gameplay::players_turn = 0;
         return false;
     }
     void Gameplay::check_empty_cards(int number_of_players,vector <Gameplay> game_gameplay)
-    {
+    {//checking that is need to set cards againg or not
         int empty_cards_number = 0;
+        empty_hand_players = 0;
         for(int i = 0 ; i < number_of_players ; i++)
         {
             for(int j = 0; j < game_gameplay[i].cards.size() ;j++)
