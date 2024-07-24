@@ -137,6 +137,8 @@ using namespace std;
                         warzone.define_war_sign( game_control.get_battle_city_chooser() );
                 }
             }
+            game_control.define_lucky_number();
+
             int players_index = game_control.get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
             starting_the_round(players_index);
             set_power_of_army();
@@ -219,6 +221,7 @@ using namespace std;
                     game_control.calculate_purple_card_power( game_gameplay[i],i );
                 }
             }
+        game_control.setting_lucky_number_effect();
 
     }
 
