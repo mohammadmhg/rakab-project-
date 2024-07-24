@@ -39,15 +39,11 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
 
     void set_index_purple_card(int);
 
-    void set_seasons();
+    void re_set_data();
 
     void set_passed_players();
 
-    void re_set_passed_players();
-
     void re_set_pass();
-
-    void re_set_parcham_dar();
 
     void re_set_empty_hand_players();
 
