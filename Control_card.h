@@ -28,6 +28,8 @@ public:
     void set_shir_zan_got_used(bool);
 
     void setting_size(int);
+
+    void set_lucky_number(int);
     ///getter
 
     int power_size()const;
@@ -52,6 +54,8 @@ public:
 
     int get_passed_players_number()const;
 
+    int get_lucky_number()const;
+
     ///methods
     void show_power()const;
 
@@ -73,6 +77,8 @@ public:
 
     void setting_parcham_dar_effect(int,int);
 
+    void define_lucky_number();
+
 
 private:
     bool winner = false;
@@ -81,6 +87,7 @@ private:
     int biggest_played_card = 0;
     int first_attacker = 0;
     int battle_city_chooser = 0;
+    int lucky_number = 0;
     bool shir_zan_got_used = false;
     vector <int> handel_passed_players;
 };
