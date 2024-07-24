@@ -33,7 +33,7 @@ using namespace std;
             set_winner_of_battle();
             winner = false;
             game_control.re_set_most_powerful( play.get_number_of_player() );
-            game_gameplay[0].set_seasons();
+            game_gameplay[0].re_set_data();
             game_control.set_biggest_card_played(0);
             game_started();
         }
@@ -146,7 +146,7 @@ using namespace std;
 
             winner = false;
             game_control.re_set_most_powerful( play.get_number_of_player() );
-            game_gameplay[0].set_seasons();
+            game_gameplay[0].re_set_data();
             game_control.set_biggest_card_played(0);
         }//end_of_game while
     }
@@ -184,14 +184,12 @@ using namespace std;
                 if( game_gameplay[players_index].get_parcham_dar() )
                 {
                     winner = true;//ending while
-                    game_gameplay[players_index].re_set_parcham_dar();
                     break;
                 }
             }
             players_index = 0;//to restart
             if (game_gameplay[players_index].get_passed_players() >= play.get_number_of_player() )
             {//to end the round on fight in a city
-                game_gameplay[players_index].re_set_passed_players();
                 game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
                 winner = true;
             }
@@ -231,10 +229,16 @@ using namespace std;
             {
                 game_gameplay[i].re_set_pass();
             }
+
             game_control.set_battle_city_chooser();
             if( game_control.get_shir_zan_got_used() )
             {
                 game_control.set_shir_zan_effect();
+            }
+
+            if( game_gameplay[0].get_parcham_dar() && game_gameplay[0].get_passed_players() == 0 )
+            {
+                game_control.setting_parcham_dar_effect( play.get_number_of_player(),game_gameplay[0].get_players_turn() );
             }
     }
 
