@@ -22,6 +22,11 @@ using namespace std;
         shir_zan_numbers.resize(temp_size);
     }
     ///setter
+    void Control_Cards::set_lucky_number(int number)
+    {
+        lucky_number = number;
+    }
+
     void Control_Cards::set_biggest_card_played(int number)
     {
         biggest_played_card = number;
@@ -71,6 +76,11 @@ using namespace std;
     }
 
     ///getter
+    int Control_Cards::get_lucky_number()const
+    {
+        return lucky_number;
+    }
+
     int Control_Cards::get_shir_zan_size()const
     {
         return shir_zan_numbers.size();
