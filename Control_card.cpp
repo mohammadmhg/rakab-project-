@@ -322,6 +322,19 @@ using namespace std;
         return 0;
     }
 
+    void Control_Cards::setting_parcham_dar_effect(int number_of_players,int player_turn)
+    {
+        if(player_turn == 0)
+        {
+            battle_city_chooser = number_of_players - 1;
+        }
+
+        else
+        {
+            battle_city_chooser = player_turn - 1;
+        }
+    }
+
 
 
 
