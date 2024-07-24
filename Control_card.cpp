@@ -335,6 +335,20 @@ using namespace std;
         }
     }
 
+    void Control_Cards::define_lucky_number()
+    {
+        cout << "Player " << first_attacker+1<<" is the beginner of game,please set a number as Lucky number:"<<endl;
+        int temp_lucky_number = 0;
+        cin >> temp_lucky_number;
+
+        while( temp_lucky_number <= 0 || temp_lucky_number > 30)
+        {
+            cout << "The Lucky number is not valid,please try again:" <<endl;
+            cin>>temp_lucky_number;
+        }
+
+        lucky_number = temp_lucky_number;
+    }
 
 
 
