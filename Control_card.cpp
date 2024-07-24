@@ -347,17 +347,29 @@ using namespace std;
 
     void Control_Cards::define_lucky_number()
     {
+        system("cls");
         cout << "Player " << first_attacker+1<<" is the beginner of game,please set a number as Lucky number:"<<endl;
         int temp_lucky_number = 0;
         cin >> temp_lucky_number;
 
-        while( temp_lucky_number <= 0 || temp_lucky_number > 30)
+        while( temp_lucky_number <= 1 || temp_lucky_number > 30)
         {
             cout << "The Lucky number is not valid,please try again:" <<endl;
             cin>>temp_lucky_number;
         }
 
         lucky_number = temp_lucky_number;
+    }
+
+    void Control_Cards::setting_lucky_number_effect()
+    {
+        for(int i = 0 ; i < power.size() ;i++)
+        {
+            if(lucky_number != 0&&power[i] % lucky_number == 0)
+            {
+                power[i] *= 2;
+            }
+        }
     }
 
 

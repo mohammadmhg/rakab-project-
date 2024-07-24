@@ -79,6 +79,8 @@ public:
 
     void define_lucky_number();
 
+    void setting_lucky_number_effect();
+
 
 private:
     bool winner = false;
