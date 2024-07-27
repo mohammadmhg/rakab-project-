@@ -75,6 +75,7 @@ using namespace std;
     {
         output_control_data.open("control_data.txt");
 
+        output_control_data << game_control.get_lucky_number() << endl;
         output_control_data << game_control.get_biggest_card() <<endl;
         output_control_data << game_control.get_shir_zan_got_used() <<endl;
         output_control_data << game_control.get_passed_players_number() << endl;

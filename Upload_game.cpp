@@ -104,6 +104,8 @@ using namespace std;
         bool bool_reader = 0;
 
         input_control_data >> int_reader;
+        game_control.set_lucky_number(int_reader);
+        input_control_data >> int_reader;
         game_control.set_biggest_card_played(int_reader);
         input_control_data >> bool_reader;
         game_control.set_shir_zan_got_used(bool_reader);
