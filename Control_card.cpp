@@ -59,12 +59,13 @@ using namespace std;
     }
 
 
-    void Control_Cards::re_set_most_powerful(int number)
+    void Control_Cards::re_set_data(int number)
     {//resetting the data
         shir_zan_numbers.clear();
         shir_zan_numbers.resize(number);
         winner = false;
         shir_zan_got_used = false;
+        biggest_played_card = 0;
         power.clear();
         power.resize(number);
         handel_passed_players.clear();
@@ -74,7 +75,10 @@ using namespace std;
     {
         handel_passed_players.push_back(index_of_player);
     }
-
+    void Control_Cards::set_battle_city(int player)
+    {
+        battle_city_chooser = player;
+    }
     ///getter
     int Control_Cards::get_lucky_number()const
     {
@@ -261,7 +265,7 @@ using namespace std;
 
     }
 
-    void Control_Cards::set_battle_city_chooser()
+    void Control_Cards::setting_battle_city_chooser()
     {//setting the person who start war when no shir_zan palyed
         int biggest_power = 0;
         for(int i = 0; i < power.size() ;i++)

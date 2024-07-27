@@ -19,7 +19,7 @@ public:
 
     void set_most_powerful(int);
 
-    void re_set_most_powerful(int);
+    void re_set_data(int);
 
     void set_first_attacker(int);
 
@@ -30,6 +30,8 @@ public:
     void setting_size(int);
 
     void set_lucky_number(int);
+
+    void set_battle_city(int);
     ///getter
 
     int power_size()const;
@@ -69,7 +71,7 @@ public:
 
     void set_zemestan_power( const Gameplay,int);//set power when is zemestan
 
-    void set_battle_city_chooser();
+    void setting_battle_city_chooser();
 
     void set_shir_zan_effect();
 
