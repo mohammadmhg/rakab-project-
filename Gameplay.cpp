@@ -10,12 +10,12 @@ using namespace std;
 bool Gameplay::is_bahar = false;
 bool Gameplay::is_zemestan = false;
 bool Gameplay::used_parcham_dar = false;
+bool Gameplay::used_rakhsh_sefid = false;
 int Gameplay::empty_hand_players = 0;
 int Gameplay::passed_players = 0;
 int Gameplay::index_yellow_card = 0;
 int Gameplay::index_purple_card = 0;
 int Gameplay::players_turn = 0;
-
 
     ///constructor
     Gameplay::Gameplay(){}
@@ -27,7 +27,6 @@ int Gameplay::players_turn = 0;
 
     }
     ///setter
-
     void Gameplay::set_players_turn(int number)
     {
         players_turn = number;
@@ -80,6 +79,9 @@ int Gameplay::players_turn = 0;
             is_bahar = true;
             is_zemestan = false;
         }
+        if(card == "parcham_dar"){
+            used_parcham_dar = true;
+        }
         if(card == "zemestan"){
             is_bahar = false;
             is_zemestan = true;
@@ -128,7 +130,10 @@ int Gameplay::players_turn = 0;
     {
         play_cards.push_back(card);
     }
-
+    void Gameplay::set_used_rakhsh_sefid(bool rakhsh)
+    {
+        used_rakhsh_sefid = rakhsh;
+    }
     ///getter
     int Gameplay::get_players_turn() const
     {
@@ -203,6 +208,10 @@ int Gameplay::players_turn = 0;
     {
         return index_purple_card;
     }
+    bool Gameplay::get_used_rakhsh_sefid()const
+    {
+        return used_rakhsh_sefid;
+    }
 
     void Gameplay::show_cards_array() const
     {
@@ -211,7 +220,6 @@ int Gameplay::players_turn = 0;
             cout << cards[i] << '\t';
         }
     }
-
     ///method
     void Gameplay::setting_card(const Card card_setter,const int conquer_cities_number)
     {
@@ -285,10 +293,12 @@ int Gameplay::players_turn = 0;
                 getline(cin,input);
             }
         }
-        if (input == "parcham_dar")
+        if(input == "rakhsh_sefid")
         {
-            used_parcham_dar = true;
+            used_rakhsh_sefid = true;
+            players_turn = number;
         }
+
         if(input == "rish_sefid")
         {
             rish_sefid_handel.set_used_rish_sefid_card(true);
@@ -320,10 +330,10 @@ int Gameplay::players_turn = 0;
 
     void Gameplay::setting_the_input_card()
     {
-        cout << "The Played Card is : " << cards[get_chosen_card() - 1]<<endl;
+        cout << "The Played Card is : " << cards[chosen_card - 1]<<endl;
         getch();
-        set_played_card(cards[Gameplay::get_chosen_card() - 1]);
-        cards[Gameplay::get_chosen_card() - 1] = "Empty";
+        set_played_card(cards[chosen_card - 1]);
+        cards[chosen_card - 1] = "Empty";
     }
 
     void Gameplay::matarsak()
@@ -436,11 +446,6 @@ int Gameplay::players_turn = 0;
         }
     }
 
-    int Gameplay::get_chosen_card()
-    {
-        return chosen_card;
-    }
-
     bool Gameplay::check_exist_card(string chosen)
     {//check that input from player is correct
         for(int i = 0 ; i < cards.size() ; i++)
@@ -454,10 +459,11 @@ int Gameplay::players_turn = 0;
     }
     void Gameplay::check_empty_cards(int number_of_players,vector <Gameplay> game_gameplay)
     {//checking that is need to set cards againg or not
-        int empty_cards_number = 0;
+
         empty_hand_players = 0;
         for(int i = 0 ; i < number_of_players ; i++)
         {
+            int empty_cards_number = 0;
             for(int j = 0; j < game_gameplay[i].cards.size() ;j++)
             {
                 if (game_gameplay[i].cards[j] == "Empty")
