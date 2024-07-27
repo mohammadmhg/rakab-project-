@@ -212,12 +212,11 @@ int Gameplay::players_turn = 0;
         }
     }
 
-
     ///method
     void Gameplay::setting_card(const Card card_setter,const int conquer_cities_number)
     {
         srand(time(0));
-        if(index_purple_card > 50)
+        if(index_purple_card > 51)
         {
             index_purple_card = 0;
         }
@@ -239,9 +238,8 @@ int Gameplay::players_turn = 0;
             }
             else
             {
-                int temp_yellow_card = card_setter.get_yellow_card(index_yellow_card);
-                string temp_string = to_string(temp_yellow_card);
-                cards.push_back( temp_string );
+                string temp_yellow_card = card_setter.get_yellow_card(index_yellow_card);
+                cards.push_back( temp_yellow_card );
                 index_yellow_card++;
             }
         }
@@ -350,11 +348,6 @@ int Gameplay::players_turn = 0;
             {
                 return;
             }
-        }
-        if(input != "0" && play_cards.size() == 1){
-            cout << "PLAY 0 IF THERE IS NO CARD PLEASE!!"<<endl;
-            getch();
-            return;
         }
         for(int i =0 ;i < play_cards.size() ; i++)
         {
