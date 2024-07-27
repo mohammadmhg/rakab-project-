@@ -32,9 +32,8 @@ using namespace std;
             show_power_of_army();
             set_winner_of_battle();
             winner = false;
-            game_control.re_set_most_powerful( play.get_number_of_player() );
+            game_control.re_set_data( play.get_number_of_player() );
             game_gameplay[0].re_set_data();
-            game_control.set_biggest_card_played(0);
             game_started();
         }
         if( user.get_loading_game() == false)//starting a new game
@@ -147,9 +146,8 @@ using namespace std;
             set_winner_of_battle();
 
             winner = false;
-            game_control.re_set_most_powerful( play.get_number_of_player() );
+            game_control.re_set_data( play.get_number_of_player() );
             game_gameplay[0].re_set_data();
-            game_control.set_biggest_card_played(0);
         }//end_of_game while
     }
 
