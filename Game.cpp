@@ -184,6 +184,13 @@ using namespace std;
                 if( game_gameplay[players_index].get_parcham_dar() )
                 {
                     winner = true;//ending while
+                    game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
+                    break;
+                }
+                if( game_gameplay[players_index].get_used_rakhsh_sefid() )
+                {
+                    winner = true;//ending while
+                    game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
                     break;
                 }
             }
@@ -231,7 +238,7 @@ using namespace std;
                 game_gameplay[i].re_set_pass();
             }
 
-            game_control.set_battle_city_chooser();
+            game_control.setting_battle_city_chooser();
             if( game_control.get_shir_zan_got_used() )
             {
                 game_control.set_shir_zan_effect();
@@ -240,6 +247,12 @@ using namespace std;
             if( game_gameplay[0].get_parcham_dar() && game_gameplay[0].get_passed_players() == 0 )
             {
                 game_control.setting_parcham_dar_effect( play.get_number_of_player(),game_gameplay[0].get_players_turn() );
+            }
+            if( game_gameplay[0].get_used_rakhsh_sefid() )
+            {
+                game_gameplay[0].set_used_rakhsh_sefid(false);
+                game_control.set_first_attacker( game_gameplay[0].get_players_turn() );
+                game_control.set_battle_city( game_gameplay[0].get_players_turn() );
             }
     }
 
