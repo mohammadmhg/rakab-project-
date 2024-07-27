@@ -29,6 +29,8 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
 
     void set_bahar(bool);
 
+    void set_used_rakhsh_sefid(bool);
+
     void set_zemestan(bool);
 
     void add_passed_players_number(int);
@@ -81,6 +83,8 @@ class Gameplay{///this class is for Gameplay during each round and setting Cards
 
     int get_players_turn()const;
 
+    bool get_used_rakhsh_sefid()const;
+
     ///method
     void print_cards(const int,const Players);
     void show_saturation(int,int,int);
@@ -95,7 +99,6 @@ private:
     void matarsak();
     void cards_helping_menus(string&);
     void input_chosen_card(string);
-    int get_chosen_card();
     bool check_exist_card(string);
     bool check_exist_played_card(string)const;
     void show_cards_array()const;
@@ -111,13 +114,14 @@ private:
     bool getting_help = false;
     static bool is_bahar;
     static bool is_zemestan;
+    static bool used_parcham_dar;
+    static bool used_rakhsh_sefid;
     Rish_Sefid rish_sefid_handel;
     static int passed_players;
     static int index_yellow_card;
     static int index_purple_card;
     static int empty_hand_players;
     static int players_turn;
-    static bool used_parcham_dar;
     bool pass = false;
     bool pass_counted = false;
 };
