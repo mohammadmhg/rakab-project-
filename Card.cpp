@@ -11,7 +11,7 @@ using namespace std;
         Card::set_yellow_card();
         Card::set_purple_card();
     }
-    Card::Card(string name,int number)
+    Card::Card(string name,string number)
     {
         yellow_cards.push_back(number);
         purple_cards.push_back(name);
@@ -20,13 +20,14 @@ using namespace std;
 
     void Card::set_yellow_card()
     {
-        Card::define_yellow_cards(10,1);//set soldier with 1 power
-        Card::define_yellow_cards(8,2);//set soldier with 2 power
-        Card::define_yellow_cards(8,3);//set soldier with 3 power
-        Card::define_yellow_cards(8,4);//set soldier with 4 power
-        Card::define_yellow_cards(8,5);//set soldier with 5 power
-        Card::define_yellow_cards(8,6);//set soldier with 6 power
-        Card::define_yellow_cards(8,10);//set soldier with 10 power
+        Card::define_yellow_cards(10,"1");//set soldier with 1 power
+        Card::define_yellow_cards(8,"2");//set soldier with 2 power
+        Card::define_yellow_cards(8,"3");//set soldier with 3 power
+        Card::define_yellow_cards(8,"4");//set soldier with 4 power
+        Card::define_yellow_cards(8,"5");//set soldier with 5 power
+        Card::define_yellow_cards(8,"6");//set soldier with 6 power
+        Card::define_yellow_cards(8,"10");//set soldier with 10 power
+
         Card::shuffle_yellow_cards();
 
 
@@ -38,10 +39,10 @@ using namespace std;
         Card::define_purple_cards(3,"zemestan");//set zemestan
         Card::define_purple_cards(6,"rish_sefid");//set rish_sefid
         Card::define_purple_cards(3,"shir_dokht");//set shir_dokht
+        Card::define_purple_cards(2,"rakhsh_sefid");//set rakhsh_sefid
         Card::define_purple_cards(6,"tabl_zan");//set tabl_zan
         Card::define_purple_cards(12,"shir_zan");//set shir_zan
         Card::define_purple_cards(3,"parcham_dar");//set parcham_dar
-
 
         Card::shuffle_purple_cards();
 
@@ -49,7 +50,7 @@ using namespace std;
     }
     ///getter
 
-    int Card::get_yellow_card(int index) const
+    string Card::get_yellow_card(int index) const
     {
         return yellow_cards[index];
     }
@@ -63,8 +64,8 @@ using namespace std;
     {
         srand(time(0));
 
-        int Shuff = rand() % 50 + 1;
-        for(int i = 0; i < 51 ;i++)
+        int Shuff = rand() % 52 + 1;
+        for(int i = 0; i < 53 ;i++)
         {
             swap(purple_cards[i],purple_cards[Shuff]);
         }
@@ -73,7 +74,7 @@ using namespace std;
     void Card::shuffle_yellow_cards()
     {
 
-        int Shuff = rand() % 57 + 1;
+        int Shuff = rand() % 56 + 1;
         for(int i = 0; i < 57 ;i++)
         {
             swap(yellow_cards[i],yellow_cards[Shuff]);
@@ -90,7 +91,7 @@ using namespace std;
 
     }
 
-    void Card::define_yellow_cards(int index,int number)
+    void Card::define_yellow_cards(int index,string number)
     {
 
         for(int i = 0; i < index ;i++)
