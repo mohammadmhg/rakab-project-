@@ -99,8 +99,8 @@ using namespace std;
         while(!end_of_game)
         {
             if( game_gameplay[0].get_empty_hand_players() >= (play.get_number_of_player() - 1) )
-            {//setting cards when the hands are empty
-                game_gameplay[0].re_set_empty_hand_players();
+            {
+                game_gameplay[0].set_empty_hand_players(0);
                 game_gameplay.clear();
                 for(int i = 0; i < play.get_number_of_player(); i++)
                 {
@@ -136,8 +136,6 @@ using namespace std;
                         warzone.define_war_sign( game_control.get_battle_city_chooser() );
                 }
             }
-            game_control.define_lucky_number();
-
             int players_index = game_control.get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
             starting_the_round(players_index);
             set_power_of_army();
@@ -167,15 +165,13 @@ using namespace std;
                     game_gameplay[players_index].set_passed_players();
                     game_control.set_handel_passed_players(players_index);
                 }
-                if (rish_sefid_handel.get_rish_sefid_card() )
+
+                if( game_gameplay[players_index].get_used_matarsak() )
                 {
-                    game_gameplay[players_index].handel_rish_sefid(play.get_number_of_player(),game_gameplay);
+                    game_gameplay[players_index].set_used_matarsak(false);
                     game_control.set_biggest_card_played(0);
-                    rish_sefid_handel.set_rish_sefid_card(false);
                 }
-
-                game_control.set_biggest_card(game_gameplay[players_index]);//set the biggest played card
-
+                game_control.set_biggest_card(play.get_number_of_player(),game_gameplay);//set the biggest played card
                 if( game_gameplay[players_index].get_help() )
                 {
                     game_gameplay[players_index].set_help(false);
@@ -184,12 +180,7 @@ using namespace std;
                 if( game_gameplay[players_index].get_parcham_dar() )
                 {
                     winner = true;//ending while
-                    game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
-                    break;
-                }
-                if( game_gameplay[players_index].get_used_rakhsh_sefid() )
-                {
-                    winner = true;//ending while
+                    game_gameplay[players_index].re_set_parcham_dar();
                     game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
                     break;
                 }
@@ -197,6 +188,7 @@ using namespace std;
             players_index = 0;//to restart
             if (game_gameplay[players_index].get_passed_players() >= play.get_number_of_player() )
             {//to end the round on fight in a city
+                game_gameplay[players_index].add_passed_players_number(0);
                 game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
                 winner = true;
             }
@@ -206,7 +198,12 @@ using namespace std;
 
     void Game::set_power_of_army()
     {
-
+        if( rish_sefid_handel.get_used_rish_sefid_card() )
+        {
+            game_gameplay[0].handel_rish_sefid(play.get_number_of_player(),game_gameplay);
+            game_control.set_biggest_card_played(0);
+            game_control.set_biggest_card(play.get_number_of_player(),game_gameplay);//set the biggest played card
+        }
         for(int i =0; i< play.get_number_of_player() ;i++)
             {
                 if( game_gameplay[i].get_bahar() )
@@ -217,6 +214,7 @@ using namespace std;
                 }
                 else if (game_gameplay[i].get_zemestan() )
                 {
+                    game_control.calculate_yellow_card_power( game_gameplay[i],i );
                     game_control.set_zemestan_power( game_gameplay[i],i );
                     game_control.calculate_purple_card_power( game_gameplay[i],i );
                 }
@@ -226,8 +224,6 @@ using namespace std;
                     game_control.calculate_purple_card_power( game_gameplay[i],i );
                 }
             }
-        game_control.setting_lucky_number_effect();
-
     }
 
     void Game::set_most_powerful_army()
@@ -237,22 +233,10 @@ using namespace std;
             {
                 game_gameplay[i].re_set_pass();
             }
-
-            game_control.setting_battle_city_chooser();
+            game_control.set_battle_city_chooser();
             if( game_control.get_shir_zan_got_used() )
             {
                 game_control.set_shir_zan_effect();
-            }
-
-            if( game_gameplay[0].get_parcham_dar() && game_gameplay[0].get_passed_players() == 0 )
-            {
-                game_control.setting_parcham_dar_effect( play.get_number_of_player(),game_gameplay[0].get_players_turn() );
-            }
-            if( game_gameplay[0].get_used_rakhsh_sefid() )
-            {
-                game_gameplay[0].set_used_rakhsh_sefid(false);
-                game_control.set_first_attacker( game_gameplay[0].get_players_turn() );
-                game_control.set_battle_city( game_gameplay[0].get_players_turn() );
             }
     }
 
