@@ -1,14 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <math.h>
 #include "Control_card.h"
-
-
-
-
-
-
 
 using namespace std;
 
@@ -22,11 +15,6 @@ using namespace std;
         shir_zan_numbers.resize(temp_size);
     }
     ///setter
-    void Control_Cards::set_lucky_number(int number)
-    {
-        lucky_number = number;
-    }
-
     void Control_Cards::set_biggest_card_played(int number)
     {
         biggest_played_card = number;
@@ -63,9 +51,9 @@ using namespace std;
     {//resetting the data
         shir_zan_numbers.clear();
         shir_zan_numbers.resize(number);
+        biggest_played_card = 0;
         winner = false;
         shir_zan_got_used = false;
-        biggest_played_card = 0;
         power.clear();
         power.resize(number);
         handel_passed_players.clear();
@@ -75,16 +63,8 @@ using namespace std;
     {
         handel_passed_players.push_back(index_of_player);
     }
-    void Control_Cards::set_battle_city(int player)
-    {
-        battle_city_chooser = player;
-    }
-    ///getter
-    int Control_Cards::get_lucky_number()const
-    {
-        return lucky_number;
-    }
 
+    ///getter
     int Control_Cards::get_shir_zan_size()const
     {
         return shir_zan_numbers.size();
@@ -147,102 +127,84 @@ using namespace std;
 
     void Control_Cards::calculate_yellow_card_power(const Gameplay game,int index_of_player)
     {//set power by yellow cards
-        string temp_data_soldier;
+        string temp_yellow_card_data;
         for(int i = 0 ; i < game.get_play_cards() ;i++)
         {
-            temp_data_soldier = game.get_play_cards_data(i);
+            temp_yellow_card_data = game.get_play_cards_data(i);
 
-            if(temp_data_soldier == "1"||temp_data_soldier == "2"||temp_data_soldier == "3"||temp_data_soldier =="4"||temp_data_soldier == "5"||temp_data_soldier == "6"
-               ||temp_data_soldier == "10")
+            if(temp_yellow_card_data == "1"||temp_yellow_card_data == "2"||temp_yellow_card_data == "3"||temp_yellow_card_data == "4"||temp_yellow_card_data == "5"||
+               temp_yellow_card_data == "6"||temp_yellow_card_data == "10")
             {
-
-                power[index_of_player] = power[index_of_player] + stoi(temp_data_soldier);
-
+                power[index_of_player] = power[index_of_player] + stoi(temp_yellow_card_data);
             }
         }
     }
 
-
     void Control_Cards::calculate_purple_card_power(const Gameplay game,int index_of_player)
     {//set power by purple cards
-        int tabl_zan_numbers = 0;
+        bool tabl_zan = false;
         int temp_shir_dokht = 0;
         int temp_shir_zan = 0;
+
         for(int i = 0; i < game.get_play_cards() ;i++)
         {
-            if(game.get_play_cards_data(i) == "tabl_zan")
+            if(game.get_play_cards_data(i) == "tabl_zan" && tabl_zan == false)
             {
-                tabl_zan_numbers++;
+                tabl_zan = true;
+                power[index_of_player] = power[index_of_player] * 2;
             }
 
             if(game.get_play_cards_data(i) == "shir_dokht")
             {
                 temp_shir_dokht = temp_shir_dokht + 10;
             }
-
             if(game.get_play_cards_data(i) == "shir_zan")
             {
                 temp_shir_zan++;
                 shir_zan_got_used = true;
             }
         }
-        if(tabl_zan_numbers != 0)
-        {
-            power[index_of_player] = power[index_of_player] * pow(1.5,tabl_zan_numbers);
-        }
         power[index_of_player] = power[index_of_player] + temp_shir_zan;
         power[index_of_player] = power[index_of_player] + temp_shir_dokht;
         shir_zan_numbers[index_of_player] = temp_shir_zan;
-
     }
 
     void Control_Cards::set_bahar_power(const Gameplay game,int index_of_player)
     {//set power when is bahar
-        string temp_played_card;
+        string temp_yellow_card;
+
         for(int i = 0; i < game.get_play_cards() ;i++)
         {
-            temp_played_card = game.get_play_cards_data(i);
+            temp_yellow_card = game.get_play_cards_data(i);
 
-            if(temp_played_card == "1"||temp_played_card == "2"||temp_played_card == "3"||temp_played_card =="4"||temp_played_card == "5"||temp_played_card == "6"
-               ||temp_played_card == "10"||temp_played_card == "shir_dokht")
+            if(temp_yellow_card == "1"||temp_yellow_card == "2"||temp_yellow_card == "3"||temp_yellow_card == "4"||temp_yellow_card == "5"||
+               temp_yellow_card == "6"||temp_yellow_card == "10")
             {
-                if(temp_played_card == "shir_dokht"&& biggest_played_card == 10)
-                {
-                    power[index_of_player] = power[index_of_player] + 3;
-                    continue;
-                }
-                if(biggest_played_card <= stoi( temp_played_card ) )
+                if(biggest_played_card <= stoi( temp_yellow_card ) )
                 {
                     power[index_of_player] = power[index_of_player] + 3;
                 }
-
             }
         }
     }
 
-    void Control_Cards::set_biggest_card(const Gameplay game)
+    void Control_Cards::set_biggest_card(int number_of_player,const vector <Gameplay> game)
     {//set the biggest played soldier card in game
-        string temp_played_card;
-        for(int i = 0; i < game.get_play_cards() ;i++)
+        string temp_yellow_card;
+        for(int j = 0; j < number_of_player ; j++)
         {
-
-            temp_played_card = game.get_play_cards_data(i);
-
-            if(temp_played_card == "1"||temp_played_card == "2"||temp_played_card == "3"||temp_played_card =="4"||temp_played_card == "5"||temp_played_card == "6"
-               ||temp_played_card == "10"||temp_played_card == "shir_dokht")
+            for(int i = 0; i < game[j].get_play_cards() ;i++)
             {
+                temp_yellow_card = game[j].get_play_cards_data(i);
 
-                if(temp_played_card == "shir_dokht")
+                if(temp_yellow_card == "1"||temp_yellow_card == "2"||temp_yellow_card == "3"||temp_yellow_card == "4"||temp_yellow_card == "5"||
+                   temp_yellow_card == "6"||temp_yellow_card == "10")
                 {
-                    biggest_played_card = 10;
-                    continue;
+                    if( stoi( temp_yellow_card ) > biggest_played_card)
+                    {
+                        biggest_played_card = stoi( temp_yellow_card );
+                    }
                 }
-
-                if( stoi( temp_played_card ) > biggest_played_card)
-                {
-                    biggest_played_card = stoi( temp_played_card );
-                }
-
             }
         }
     }
@@ -254,18 +216,15 @@ using namespace std;
         {
             temp_yellow_card = game.get_play_cards_data(i);
 
-            if(temp_yellow_card == "1"||temp_yellow_card == "2"||temp_yellow_card == "3"||temp_yellow_card == "4"||temp_yellow_card == "5"||temp_yellow_card == "6"
-               ||temp_yellow_card == "10")
+            if(temp_yellow_card == "1"||temp_yellow_card == "2"||temp_yellow_card == "3"||temp_yellow_card == "4"||temp_yellow_card == "5"||
+               temp_yellow_card == "6"||temp_yellow_card == "10")
             {
-                int half_power = stoi(temp_yellow_card);
-                power[index_of_player] += half_power/2;
+                power[index_of_player] = (power[index_of_player] + 1) - ( stoi(temp_yellow_card) );
             }
-
         }
-
     }
 
-    void Control_Cards::setting_battle_city_chooser()
+    void Control_Cards::set_battle_city_chooser()
     {//setting the person who start war when no shir_zan palyed
         int biggest_power = 0;
         for(int i = 0; i < power.size() ;i++)
@@ -321,7 +280,6 @@ using namespace std;
                 }
             }
         }
-
     }
 
     int Control_Cards::check_handel_passed_players(int index_of_player)
@@ -335,48 +293,3 @@ using namespace std;
         }
         return 0;
     }
-
-    void Control_Cards::setting_parcham_dar_effect(int number_of_players,int player_turn)
-    {
-        if(player_turn == 0)
-        {
-            battle_city_chooser = number_of_players - 1;
-        }
-
-        else
-        {
-            battle_city_chooser = player_turn - 1;
-        }
-    }
-
-    void Control_Cards::define_lucky_number()
-    {
-        system("cls");
-        cout << "Player " << first_attacker+1<<" is the beginner of game,please set a number as Lucky number:"<<endl;
-        int temp_lucky_number = 0;
-        cin >> temp_lucky_number;
-
-        while( temp_lucky_number <= 1 || temp_lucky_number > 30)
-        {
-            cout << "The Lucky number is not valid,please try again:" <<endl;
-            cin>>temp_lucky_number;
-        }
-
-        lucky_number = temp_lucky_number;
-    }
-
-    void Control_Cards::setting_lucky_number_effect()
-    {
-        for(int i = 0 ; i < power.size() ;i++)
-        {
-            if(lucky_number != 0&&power[i] % lucky_number == 0)
-            {
-                power[i] *= 2;
-            }
-        }
-    }
-
-
-
-
-
