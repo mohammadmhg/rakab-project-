@@ -1,30 +1,18 @@
 #include <iostream>
 #include <ctime>
 #include <conio.h>
-
 #include "Gameplay.h"
-
-
 using namespace std;
-
-bool Gameplay::is_bahar = false;
-bool Gameplay::is_zemestan = false;
-bool Gameplay::used_parcham_dar = false;
-bool Gameplay::used_rakhsh_sefid = false;
 int Gameplay::empty_hand_players = 0;
 int Gameplay::passed_players = 0;
-int Gameplay::index_yellow_card = 0;
-int Gameplay::index_purple_card = 0;
 int Gameplay::players_turn = 0;
 
     ///constructor
     Gameplay::Gameplay(){}
-
     Gameplay::Gameplay(string card,string played_card)
     {
         Gameplay::set_cards(card);
         Gameplay::set_played_card(played_card);
-
     }
     ///setter
     void Gameplay::set_players_turn(int number)
@@ -35,26 +23,6 @@ int Gameplay::players_turn = 0;
     void Gameplay::re_set_empty_hand_players()
     {
         empty_hand_players = 0;
-    }
-
-    void Gameplay::set_bahar(bool season)
-    {
-        is_bahar = season;
-    }
-
-    void Gameplay::set_zemestan(bool season)
-    {
-        is_zemestan = season;
-    }
-
-    void Gameplay::set_index_yellow_card(int index)
-    {
-        index_yellow_card = index;
-    }
-
-    void Gameplay::set_index_purple_card(int index)
-    {
-        index_purple_card = index;
     }
 
     void Gameplay::set_empty_hand_players(int empty_hand)
@@ -76,17 +44,15 @@ int Gameplay::players_turn = 0;
     {//setting the paled card and check the season
         play_cards.push_back(card);
         if(card == "bahar"){
-            is_bahar = true;
-            is_zemestan = false;
-        }
-        if(card == "parcham_dar"){
-            used_parcham_dar = true;
+            card_data.set_bahar(true);
+            card_data.set_zemestan(false);
         }
         if(card == "zemestan"){
-            is_bahar = false;
-            is_zemestan = true;
+            card_data.set_bahar(false);
+            card_data.set_zemestan(true);
         }
         if(card == "matarsak"){
+            card_data.set_used_matarsak(true);
             Gameplay::matarsak();
         }
     }
@@ -102,11 +68,8 @@ int Gameplay::players_turn = 0;
     }
 
     void Gameplay::re_set_data()
-    {//re_setting the bahar and zemestan
-        is_bahar = false;
-        is_zemestan = false;
+    {
         passed_players = 0;
-        used_parcham_dar = false;
     }
 
     void Gameplay::set_passed_players()
@@ -130,11 +93,8 @@ int Gameplay::players_turn = 0;
     {
         play_cards.push_back(card);
     }
-    void Gameplay::set_used_rakhsh_sefid(bool rakhsh)
-    {
-        used_rakhsh_sefid = rakhsh;
-    }
     ///getter
+
     int Gameplay::get_players_turn() const
     {
         return players_turn;
@@ -145,10 +105,21 @@ int Gameplay::players_turn = 0;
         return passed_players;
     }
 
-    bool Gameplay::get_parcham_dar()const
+    bool Gameplay::get_red_card_herkol()const
     {
-        return used_parcham_dar;
+        return red_card_handel.get_used_herkol();
     }
+
+    bool Gameplay::get_red_card_kooh_shekan()const
+    {
+        return red_card_handel.get_used_kooh_shekan();
+    }
+
+    bool Gameplay::get_red_card_rooh_jangal()const
+    {
+        return red_card_handel.get_used_rooh_jangal();
+    }
+
     bool Gameplay::get_help() const
     {
         return getting_help;
@@ -162,16 +133,6 @@ int Gameplay::players_turn = 0;
     bool Gameplay::get_pass_counted() const
     {
         return pass_counted;
-    }
-
-    bool Gameplay::get_bahar() const
-    {
-        return is_bahar;
-    }
-
-    bool Gameplay::get_zemestan() const
-    {
-        return is_zemestan;
     }
 
     int Gameplay::get_play_cards() const
@@ -199,20 +160,6 @@ int Gameplay::players_turn = 0;
         return pass;
     }
 
-    int Gameplay::get_index_yellow_card() const
-    {
-        return index_yellow_card;
-    }
-
-    int Gameplay::get_index_purple_card() const
-    {
-        return index_purple_card;
-    }
-    bool Gameplay::get_used_rakhsh_sefid()const
-    {
-        return used_rakhsh_sefid;
-    }
-
     void Gameplay::show_cards_array() const
     {
         for(int i = 0 ; i < cards.size(); i++)
@@ -224,34 +171,34 @@ int Gameplay::players_turn = 0;
     void Gameplay::setting_card(const Card card_setter,const int conquer_cities_number)
     {
         srand(time(0));
-        if(index_purple_card > 51)
+        if(card_data.get_index_purple_card() > 51)
         {
-            index_purple_card = 0;
+            card_data.set_index_purple_card(0);
         }
-        if(index_yellow_card > 56)
+        if(card_data.get_index_yellow_card() > 56)
         {
-            index_yellow_card = 0;
+            card_data.set_index_yellow_card(0);
         }
 
         for(int i = 0 ; i < 10 + conquer_cities_number ;i++)
         {
-
-            int Random = rand() % 6 + 1;
-
+            int Random = rand() % 8 + 1;
             if(Random % 2 == 0)
             {
-                string temp_purple = card_setter.get_purple_card(index_purple_card);
-                cards.push_back(temp_purple);
-                index_purple_card++;
+                cards.push_back( card_setter.get_purple_card(card_data.get_index_purple_card() ) );
+                card_data.set_index_purple_card(card_data.get_index_purple_card() + 1);
+            }
+            else if(Random == 7)
+            {
+                cards.push_back( card_setter.get_red_card( red_card_handel.get_index_red_card()) );
+                red_card_handel.set_index_red_card();
             }
             else
             {
-                string temp_yellow_card = card_setter.get_yellow_card(index_yellow_card);
-                cards.push_back( temp_yellow_card );
-                index_yellow_card++;
+                cards.push_back( card_setter.get_yellow_card(card_data.get_index_yellow_card() ) );
+                card_data.set_index_yellow_card(card_data.get_index_yellow_card() + 1);
             }
         }
-
     }
 
     void Gameplay::print_cards(const int index,const Players play)
@@ -293,19 +240,6 @@ int Gameplay::players_turn = 0;
                 getline(cin,input);
             }
         }
-        if(input == "rakhsh_sefid")
-        {
-            used_rakhsh_sefid = true;
-            players_turn = number;
-        }
-
-        if(input == "rish_sefid")
-        {
-            rish_sefid_handel.set_used_rish_sefid_card(true);
-            rish_sefid_handel.set_biggest_card_value(biggest_played_card);
-            rish_sefid_handel.set_rish_sefid_card(true);
-            rish_sefid_handel.set_last_played_card_index(number);
-        }
         if(input == "pass"|| input == "0")
         {
             pass = true;
@@ -324,8 +258,41 @@ int Gameplay::players_turn = 0;
             cards_helping_menus(input);
             return;
         }
+        control_received_card(input,number,biggest_played_card);
         Gameplay::input_chosen_card(input);
         Gameplay::setting_the_input_card();
+    }
+
+    void Gameplay::control_received_card(string input,int number,int biggest_played_card)
+    {
+        if(input == "rakhsh_sefid")
+        {
+            card_data.set_used_rakhsh_sefid(true);
+            players_turn = number;
+        }
+        if(input == "parcham_dar")
+        {
+            card_data.set_parcham_dar(true);
+        }
+        if(input == "rish_sefid")
+        {
+            rish_sefid_handel.set_used_rish_sefid_card(true);
+            rish_sefid_handel.set_biggest_card_value(biggest_played_card);
+            rish_sefid_handel.set_rish_sefid_card(true);
+            rish_sefid_handel.set_last_played_card_index(number);
+        }
+        if(input == "herkol")
+        {
+            red_card_handel.set_used_herkol(true);
+        }
+        if(input == "kooh_shekan")
+        {
+            red_card_handel.set_used_kooh_shekan(true);
+        }
+        if(input == "rooh_jangal")
+        {
+            red_card_handel.set_used_rooh_jangal(true);
+        }
     }
 
     void Gameplay::setting_the_input_card()
@@ -418,18 +385,15 @@ int Gameplay::players_turn = 0;
             menu.shir_dokht_help();
             return;
         }
-        if(temp == "help rish_sefid")
-        {
+        if(temp == "help rish_sefid"){
             menu.rish_sefid_help();
             return;
         }
-        if(temp == "help shir_zan")
-        {
+        if(temp == "help shir_zan"){
             menu.shir_zan_help();
             return;
         }
-        if(temp == "help parcham_dar")
-        {
+        if(temp == "help parcham_dar"){
             menu.parcham_dar_help();
             return;
         }
@@ -444,6 +408,13 @@ int Gameplay::players_turn = 0;
                 break;
             }
         }
+    }
+
+    void Gameplay::re_set_red_cards()
+    {
+        red_card_handel.set_used_herkol(false);
+        red_card_handel.set_used_kooh_shekan(false);
+        red_card_handel.set_used_rooh_jangal(false);
     }
 
     bool Gameplay::check_exist_card(string chosen)
@@ -496,6 +467,3 @@ int Gameplay::players_turn = 0;
             }
         }
     }
-
-
-
