@@ -10,12 +10,15 @@ using namespace std;
     {
         Card::set_yellow_card();
         Card::set_purple_card();
+        Card::set_red_card();
     }
+
     Card::Card(string name,string number)
     {
         yellow_cards.push_back(number);
         purple_cards.push_back(name);
     }
+
     ///setter
 
     void Card::set_yellow_card()
@@ -29,9 +32,8 @@ using namespace std;
         Card::define_yellow_cards(8,"10");//set soldier with 10 power
 
         Card::shuffle_yellow_cards();
-
-
     }
+
     void Card::set_purple_card()
     {
         Card::define_purple_cards(16,"matarsak");//set matarsak
@@ -45,18 +47,32 @@ using namespace std;
         Card::define_purple_cards(3,"parcham_dar");//set parcham_dar
 
         Card::shuffle_purple_cards();
-
-
     }
+
+    void Card::set_red_card()
+    {
+        define_red_cards(3,"rooh_jangal");// set rooh_jangal
+        define_red_cards(3,"herkol");//set herkol
+        define_red_cards(3,"kooh_shekan");//set kooh_shekan
+
+        shuffle_red_cards();
+    }
+
     ///getter
 
     string Card::get_yellow_card(int index) const
     {
         return yellow_cards[index];
     }
+
     string Card::get_purple_card(int index) const
     {
         return purple_cards[index];
+    }
+
+    string Card::get_red_card(int index) const
+    {
+        return red_cards[index];
     }
     ///method
 
@@ -64,22 +80,42 @@ using namespace std;
     {
         srand(time(0));
 
-        int Shuff = rand() % 52 + 1;
         for(int i = 0; i < 53 ;i++)
         {
+            int Shuff = rand() % 10 + 1;
+            if(i == Shuff)
+            {
+                continue;
+            }
             swap(purple_cards[i],purple_cards[Shuff]);
         }
-
     }
+
+    void Card::shuffle_red_cards()
+    {
+        for(int i = 0; i < 9 ;i++)
+        {
+            int Shuff = rand() % 8 + 1;
+            if(i == Shuff)
+            {
+                continue;
+            }
+            swap(red_cards[i],red_cards[Shuff]);
+        }
+    }
+
     void Card::shuffle_yellow_cards()
     {
 
-        int Shuff = rand() % 56 + 1;
         for(int i = 0; i < 57 ;i++)
         {
+            int Shuff = rand() % 10 + 1;
+            if(i == Shuff)
+            {
+                continue;
+            }
             swap(yellow_cards[i],yellow_cards[Shuff]);
         }
-
     }
 
     void Card::define_purple_cards(int index,string data)
@@ -88,16 +124,21 @@ using namespace std;
         {
             purple_cards.push_back(data);
         }
+    }
 
+    void Card::define_red_cards(int index,string name)
+    {
+        for(int i = 0; i < index ; i++)
+        {
+            red_cards.push_back(name);
+        }
     }
 
     void Card::define_yellow_cards(int index,string number)
     {
-
         for(int i = 0; i < index ;i++)
         {
             yellow_cards.push_back(number);
         }
-
     }
 
