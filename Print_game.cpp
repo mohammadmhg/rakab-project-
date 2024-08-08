@@ -1,5 +1,6 @@
 #include "Print_game.h"
 #include <conio.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ using namespace std;
     void Print_Game::showing_map(const int number,const string show_city,const vector <Gameplay> play,const vector <City> cities)
     {
         system("cls");
+        HANDLE a = GetStdHandle(STD_OUTPUT_HANDLE);
         bool temp_flag = true;
         for (int i = 0 ; i < number ;i++)
         {
@@ -16,7 +18,7 @@ using namespace std;
                 cout << "Player"<<i+1<<" Played Cards:\t";
                 temp_flag = false;
             }
-
+            SetConsoleTextAttribute(a,15);
             for (int j = 0; j < play[i].get_play_cards();j++)
             {
                 if (play[i].get_play_cards_data(j) == "Empty")
@@ -25,6 +27,7 @@ using namespace std;
                 }
                 cout << play[i].get_play_cards_data(j)<<'\t';
             }
+            SetConsoleTextAttribute(a,7);
             cout <<endl<<endl;
             temp_flag = true;
         }
@@ -37,7 +40,9 @@ using namespace std;
                 cout << "Player" << x+1<<": ";
                 temp_flag = false;
             }
+            SetConsoleTextAttribute(a,2);
             cities[x].show_taken_cities();
+            SetConsoleTextAttribute(a,7);
             cout << endl<<endl;
             temp_flag = true;
         }
@@ -46,6 +51,7 @@ using namespace std;
 
     void Print_Game::show_players(const int number,const string show_city)
     {
+        HANDLE a = GetStdHandle(STD_OUTPUT_HANDLE);
         cout << "--------------------------------------------------"<<endl<<endl;
         for(int i = 0; i< number ;i++)
         {
@@ -75,8 +81,10 @@ using namespace std;
                 }
             }
         }
-        cout <<endl<<endl<<"             The City in War is "<< show_city<<endl;
-
+        cout <<endl<<endl<<"             The City in War is ";
+        SetConsoleTextAttribute(a,4);
+        cout << show_city<<endl;
+        SetConsoleTextAttribute(a,7);
         cout << "--------------------------------------------------";
     }
 
