@@ -48,14 +48,14 @@ using namespace std;
         output_gameplay_play_card.close();
     }
 
-    void Saved_Game::saving_gamplay_data(const int number_of_players,const vector<Gameplay>& game_gameplay,const Rish_Sefid& rish_sefid)
+    void Saved_Game::saving_gamplay_data(const int number_of_players,const vector<Gameplay>& game_gameplay,const Rish_Sefid& rish_sefid,const Handle_Data& game_data)
     {
         output_gameplay_data.open("gameplay_data.txt");
-        output_gameplay_data << game_gameplay[0].get_bahar() << endl;
-        output_gameplay_data << game_gameplay[0].get_zemestan() << endl;
+        output_gameplay_data << game_data.get_bahar() << endl;
+        output_gameplay_data << game_data.get_zemestan() << endl;
         output_gameplay_data << game_gameplay[0].get_passed_players() << endl;
-        output_gameplay_data << game_gameplay[0].get_index_yellow_card() << endl;
-        output_gameplay_data << game_gameplay[0].get_index_purple_card() << endl;
+        output_gameplay_data << game_data.get_index_yellow_card() << endl;
+        output_gameplay_data << game_data.get_index_purple_card() << endl;
         output_gameplay_data << game_gameplay[0].get_empty_hand_players() << endl;
         output_gameplay_data << game_gameplay[0].get_players_turn() << endl;
 
@@ -102,6 +102,24 @@ using namespace std;
             output_cities_data << "player" << endl;
         }
         output_cities_data.close();
+    }
+
+    void Saved_Game::saving_red_cards_data(const int number_of_players,const vector<City>& game_city)
+    {
+        output_red_cards_data.open("red_cards.txt");
+
+        for(int i = 0 ; i < number_of_players ; i++)
+        {
+            for(int j = 0 ; j < 15 ; j++)
+            {
+                for( int k = 1 ; k < game_city[i].get_red_cities_size(j) ; k++)
+                {
+                    output_red_cards_data << game_city[i].get_red_cities(j,k) << endl;
+                }
+                output_red_cards_data << game_city[i].get_taken_cities_number(j) << endl;
+            }
+        }
+        output_red_cards_data.close();
     }
 
 
