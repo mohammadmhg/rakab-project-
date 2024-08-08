@@ -54,7 +54,3 @@ int Red_Card::index_red_card = 0;
     {
         return used_rooh_jangal;
     }
-
-
-
-
