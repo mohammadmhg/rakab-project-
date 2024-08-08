@@ -58,22 +58,22 @@ using namespace std;
          input_gameplay_play_card.close();
     }
 
-    void Upload_Game::uploading_gamplay_data(const int number_of_player,vector<Gameplay>& game_gameplay,Rish_Sefid& rish_sefid)
+    void Upload_Game::uploading_gamplay_data(const int number_of_player,vector<Gameplay>& game_gameplay,Rish_Sefid& rish_sefid,Handle_Data& game_data)
     {
         input_gameplay_data.open("gameplay_data.txt");
         bool bool_reader;
         int int_reader = 0;
 
         input_gameplay_data >>  bool_reader;
-        game_gameplay[0].set_bahar(bool_reader);
+        game_data.set_bahar(bool_reader);
         input_gameplay_data >> bool_reader;
-        game_gameplay[0].set_zemestan(bool_reader);
+        game_data.set_zemestan(bool_reader);
         input_gameplay_data >> int_reader;
         game_gameplay[0].add_passed_players_number(int_reader);
         input_gameplay_data >> int_reader;
-        game_gameplay[0].set_index_yellow_card(int_reader);
+        game_data.set_index_yellow_card(int_reader);
         input_gameplay_data >> int_reader;
-        game_gameplay[0].set_index_purple_card(int_reader);
+        game_data.set_index_purple_card(int_reader);
         input_gameplay_data >> int_reader;
         game_gameplay[0].set_empty_hand_players(int_reader);
         input_gameplay_data >> int_reader;
@@ -138,5 +138,27 @@ using namespace std;
              }
         }
         input_cities_data.close();
+    }
+
+    void Upload_Game::uploading_red_cards_data(const int number_of_players,vector <City>& game_city)
+    {
+        input_red_cards_data.open("red_cards.txt");
+        string string_reader;
+        int int_reader = 0;
+
+        for(int i = 0 ; i < number_of_players ; i++)
+        {
+            for(int j = 0 ; j < 15 ; j++)
+            {
+                for( int k = 1 ; k < game_city[i].get_red_cities_size(j) ; k++)
+                {
+                    input_red_cards_data >> string_reader;
+                    game_city[i].set_red_cities(j,k,string_reader);
+                }
+                input_red_cards_data >> int_reader;
+                game_city[i].set_taken_cities_number(j,int_reader);
+            }
+        }
+        input_red_cards_data.close();
     }
 
