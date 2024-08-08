@@ -11,6 +11,15 @@ using namespace std;
         taken_city.push_back(city);
     }
 
+    void City::set_red_cities(int row,int colume,string value)
+    {
+        spacial_cities.red_cities[row][colume] = value;
+    }
+
+    void City::set_taken_cities_number(int index,int value)
+    {
+        spacial_cities.taken_cities_number[index] = value;
+    }
     ///getter
 
     string City::get_city(int index) const
@@ -21,6 +30,21 @@ using namespace std;
     int City::get_size_of_city()const
     {
         return taken_city.size();
+    }
+
+    string City::get_red_cities(int row,int colume) const
+    {
+        return spacial_cities.red_cities[row][colume];
+    }
+
+    int City::get_taken_cities_number(int index) const
+    {
+        return spacial_cities.taken_cities_number[index];
+    }
+
+    int City::get_red_cities_size(int index) const
+    {
+        return spacial_cities.red_cities[index].size();
     }
 
     ///method
@@ -48,9 +72,7 @@ using namespace std;
                 return true;
             }
         }
-
         return false;
-
     }
 
     bool City::set_adjacent_cities()
@@ -99,7 +121,6 @@ using namespace std;
                 }
             }
         }
-
         return false;
     }
 
@@ -125,4 +146,73 @@ using namespace std;
         }
     }
 
+    void City::setting_herkol_effect(string battle_city)
+   {
+        for(int j = 0 ; j < spacial_cities.red_cities.size() ; j++)
+        {
+            if( spacial_cities.red_cities[j][0] == battle_city)
+            {
+                for(int k = 1 ; k < spacial_cities.red_cities[j].size() ;k++)
+                {
+                    if( spacial_cities.red_cities[j][k] == "ghale")
+                    {
+                        spacial_cities.taken_cities_number[j] = spacial_cities.taken_cities_number[j] - 4;
+                        spacial_cities.red_cities[j][k] = "none";
+                    }
+                }
+            }
+        }
 
+   }
+
+   void City::setting_kooh_shekan_effect(string battle_city)
+   {
+       for(int j = 0 ; j < spacial_cities.red_cities.size() ; j++)
+        {
+            if( spacial_cities.red_cities[j][0] == battle_city)
+            {
+                for(int k = 1 ; k < spacial_cities.red_cities[j].size() ;k++)
+                {
+                    if( spacial_cities.red_cities[j][k] == "kohestan")
+                    {
+                        spacial_cities.taken_cities_number[j] = spacial_cities.taken_cities_number[j] - 3;
+                        spacial_cities.red_cities[j][k] = "none";
+                    }
+                }
+            }
+        }
+   }
+
+   void City::setting_rooh_jangal_effect(string battle_city)
+   {
+       for(int j = 0 ; j < spacial_cities.red_cities.size() ; j++)
+        {
+            if( spacial_cities.red_cities[j][0] == battle_city)
+            {
+                for(int k = 1 ; k < spacial_cities.red_cities[j].size() ;k++)
+                {
+                    if( spacial_cities.red_cities[j][k] == "jangal")
+                    {
+                        spacial_cities.taken_cities_number[j] = spacial_cities.taken_cities_number[j] - 2;
+                        spacial_cities.red_cities[j][k] = "none";
+                    }
+                }
+            }
+        }
+   }
+
+   bool City::open_city(string battle_city)
+   {
+       for(int j = 0 ; j < spacial_cities.red_cities.size() ; j++)
+        {
+            if( spacial_cities.red_cities[j][0] == battle_city)
+            {
+                spacial_cities.taken_cities_number[j] = spacial_cities.taken_cities_number[j] - 1;
+                if( spacial_cities.taken_cities_number[j] <= 0 )
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+   }
