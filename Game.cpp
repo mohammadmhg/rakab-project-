@@ -81,7 +81,7 @@ using namespace std;
             game_gameplay.push_back(x);
         }
         game_upload.uploading_gamplay_cards(play.get_number_of_player(),game_gameplay);
-        game_upload.uploading_gamplay_data(play.get_number_of_player(),game_gameplay,rish_sefid_handel);
+        game_upload.uploading_gamplay_data(play.get_number_of_player(),game_gameplay,rish_sefid_handel,game_card_data);
         game_control.setting_size(play.get_number_of_player());
         game_upload.uploading_control_data(play.get_number_of_player(),game_control);
         for(int i = 0 ; i< play.get_number_of_player();i++)
@@ -90,6 +90,7 @@ using namespace std;
             game_city.push_back(z);
         }
         game_upload.uploading_cities_data(play.get_number_of_player(),warzone,peacezone,game_city);
+        game_upload.uploading_red_cards_data(play.get_number_of_player(),game_city);
         int players_index = game_gameplay[0].get_players_turn();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
         starting_the_round(players_index);
     }
@@ -99,8 +100,8 @@ using namespace std;
         while(!end_of_game)
         {
             if( game_gameplay[0].get_empty_hand_players() >= (play.get_number_of_player() - 1) )
-            {
-                game_gameplay[0].set_empty_hand_players(0);
+            {//setting cards when the hands are empty
+                game_gameplay[0].re_set_empty_hand_players();
                 game_gameplay.clear();
                 for(int i = 0; i < play.get_number_of_player(); i++)
                 {
@@ -136,6 +137,8 @@ using namespace std;
                         warzone.define_war_sign( game_control.get_battle_city_chooser() );
                 }
             }
+            game_control.define_lucky_number();
+
             int players_index = game_control.get_first_attacker();///the first_attacker is index of first person who start the game so to continue in order we set Players_index and use it for++ in"for" only
             starting_the_round(players_index);
             set_power_of_army();
@@ -146,6 +149,7 @@ using namespace std;
             winner = false;
             game_control.re_set_data( play.get_number_of_player() );
             game_gameplay[0].re_set_data();
+            game_card_data.re_set_data();
         }//end_of_game while
     }
 
@@ -159,28 +163,22 @@ using namespace std;
                 game_map.showing_map( play.get_number_of_player(),warzone.get_war_sign(),game_gameplay,game_city);
                 game_gameplay[players_index].show_saturation(players_index,play.get_number_of_player(),game_control.get_biggest_card() );
 
-                if(game_gameplay[players_index].get_pass() == true && game_gameplay[players_index].get_pass_counted() == false)
-                {
-                    game_gameplay[players_index].set_pass_counted(true);//to sure that we already count this pass
-                    game_gameplay[players_index].set_passed_players();
-                    game_control.set_handel_passed_players(players_index);
-                }
-
-                if( game_gameplay[players_index].get_used_matarsak() )
-                {
-                    game_gameplay[players_index].set_used_matarsak(false);
-                    game_control.set_biggest_card_played(0);
-                }
+                control_conditions(players_index);
                 game_control.set_biggest_card(play.get_number_of_player(),game_gameplay);//set the biggest played card
                 if( game_gameplay[players_index].get_help() )
                 {
                     game_gameplay[players_index].set_help(false);
                     players_index--;
                 }
-                if( game_gameplay[players_index].get_parcham_dar() )
+                if( game_card_data.get_parcham_dar() )
                 {
                     winner = true;//ending while
-                    game_gameplay[players_index].re_set_parcham_dar();
+                    game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
+                    break;
+                }
+                if( game_card_data.get_used_rakhsh_sefid() )
+                {
+                    winner = true;//ending while
                     game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
                     break;
                 }
@@ -188,7 +186,6 @@ using namespace std;
             players_index = 0;//to restart
             if (game_gameplay[players_index].get_passed_players() >= play.get_number_of_player() )
             {//to end the round on fight in a city
-                game_gameplay[players_index].add_passed_players_number(0);
                 game_gameplay[players_index].check_empty_cards(play.get_number_of_player(),game_gameplay);
                 winner = true;
             }
@@ -196,25 +193,55 @@ using namespace std;
 
     }
 
+    void Game::control_conditions(int players_index)
+    {
+        if(game_gameplay[players_index].get_pass() == true && game_gameplay[players_index].get_pass_counted() == false)
+        {
+            game_gameplay[players_index].set_pass_counted(true);//to sure that we already count this pass
+            game_gameplay[players_index].set_passed_players();
+            game_control.set_handel_passed_players(players_index);
+        }
+        if( game_card_data.get_used_matarsak() )
+        {
+            game_card_data.set_used_matarsak(false);
+            game_control.set_biggest_card_played(0);
+        }
+        if (rish_sefid_handel.get_rish_sefid_card() )
+        {
+            game_gameplay[players_index].handel_rish_sefid(play.get_number_of_player(),game_gameplay);
+            game_control.set_biggest_card_played(0);
+            rish_sefid_handel.set_rish_sefid_card(false);
+        }
+        if( game_gameplay[players_index].get_red_card_herkol() )
+        {
+            game_city[players_index].setting_herkol_effect(warzone.get_war_sign() );
+            game_gameplay[players_index].re_set_red_cards();
+        }
+        if( game_gameplay[players_index].get_red_card_kooh_shekan() )
+        {
+            game_city[players_index].setting_kooh_shekan_effect(warzone.get_war_sign() );
+            game_gameplay[players_index].re_set_red_cards();
+        }
+        if( game_gameplay[players_index].get_red_card_rooh_jangal() )
+        {
+            game_city[players_index].setting_rooh_jangal_effect(warzone.get_war_sign() );
+            game_gameplay[players_index].re_set_red_cards();
+        }
+    }
+
     void Game::set_power_of_army()
     {
-        if( rish_sefid_handel.get_used_rish_sefid_card() )
-        {
-            game_gameplay[0].handel_rish_sefid(play.get_number_of_player(),game_gameplay);
-            game_control.set_biggest_card_played(0);
-            game_control.set_biggest_card(play.get_number_of_player(),game_gameplay);//set the biggest played card
-        }
+
         for(int i =0; i< play.get_number_of_player() ;i++)
             {
-                if( game_gameplay[i].get_bahar() )
+                if( game_card_data.get_bahar() )
                 {
                     game_control.calculate_yellow_card_power( game_gameplay[i],i );
                     game_control.calculate_purple_card_power( game_gameplay[i],i );
                     game_control.set_bahar_power( game_gameplay[i],i );
                 }
-                else if (game_gameplay[i].get_zemestan() )
+                else if (game_card_data.get_zemestan() )
                 {
-                    game_control.calculate_yellow_card_power( game_gameplay[i],i );
                     game_control.set_zemestan_power( game_gameplay[i],i );
                     game_control.calculate_purple_card_power( game_gameplay[i],i );
                 }
@@ -224,6 +251,8 @@ using namespace std;
                     game_control.calculate_purple_card_power( game_gameplay[i],i );
                 }
             }
+        game_control.setting_lucky_number_effect();
+
     }
 
     void Game::set_most_powerful_army()
@@ -233,10 +262,23 @@ using namespace std;
             {
                 game_gameplay[i].re_set_pass();
             }
-            game_control.set_battle_city_chooser();
+
+            game_control.setting_battle_city_chooser();
             if( game_control.get_shir_zan_got_used() )
             {
                 game_control.set_shir_zan_effect();
+            }
+
+            if( game_card_data.get_parcham_dar() && game_gameplay[0].get_passed_players() == 0 )
+            {
+                game_control.setting_parcham_dar_effect( play.get_number_of_player(),game_gameplay[0].get_players_turn() );
+                game_card_data.set_parcham_dar(false);
+            }
+            if( game_card_data.get_used_rakhsh_sefid() )
+            {
+                game_card_data.set_used_rakhsh_sefid(false);
+                game_control.set_first_attacker( game_gameplay[0].get_players_turn() );
+                game_control.set_battle_city( game_gameplay[0].get_players_turn() );
             }
     }
 
@@ -253,8 +295,11 @@ using namespace std;
             if ( game_control.get_winner() )
             {
                 game_map.round_end( game_control.get_first_attacker() );
-                play.set_conquer_cities_number( game_control.get_first_attacker() );
-                game_city[game_control.get_first_attacker()].set_city( warzone.get_war_sign() );
+                if( game_city[game_control.get_first_attacker()].open_city(warzone.get_war_sign() ) )
+                {
+                    play.set_conquer_cities_number( game_control.get_first_attacker() );
+                    game_city[game_control.get_first_attacker()].set_city( warzone.get_war_sign() );
+                }
             }
             for(int k = 0; k < play.get_number_of_player() ;k++)
             {
@@ -292,7 +337,8 @@ using namespace std;
     {
         game_saver.saving_the_player_identity(play);
         game_saver.saving_gamplay_cards(play.get_number_of_player(),game_gameplay);
-        game_saver.saving_gamplay_data(play.get_number_of_player(),game_gameplay,rish_sefid_handel);
+        game_saver.saving_gamplay_data(play.get_number_of_player(),game_gameplay,rish_sefid_handel,game_card_data);
         game_saver.saving_control_data(play.get_number_of_player(),game_control);
         game_saver.saving_cities_data(play.get_number_of_player(),warzone,peacezone,game_city);
+        game_saver.saving_red_cards_data(play.get_number_of_player(),game_city);
     }
