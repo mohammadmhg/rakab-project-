@@ -2,6 +2,7 @@
 #include <iostream>
 #include <conio.h>
 #include <fstream>
+#include <windows.h>
 using namespace std;
 
     void Menus::set_loading_game(bool upload)
@@ -32,6 +33,8 @@ using namespace std;
     void Menus::menu_of_opsions()
     {// print the options and explain the game
         system("cls");
+        HANDLE a = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(a,6);
         fstream in;
         in.open("menu.txt",ios::in);
         string line;
@@ -39,6 +42,7 @@ using namespace std;
         {
             cout << line <<endl;
         }
+        SetConsoleTextAttribute(a,7);
         Menus::exit();
     }
 
@@ -91,7 +95,6 @@ using namespace std;
             }
 
         }
-        cout << "Press x or X to Exit: "<<endl;
         Menus::exit();
     }
 
@@ -118,7 +121,6 @@ using namespace std;
             }
 
         }
-        cout << "Press x or X to Exit: "<<endl;
         Menus::exit();
     }
 
@@ -145,7 +147,6 @@ using namespace std;
             }
 
         }
-        cout << "Press x or X to Exit: "<<endl;
         Menus::exit();
     }
 
@@ -172,7 +173,6 @@ using namespace std;
             }
 
         }
-        cout << "Press x or X to Exit: "<<endl;
         Menus::exit();
     }
 
@@ -199,7 +199,6 @@ using namespace std;
             }
 
         }
-        cout << "Press x or X to Exit: "<<endl;
         Menus::exit();
     }
 
@@ -226,7 +225,6 @@ using namespace std;
             }
 
         }
-        cout << "Press x or X to Exit: "<<endl;
         Menus::exit();
     }
 
@@ -253,7 +251,6 @@ using namespace std;
             }
 
         }
-        cout << "Press x or X to Exit: "<<endl;
         Menus::exit();
     }
 
@@ -297,6 +294,7 @@ using namespace std;
     }
     void Menus::exit()
     {
+        cout << "Press x or X to Exit:"<<endl;
         char user = getch();
         while(user != 'x' && user != 'X')
         {
