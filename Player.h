@@ -18,6 +18,7 @@ public:
     Players();
     Players(int,string,string,int);
     ///setter
+
     void set_age(int);
     void set_name(string);
     void set_color(string);
@@ -26,12 +27,14 @@ public:
     void add_index_of_players();
     void add_conquer_cities_number(int);
     ///getter
+
     string get_name(int) const;
     int get_age(int) const;
     string get_color(int) const;
     int get_conquer_cities_number(int) const;
     int get_number_of_player() const;
     ///method
+
     void sort_array();
     void defind_players();
     void set_player_correct();

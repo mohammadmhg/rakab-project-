@@ -17,24 +17,18 @@ public:
     void set_rish_sefid_card(bool);
     void set_used_rish_sefid_card(bool);
 
-
-
-
     ///getter
     int get_last_played_card_index() const;
-
     bool get_rish_sefid_card() const;
-
     bool get_used_rish_sefid_card() const;
-
     int get_biggest_card_value() const;
 
 private:
+
     static int last_played_card_index;
     static bool used_rish_sefid_card;
     static bool rish_sefid_card;
     static int biggest_card_value;
-
 };
 
 #endif

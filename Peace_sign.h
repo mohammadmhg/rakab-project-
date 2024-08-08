@@ -9,10 +9,13 @@ public:
     Peace_Sign();
     Peace_Sign(string);
     ///setter
+
     void set_peace_sign(string);
     ///getter
+
     string get_peace_sign() const;
     ///method
+
     void define_peace_sign(int);
 private:
     string peace;
